@@ -1,4 +1,3 @@
-<!-- resources/views/missions/create.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,6 @@
 <body class="bg-green-400">
 
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <div class="w-1/5 bg-green-400 text-white p-5">
             <div class="mb-8">
                 <div class="flex justify-center mb-4">
@@ -27,11 +25,8 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 p-10 bg-white">
             <h2 class="text-2xl font-bold mb-4">Tambah Misi Gamifikasi</h2>
-
-            <!-- Form -->
             <div class="bg-white shadow-md rounded-lg p-6">
                 <form>
                     <div class="mb-4">
