@@ -34,5 +34,4 @@ class MisiController extends Controller
 
         return view('missions.edit', compact('mission'));
     }
-    
 }
