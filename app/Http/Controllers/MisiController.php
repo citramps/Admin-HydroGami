@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Misi;
 use Illuminate\Http\Request;
+
 class MisiController extends Controller
 {
     public function index()
     {
-        $missions = [
-            ['id' => 1, 'name' => 'Control Automatic', 'description' => 'Nyalakan Control Automatic untuk mengatur sistem secara otomatis.', 'stage' => 'Tahap 1', 'points' => 300],
-            ['id' => 2, 'name' => 'Control AB MIX', 'description' => 'Pastikan kadar nutrisi yang tepat dengan menekan tombol AB Mix.', 'stage' => 'Tahap 2', 'points' => 400],
-            ['id' => 3, 'name' => 'Control Water', 'description' => 'Tekan tombol Water untuk memulai aliran air dan pastikan sirkulasi yang baik bagi tanaman.', 'stage' => 'Tahap 3', 'points' => 500],
-            ['id' => 4, 'name' => 'Control pH UP dan pH Down', 'description' => 'Lakukan pengecekan pada pH dengan menggunakan tombol pH UP atau pH DOWN sesuai kondisi air.', 'stage' => 'Tahap 4', 'points' => 600],
-        ];
-
+        $missions = Misi::all();
         return view('missions.index', compact('missions'));
     }
 
@@ -22,16 +18,63 @@ class MisiController extends Controller
         return view('missions.create');
     }
 
+    // Menyimpan data misi ke dalam database
+    public function store(Request $request)
+    {
+        $request->validate([
+            'mission_number' => 'required',
+            'mission_name' => 'required',
+            'mission_description' => 'required',
+            'mission_stage' => 'required',
+            'mission_points' => 'required|integer',
+        ]);
+
+        Misi::create([
+            'no_misi' => $request->mission_number,
+            'nama_misi' => $request->mission_name,
+            'deskripsi_misi' => $request->mission_description,
+            'tahap_misi' => $request->mission_stage,
+            'poin' => $request->mission_points,
+        ]);
+
+        return redirect()->route('misi.index')->with('success', 'Misi berhasil ditambahkan');
+    }
+
     public function edit($id)
     {
-        $mission = [
-            'id' => $id,
-            'name' => 'Control Automatic',
-            'description' => 'Nyalakan Control Automatic untuk mengatur sistem secara otomatis.',
-            'stage' => 'Tahap 1',
-            'points' => '300 Exp'
-        ];
+        $mission = Misi::findOrFail($id);
 
         return view('missions.edit', compact('mission'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_misi' => 'required|string|max:255',
+            'deskripsi_misi' => 'required|string',
+            'tahap_misi' => 'required|string|max:50',
+            'poin' => 'required|integer|min:0',
+        ]);
+
+        $mission = Misi::findOrFail($id);
+        $mission->nama_misi = $request->input('nama_misi');
+        $mission->deskripsi_misi = $request->input('deskripsi_misi');
+        $mission->tahap_misi = $request->input('tahap_misi');
+        $mission->poin = $request->input('poin');
+        $mission->save();
+
+        return redirect()->route('misi.index')->with('success', 'Misi berhasil diperbarui!');
+    }
+
+
+    public function destroy($id)
+{
+    $mission = Misi::findOrFail($id);
+    $mission->delete();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Misi berhasil dihapus!'
+    ]);
+}
 }

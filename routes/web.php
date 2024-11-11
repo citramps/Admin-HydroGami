@@ -20,4 +20,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::get('/misi', [MisiController::class, 'index'])->name('misi.index');
 Route::get('/misi/create', [MisiController::class, 'create'])->name('misi.create');
+Route::post('/misi', [MisiController::class, 'store'])->name('misi.store');
 Route::get('/misi/{id}/edit', [MisiController::class, 'edit'])->name('misi.edit');
+Route::post('/misi/{id}/update', [MisiController::class, 'update'])->name('misi.update');
+Route::delete('/misi/{id}', [MisiController::class, 'destroy'])->name('misi.destroy');
+
+

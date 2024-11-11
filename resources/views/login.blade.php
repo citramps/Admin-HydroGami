@@ -6,9 +6,14 @@
         <title>Login</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            .bg-custom-green {
+            background-color: #29CC74;
+             }
+        </style>
     </head>
 
-    <body class="bg-green-400">
+    <body class="bg-custom-green">
     <div class="absolute top-0 left-0 w-32 h-32 bg-green-300 rounded-lg "></div>
         <div class="flex justify-center items-center h-screen">
             <div class="bg-white p-10 rounded-lg shadow-md text-center" style="width: 900px;">
@@ -27,7 +32,7 @@
                         <label for="password" class="block text-sm text-gray-800">Kata Sandi</label>
                         <input type="password" name="password" id="password" placeholder="Masukkan Kata Sandi" required class="w-full p-2 border border-gray-300 rounded mt-1">
                     </div>
-                    <button type="submit" class="w-3/5 bg-green-500 text-white py-2 rounded hover:bg-green-600 transition duration-200">Login</button>
+                    <button type="submit" class="w-3/5 bg-custom-green text-white py-2 rounded hover:bg-green-600 transition duration-200">Login</button>
                 </form>
                 <p class="mt-4">Belum Punya Akun? <a href="{{ route('register') }}" class="text-green-500 hover:underline">Registrasi</a></p>
             </div>
