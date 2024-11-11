@@ -17,5 +17,4 @@ class Misi extends Model
         'tahap_misi',
         'poin',
     ];
-    
 }

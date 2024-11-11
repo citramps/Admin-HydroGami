@@ -47,6 +47,5 @@
         <p class="mt-4">Sudah Punya Akun? <a href="{{ route('login') }}" class="text-green-500 hover:underline">Login</a></p>
         <div class="absolute bottom-0 right-0 w-32 h-32 bg-green-300 rounded-lg "></div>
     </div>
-    
 </body>
 </html>

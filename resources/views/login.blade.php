@@ -38,6 +38,5 @@
             </div>
             <div class="absolute bottom-0 right-0 w-32 h-32 bg-green-300 rounded-lg "></div>
         </div>
-        
     </body>
     </html>
