@@ -13,7 +13,6 @@
 </style>
 </head>
 <body> 
-
     <div class="flex h-screen">
     <div class="w-1/5 bg-custom-green text-white p-5"> 
     <div class="mb-8">
@@ -51,7 +50,6 @@
         </a>
     </nav>
 </div>
-
 
         <div class="flex-1 p-10 bg-white">
             <div class="flex justify-between items-center mb-8">
@@ -99,7 +97,6 @@
                 <div>
                     <img src="images/.png" alt="Chart" class="w-full h-auto">
                 </div>
-            </div>
         </div>
     </div>
 </body>

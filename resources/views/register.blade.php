@@ -13,7 +13,7 @@
         </style>
     </head>
 
-    <body class="bg-custom-green">
+<body class="bg-custom-green">
 <div class="absolute top-0 left-0 w-32 h-32 bg-green-300 rounded-lg "></div>
     <div class="flex justify-center items-center h-screen">
         <div class="bg-white p-10 rounded-lg shadow-md text-center" style="width: 900px;">

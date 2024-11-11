@@ -14,7 +14,6 @@
 </style>
 </head>
 <body> 
-
     <div class="flex h-screen">
     <div class="w-1/5 bg-custom-green text-white p-5"> 
     <div class="mb-8">

@@ -10,6 +10,7 @@ class MisiController extends Controller
     public function index()
     {
         $missions = Misi::all();
+
         return view('missions.index', compact('missions'));
     }
 
@@ -18,7 +19,6 @@ class MisiController extends Controller
         return view('missions.create');
     }
 
-    // Menyimpan data misi ke dalam database
     public function store(Request $request)
     {
         $request->validate([
