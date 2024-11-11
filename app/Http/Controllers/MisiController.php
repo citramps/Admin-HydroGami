@@ -77,4 +77,5 @@ class MisiController extends Controller
         'message' => 'Misi berhasil dihapus!'
     ]);
 }
+
 }

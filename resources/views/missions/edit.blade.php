@@ -52,7 +52,6 @@
         </a>
     </nav>
 </div>
-
         <div class="flex-1 p-10 bg-white">
             <h2 class="text-2xl font-bold mb-4">Edit Misi Gamifikasi</h2>
             <div class="bg-white shadow-md rounded-lg p-6">

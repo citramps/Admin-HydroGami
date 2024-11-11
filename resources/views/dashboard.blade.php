@@ -94,7 +94,6 @@
                     </tbody>
                 </table>
             </div>
-
             <h2 class="text-2xl font-bold">Grafik Player Setiap Bulan</h2>
             <div class="bg-white shadow-md rounded-lg p-10">
                 <div>

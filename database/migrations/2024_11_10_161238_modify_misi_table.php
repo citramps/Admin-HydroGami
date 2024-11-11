@@ -16,6 +16,7 @@ return new class extends Migration
     });
 }
 
+
 public function down()
 {
     Schema::table('misi', function (Blueprint $table) {
