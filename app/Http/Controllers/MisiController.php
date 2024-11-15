@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Misi;
 use Illuminate\Http\Request;
 
@@ -9,9 +10,10 @@ class MisiController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $missions = Misi::all();
 
-        return view('missions.index', compact('missions'));
+        return view('missions.index', compact('user', 'missions'));
     }
 
     public function create()
@@ -68,13 +70,13 @@ class MisiController extends Controller
 
 
     public function destroy($id)
-{
-    $mission = Misi::findOrFail($id);
-    $mission->delete();
+    {
+        $mission = Misi::findOrFail($id);
+        $mission->delete();
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Misi berhasil dihapus!'
-    ]);
-}
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Misi berhasil dihapus!'
+        ]);
+    }
 }

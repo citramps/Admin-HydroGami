@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>View Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .bg-custom-green {
             background-color: #29CC74;
@@ -26,15 +25,13 @@
                 </div>
             </div>
             <nav class="space-y-4">
-                <a href="{{ route('dashboard') }}"
-                    class="flex items-center py-2 px-4 bg-white text-green-500 rounded shadow">
-                    <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"
+                <a href="{{ route('dashboard') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 2.828l7 7V17a2 2 0 01-2 2h-3a1 1 0 01-1-1v-4a1 1 0 00-1-1H8a1 1 0 00-1 1v4a1 1 0 01-1 1H3a2 2 0 01-2-2v-7.172l7-7a1 1 0 011.414 0z" />
                     </svg>
                     <span>Dashboard</span>
                 </a>
-
                 <a href="{{ route('misi.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +39,6 @@
                     </svg>
                     <span>Misi</span>
                 </a>
-
                 <a href="{{ route('leaderboard') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +46,6 @@
                     </svg>
                     <span>Leaderboard</span>
                 </a>
-
                 <a href="#" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -95,104 +90,56 @@
                     <h3 class="text-lg font-semibold">Apakah Anda Yakin?</h3>
                     <p class="text-sm text-gray-600">Anda akan keluar dari akun Anda.</p>
                     <div class="flex justify-between mt-6">
-                        <a href="{{ route('login') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya, Logout</a>
-                        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak, Batalkan!</button>
+                        <a href="{{ route('login') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya,
+                            Logout</a>
+                        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak,
+                            Batalkan!</button>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold">Top Master Hidroponik</h2>
-            </div>
-            <div class="bg-white shadow-md rounded-lg mb-8">
-                <table class="min-w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-3 px-4 w-5/12 text-center">Nama</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Poin</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Tanaman</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Skala</th>
-                        </tr>
-                    </thead>
+            <h2 class="text-2xl font-bold">Profile Pengguna</h2>
+            <div class="flex-1 p-8">
+                <div class="max-w-xl mx-auto bg-white shadow-md rounded-lg p-10">
 
-                    <tbody>
-                        @foreach($players as $player)
-                            <tr class="border-t">
-                                <td class="py-4 px-6 w-5/12 text-center flex items-center">
-                                    <img src="{{ $player['profile_image'] }}" alt="Profile Picture"
-                                        class="w-8 h-8 rounded-full mr-3"> {{ $player['name'] }}
-                                </td>
-                                <td class="py-4 px-6 text-center">{{ $player['points'] }} Poin</td>
-                                <td class="py-4 px-6 text-center text-green-500">{{ $player['plant'] }}</td>
-                                <td class="py-4 px-6 text-center
-                            @if($player['difficulty'] == 'High') text-red-500
-                            @elseif($player['difficulty'] == 'Medium') text-yellow-500
-                            @elseif($player['difficulty'] == 'Easy') text-green-500
-                            @endif 
-                            ">
-                                    {{ $player['difficulty'] }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    <div class="flex justify-center">
+                        <img src="{{ $user->profile_image ? asset('storage/profile_images/' . $user->profile_image) : asset('images/default-profile.png') }}"
+                            alt="Profile Picture" class="w-40 h-40 rounded-full object-cover border-2">
+                    </div>
 
-            <h2 class="text-2xl font-bold mb-4">Grafik Player Setiap Minggu</h2>
-            <div class="bg-white shadow-md rounded-lg p-10 mb-8">
-                <canvas id="weeklyPlayerChart" class="w-full h-auto"></canvas>
+                    <div class="space-y-4 mt-10">
+                        <div class="flex justify-between items-center">
+                            <label class="text-gray-600 font-medium">Nama</label>
+                            <p class="text-gray-600 font-medium">{{ $user->name }}</p>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <label class="text-gray-600 font-medium">Email</label>
+                            <p class="text-gray-600 font-medium">{{ $user->email }}</p>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <label class="text-gray-600 font-medium">Role</label>
+                            <p class="text-gray-600 font-medium">{{ $role }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mt-10">
+                        <a href="{{ route('profile.edit') }}"
+                            class="px-10 py-2 bg-custom-green text-white font-semibold rounded-md hover:bg-green-600">Edit
+                            Profil</a>
+                    </div>
+                </div>
             </div>
-            <canvas id="weeklyPlayerChart" width="100" height="50"></canvas>
 
             <script>
                 function toggleDropdown(event) {
-                    // Menghindari konflik dengan event klik pada input pencarian
                     event.stopPropagation();
 
                     const dropdown = document.getElementById('dropdownMenu');
                     dropdown.classList.toggle('hidden');
                 }
-
-                const ctx = document.getElementById('weeklyPlayerChart').getContext('2d');
-                const weeklyPlayerChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5', 'Minggu 6', 'Minggu 7', 'Minggu 8'],
-                        datasets: [{
-                            label: 'Jumlah Player',
-                            data: [20, 35, 25, 45, 30, 25, 30, 45], // Ganti dengan data dinamis dari backend
-                            fill: true,
-                            borderColor: 'rgba(79, 70, 229, 1)', // Warna garis
-                            backgroundColor: 'rgba(79, 70, 229, 0.1)', // Warna area
-                            pointBackgroundColor: 'rgba(79, 70, 229, 1)',
-                            tension: 0.4, // Membuat kurva halus
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Jumlah Player'
-                                }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Minggu'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
 
                 function toggleDropdown() {
                     const dropdown = document.getElementById('dropdownMenu');
@@ -202,7 +149,7 @@
                 function confirmLogout() {
                     const logoutModal = document.getElementById('logoutModal');
                     logoutModal.classList.remove('hidden');
-                    document.getElementById('dropdownMenu').classList.add('hidden'); // Close dropdown when modal opens
+                    document.getElementById('dropdownMenu').classList.add('hidden'); 
                 }
 
                 function closeModal() {
@@ -210,7 +157,6 @@
                     logoutModal.classList.add('hidden');
                 }
 
-                // Close dropdown if clicked outside
                 window.addEventListener('click', function (e) {
                     const dropdown = document.getElementById('dropdownMenu');
                     if (!e.target.closest('.relative')) {
@@ -218,6 +164,5 @@
                     }
                 });
             </script>
-        </div>
 </body>
 </html>

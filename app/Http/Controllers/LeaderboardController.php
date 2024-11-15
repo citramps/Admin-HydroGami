@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class LeaderboardController extends Controller
 {
-        public function index()
+    public function index()
         {
-            $user = Auth::user(); 
+            $user = Auth::user();
 
             $players = [
                 ['name' => 'Rebecca Max', 'points' => 800, 'plant' => 'Pakcoy', 'difficulty' => 'Easy', 'profile_image' => '/path/to/rebecca-max.jpg'],
@@ -18,13 +18,6 @@ class DashboardController extends Controller
                 ['name' => 'Larissa Burton', 'points' => 300, 'plant' => 'Pakcoy', 'difficulty' => 'Easy', 'profile_image' => '/path/to/rebecca-max.jpg'],
             ];
     
-            return view('dashboard', compact('user', 'players'));
-        }
-
-        public function showChart()
-        {
-            $weeklyData = [20, 35, 25, 45, 30, 25, 30, 45]; 
-
-            return view('dashboard', compact('weeklyData'));
+            return view('leaderboard', compact('user', 'players'));
         }
 }
