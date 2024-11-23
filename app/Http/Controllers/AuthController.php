@@ -3,61 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Register
-    public function showRegisterForm()
+    public function showLoginForm()
     {
-        return view('register');
+        return view('login-admin');
     }
 
+    public function showRegisterForm()
+    {
+        return view('register-admin');
+    }
+
+    // Login
+    public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/dashboard-admin');
+    }
+
+    return back()->withErrors([
+        'email' => 'Email atau kata sandi salah.',
+    ]);
+}   
+
+    // Register
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:255|unique:admin',
+            'email' => 'required|string|email|max:255|unique:admin',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
-            'name' => $request->name,
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $admin = Admin::create([
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
+        Auth::login($admin);
 
-    // Login
-    public function showLoginForm()
-    {
-        return view('login');
-    }
-
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('dashboard')->with('success', 'Login berhasil!');
-        }
-
-        return redirect()->back()->withErrors([
-            'login' => 'Email atau password salah, atau akun belum terdaftar.',
-        ])->withInput();
-    }
+        return redirect()->route('login-admin')->with('success', 'Registrasi berhasil! Silahkan login.');
+    }    
 
     // Logout
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login')->with('success', 'Anda telah logout.');
+        return redirect()->route('login-admin');
     }
 }

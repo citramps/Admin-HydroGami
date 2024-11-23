@@ -5,26 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Misi extends Model
+class Panduan extends Model
 {
     use HasFactory;
 
-    protected $table = 'misi';
-
-    protected $primaryKey = 'id_misi';
+    protected $table = 'panduan';
+    protected $primaryKey = 'id_panduan';
+    public $timestamps = false;
 
     protected $fillable = [
         'id_admin',
-        'nama_misi',
-        'deskripsi_misi',
-        'status_misi',
-        'poin',
+        'judul',
+        'desk_panduan',
+        'gambar',
+        'video',
     ];
-
 
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'id_admin');
     }
 }
-

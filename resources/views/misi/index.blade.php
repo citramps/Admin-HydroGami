@@ -16,7 +16,7 @@
 
 <body>
     <div class="flex min-h-screen">
-       
+
         <!-- Side Bar -->
         <div class="w-1/5 bg-custom-green text-white p-6 z-10 flex flex-col">
             <div class="mb-8">
@@ -25,10 +25,11 @@
                 </div>
             </div>
             <nav class="space-y-4">
-                <a href="{{ route('dashboard') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                <a href="{{ route('dashboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2.828l7 7V17a2 2 0 01-2 2h-3a1 1 0 01-1-1v-4a1 1 0 00-1-1H8a1 1 0 00-1 1v4a1 1 0 01-1 1H3a2 2 0 01-2-2v-7.172l7-7a1 1 0 011.414 0z" />
+                        <path
+                            d="M10 2.828l7 7V17a2 2 0 01-2 2h-3a1 1 0 01-1-1v-4a1 1 0 00-1-1H8a1 1 0 00-1 1v4a1 1 0 01-1 1H3a2 2 0 01-2-2v-7.172l7-7a1 1 0 011.414 0z" />
                     </svg>
                     <span>Dashboard</span>
                 </a>
@@ -37,23 +38,26 @@
                     class="flex items-center py-2 px-4 bg-white text-green-500 rounded shadow">
                     <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
+                        <path
+                            d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
                     </svg>
                     <span>Misi</span>
                 </a>
 
-                <a href="{{ route('leaderboard') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                <a href="{{ route('leaderboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2a1 1 0 01.832.445l4 6A1 1 0 0114 10H6a1 1 0 01-.832-1.555l4-6A1 1 0 0110 2zm.79 7.607A1 1 0 0010 9h0a1 1 0 00-.79.393L4 15h12l-5.21-7.393z" />
+                        <path
+                            d="M10 2a1 1 0 01.832.445l4 6A1 1 0 0114 10H6a1 1 0 01-.832-1.555l4-6A1 1 0 0110 2zm.79 7.607A1 1 0 0010 9h0a1 1 0 00-.79.393L4 15h12l-5.21-7.393z" />
                     </svg>
                     <span>Leaderboard</span>
                 </a>
 
-                <a href="#" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                <a href="{{ route('panduan.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
+                        <path
+                            d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
                     </svg>
                     <span>Panduan</span>
                 </a>
@@ -70,7 +74,7 @@
                     <button class="flex items-center space-x-4 focus:outline-none">
                         <input type="text" placeholder="Search"
                             class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
-                        <img src="{{ $user->profile_image }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
+                        <img src="#" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
                     <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 hidden">
@@ -79,7 +83,8 @@
                         <button onclick="confirmLogout()"
                             class="flex justify-between w-full px-4 py-2 text-black hover:bg-gray-100">Logout<svg
                                 class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12H13M18 15l2.913-2.913c.048-.048.048-.126 0-.174L18 9M16 5v-.5C16 3.672 15.328 3 14.5 3H5a2 2 0 00-2 2v14a2 2 0 002 2h9.5c.828 0 1.5-.672 1.5-1.5V19"
+                                <path
+                                    d="M21 12H13M18 15l2.913-2.913c.048-.048.048-.126 0-.174L18 9M16 5v-.5C16 3.672 15.328 3 14.5 3H5a2 2 0 00-2 2v14a2 2 0 002 2h9.5c.828 0 1.5-.672 1.5-1.5V19"
                                     stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
@@ -93,8 +98,10 @@
                     <h3 class="text-lg font-semibold">Apakah Anda Yakin?</h3>
                     <p class="text-sm text-gray-600">Anda akan keluar dari akun Anda.</p>
                     <div class="flex justify-between mt-6">
-                        <a href="{{ route('login') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya, Logout</a>
-                        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak, Batalkan!</button>
+                        <a href="{{ route('login-admin') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya,
+                            Logout</a>
+                        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak,
+                            Batalkan!</button>
                     </div>
                 </div>
             </div>
@@ -114,25 +121,25 @@
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b">
-                            <th class="py-3 px-4 w-1/12 text-center">NO.</th>
-                            <th class="py-3 px-4 w-2/12 text-center">NAMA MISI</th>
+                            <th class="py-3 px-4 w-1/12 text-center">ID</th>
+                            <th class="py-3 px-4 w-2/12 text-left">NAMA MISI</th>
                             <th class="py-3 px-4 w-4/12 text-center">DESKRIPSI MISI</th>
-                            <th class="py-3 px-4 w-1/12 text-center text-green-500">TAHAP MISI</th>
+                            <th class="py-3 px-4 w-1/12 text-center text-green-500">STATUS MISI</th>
                             <th class="py-3 px-4 w-1/12 text-center text-yellow-500 ">JUMLAH POIN</th>
                             <th class="py-3 px-4 w-2/12 text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($missions as $mission)
-                            <tr class="border-t">
-                                <td class="px-4 py-2 text-center">{{ $mission->id }}</td>
-                                <td class="px-4 py-2">{{ $mission->nama_misi }}</td>
-                                <td class="px-4 py-2">{{ $mission->deskripsi_misi }}</td>
-                                <td class="px-4 py-2 text-center text-green-500">{{ $mission->tahap_misi }}</td>
+                            <tr class="border-t" data-mission-id="{{ $mission->id_misi }}">
+                                <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-2 text-left">{{ $mission->nama_misi }}</td>
+                                <td class="px-4 py-2 text-justify">{{ $mission->deskripsi_misi }}</td>
+                                <td class="px-4 py-2 text-center text-green-500">{{ $mission->status_misi }}</td>
                                 <td class="px-4 py-2 text-center text-yellow-500">{{ $mission->poin }} Poin</td>
                                 <td class="px-4 py-2 text-center">
                                     <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('misi.edit', $mission->id) }}"
+                                        <a href="{{ route('misi.edit', $mission->id_misi) }}"
                                             class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -142,7 +149,7 @@
                                             <span class="text-sm font-medium">Edit</span>
                                         </a>
 
-                                        <button onclick="openDeleteModal({{ $mission->id }})"
+                                        <button onclick="openDeleteModal({{ $mission->id_misi }})"
                                             class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -186,7 +193,6 @@
 
     <script>
         function toggleDropdown(event) {
-            // Menghindari konflik dengan event klik pada input pencarian
             event.stopPropagation();
 
             const dropdown = document.getElementById('dropdownMenu');
@@ -199,7 +205,6 @@
             document.getElementById('deleteModal').classList.remove('hidden');
         }
         function confirmDelete() {
-            // Melakukan aksi penghapusan
             if (missionIdToDelete) {
                 fetch(`/misi/${missionIdToDelete}`, {
                     method: 'DELETE',
@@ -208,14 +213,11 @@
                     },
                 }).then(response => {
                     if (response.ok) {
-                        // Tampilkan modal sukses tanpa menimpa modal konfirmasi
-                        closeModal(); // Menutup modal konfirmasi penghapusan terlebih dahulu
+                        closeModal();
                         document.getElementById("successModal").classList.remove("hidden");
 
-                        // Hapus baris data misi
                         document.querySelector(`[data-mission-id="${missionIdToDelete}"]`).remove();
 
-                        // Sembunyikan modal sukses setelah 2 detik
                         setTimeout(() => {
                             document.getElementById("successModal").classList.add("hidden");
                         }, 2000);
@@ -245,7 +247,7 @@
         function confirmLogout() {
             const logoutModal = document.getElementById('logoutModal');
             logoutModal.classList.remove('hidden');
-            document.getElementById('dropdownMenu').classList.add('hidden'); // Close dropdown when modal opens
+            document.getElementById('dropdownMenu').classList.add('hidden'); 
         }
         window.addEventListener('click', function (e) {
             const dropdown = document.getElementById('dropdownMenu');

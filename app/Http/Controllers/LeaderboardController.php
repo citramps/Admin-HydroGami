@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LeaderboardController extends Controller
 {
     public function index()
-        {
-            $user = Auth::user();
+    {
+        $admin = Auth::user();
 
-            $players = [
-                ['name' => 'Rebecca Max', 'points' => 800, 'plant' => 'Pakcoy', 'difficulty' => 'Easy', 'profile_image' => '/path/to/rebecca-max.jpg'],
-                ['name' => 'Cordell Edwards', 'points' => 500, 'plant' => 'Pakcoy', 'difficulty' => 'High', 'profile_image' => '/path/to/rebecca-max.jpg'],
-                ['name' => 'Derrick Spencer', 'points' => 400, 'plant' => 'Pakcoy', 'difficulty' => 'Medium', 'profile_image' => '/path/to/rebecca-max.jpg'],
-                ['name' => 'Larissa Burton', 'points' => 300, 'plant' => 'Pakcoy', 'difficulty' => 'Easy', 'profile_image' => '/path/to/rebecca-max.jpg'],
-            ];
-    
-            return view('leaderboard', compact('user', 'players'));
-        }
+        $leaderboard = DB::table('leaderboard')
+            ->join('pengguna', 'leaderboard.id_pengguna', '=', 'pengguna.id_pengguna')
+            ->select(
+                'leaderboard.id_pengguna',
+                'pengguna.username as nama_pengguna',
+                'leaderboard.total_poin',
+                'leaderboard.created_at'
+            )
+            ->orderByDesc('leaderboard.total_poin')
+            ->get();
+
+        return view('leaderboard-admin', compact('admin', 'leaderboard'));
+    }
 }
