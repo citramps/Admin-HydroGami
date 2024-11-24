@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Leaderboard;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class LeaderboardController extends Controller
 {
@@ -11,15 +11,9 @@ class LeaderboardController extends Controller
     {
         $admin = Auth::user();
 
-        $leaderboard = DB::table('leaderboard')
-            ->join('pengguna', 'leaderboard.id_pengguna', '=', 'pengguna.id_pengguna')
-            ->select(
-                'leaderboard.id_pengguna',
-                'pengguna.username as nama_pengguna',
-                'leaderboard.total_poin',
-                'leaderboard.created_at'
-            )
-            ->orderByDesc('leaderboard.total_poin')
+        // Mengambil data leaderboard dengan relasi pengguna
+        $leaderboard = Leaderboard::with('pengguna')
+            ->orderByDesc('total_poin')
             ->get();
 
         return view('leaderboard-admin', compact('admin', 'leaderboard'));

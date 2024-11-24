@@ -8,6 +8,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/hydrogami-logo2.png') }}" type="image/png">
     <style>
         .bg-custom-green {
             background-color: #29CC74;

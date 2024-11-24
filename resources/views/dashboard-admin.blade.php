@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/hydrogami-logo2.png') }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -125,13 +126,14 @@
                     </thead>
                     <tbody>
                         @foreach($leaderboard as $entry)
-                            <tr class="border-t">
-                                <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
-                                <td class="py-4 px-6 text-center">
-                                    {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}</td>
-                            </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
+                            <td class="py-4 px-6 text-center">
+                                {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -158,7 +160,7 @@
                         labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5', 'Minggu 6', 'Minggu 7', 'Minggu 8'],
                         datasets: [{
                             label: 'Jumlah Player',
-                            data: [20, 35, 25, 45, 30, 25, 30, 45], 
+                            data: [20, 35, 25, 45, 30, 25, 30, 45],
                             fill: true,
                             borderColor: 'rgba(79, 70, 229, 1)', // Warna garis
                             backgroundColor: 'rgba(79, 70, 229, 0.1)', // Warna area
@@ -199,7 +201,7 @@
                 function confirmLogout() {
                     const logoutModal = document.getElementById('logoutModal');
                     logoutModal.classList.remove('hidden');
-                    document.getElementById('dropdownMenu').classList.add('hidden'); 
+                    document.getElementById('dropdownMenu').classList.add('hidden');
                 }
 
                 function closeModal() {
@@ -208,7 +210,7 @@
                 }
 
                 // Close dropdown if clicked outside
-                window.addEventListener('click', function (e) {
+                window.addEventListener('click', function(e) {
                     const dropdown = document.getElementById('dropdownMenu');
                     if (!e.target.closest('.relative')) {
                         dropdown.classList.add('hidden');

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/hydrogami-logo2.png') }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .bg-custom-green {
@@ -119,7 +120,7 @@
                     </label>
 
                     @error('foto_profil')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -136,9 +137,9 @@
                                     class="w-2/3 border border-green-500 rounded-md py-2 px-3 text-sm text-green-500 focus:outline-none focus:border-green-600">
                             </div>
                             @error('name')
-                                <div class="flex justify-end">
-                                    <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
-                                </div>
+                            <div class="flex justify-end">
+                                <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
+                            </div>
                             @enderror
                         </div>
 
@@ -149,9 +150,9 @@
                                     class="w-2/3 border border-green-500 rounded-md py-2 px-3 text-sm text-green-500 focus:outline-none focus:border-green-600">
                             </div>
                             @error('email')
-                                <div class="flex justify-end">
-                                    <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
-                                </div>
+                            <div class="flex justify-end">
+                                <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
+                            </div>
                             @enderror
                         </div>
 
@@ -178,9 +179,9 @@
                                 </button>
                             </div>
                             @error('current_password')
-                                <div class="flex justify-end">
-                                    <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
-                                </div>
+                            <div class="flex justify-end">
+                                <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
+                            </div>
                             @enderror
                         </div>
 
@@ -201,9 +202,9 @@
                                 </button>
                             </div>
                             @error('new_password')
-                                <div class="flex justify-end">
-                                    <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
-                                </div>
+                            <div class="flex justify-end">
+                                <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
+                            </div>
                             @enderror
                         </div>
 
@@ -225,9 +226,9 @@
                                 </button>
                             </div>
                             @error('new_password_confirmation')
-                                <div class="flex justify-end">
-                                    <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
-                                </div>
+                            <div class="flex justify-end">
+                                <p class="text-red-500 text-sm mt-1 w-2/3 text-left">{{ $message }}</p>
+                            </div>
                             @enderror
                         </div>
 
@@ -239,9 +240,9 @@
                     </form>
                 </div>
                 @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
                 @endif
             </div>
         </div>
@@ -273,7 +274,7 @@
             logoutModal.classList.add('hidden');
         }
 
-        window.addEventListener('click', function (e) {
+        window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('dropdownMenu');
             if (!e.target.closest('.relative')) {
                 dropdown.classList.add('hidden');
@@ -332,7 +333,6 @@
                 eyeIconNewPasswordConfirmation.innerHTML = hidePasswordIcon;
             }
         });
-
     </script>
 </body>
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - HydroGami</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/hydrogami-logo2.png') }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .bg-custom-green {
@@ -25,19 +26,19 @@
             <p class="text-gray-600">Silahkan Buat Akun Anda terlebih dahulu</p>
 
             @if ($errors->any())
-                <div class="bg-red-100 text-red-600 p-3 rounded mb-4">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="bg-red-100 text-red-600 p-3 rounded mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             @if (session('success'))
-                <div class="bg-green-100 text-green-600 p-3 rounded mb-4">
-                    {{ session('success') }}
-                </div>
+            <div class="bg-green-100 text-green-600 p-3 rounded mb-4">
+                {{ session('success') }}
+            </div>
             @endif
 
             <form action="{{ route('register-admin') }}" method="POST" class="mt-4">
@@ -129,4 +130,5 @@
             });
         </script>
 </body>
+
 </html>

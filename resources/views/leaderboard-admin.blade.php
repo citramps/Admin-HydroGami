@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/hydrogami-logo2.png') }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -128,13 +129,14 @@
                     </thead>
                     <tbody>
                         @foreach($leaderboard as $entry)
-                            <tr class="border-t">
-                                <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
-                                <td class="py-4 px-6 text-center">
-                                    {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}</td>
-                            </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
+                            <td class="py-4 px-6 text-center">
+                                {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -159,7 +161,7 @@
                 function confirmLogout() {
                     const logoutModal = document.getElementById('logoutModal');
                     logoutModal.classList.remove('hidden');
-                    document.getElementById('dropdownMenu').classList.add('hidden'); 
+                    document.getElementById('dropdownMenu').classList.add('hidden');
                 }
 
                 function closeModal() {
@@ -167,7 +169,7 @@
                     logoutModal.classList.add('hidden');
                 }
 
-                window.addEventListener('click', function (e) {
+                window.addEventListener('click', function(e) {
                     const dropdown = document.getElementById('dropdownMenu');
                     if (!e.target.closest('.relative')) {
                         dropdown.classList.add('hidden');
