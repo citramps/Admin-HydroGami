@@ -10,33 +10,33 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function showLoginAdminForm()
     {
         return view('login-admin');
     }
 
-    public function showRegisterForm()
+    public function showRegisterAdminForm()
     {
         return view('register-admin');
     }
 
     // Login
-    public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
+    public function loginAdmin(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->intended('/dashboard-admin');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard-admin');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau kata sandi salah.',
+        ]);
     }
 
-    return back()->withErrors([
-        'email' => 'Email atau kata sandi salah.',
-    ]);
-}   
-
     // Register
-    public function register(Request $request)
+    public function registerAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255|unique:admin',
@@ -57,10 +57,10 @@ class AuthController extends Controller
         Auth::login($admin);
 
         return redirect()->route('login-admin')->with('success', 'Registrasi berhasil! Silahkan login.');
-    }    
+    }
 
     // Logout
-    public function logout()
+    public function logoutAdmin()
     {
         Auth::logout();
         return redirect()->route('login-admin');
