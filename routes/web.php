@@ -9,15 +9,14 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PanduanController;
 
 
-// Halaman login
-Route::get('login-admin', [AuthController::class, 'showLoginForm'])->name('login-admin');
-Route::post('login-admin', [AuthController::class, 'login']);
 
+Route::get('/register-admin', [AuthController::class, 'showRegisterAdminForm'])->name('register-admin');
+Route::post('/register-admin', [AuthController::class, 'registerAdmin'])->name('register-admin');
 
-// Halaman register
-Route::get('register-admin', [AuthController::class, 'showRegisterForm'])->name('register-admin');
-Route::post('register-admin', [AuthController::class, 'register']);
+Route::get('/login-admin', [AuthController::class, 'showLoginAdminForm'])->name('login-admin');
+Route::post('/login-admin', [AuthController::class, 'loginAdmin'])->name('login-admin');
 
+Route::post('/logout', [AuthController::class, 'logoutAdmin'])->name('logout');
 
 // Halaman dashboard
 Route::get('dashboard-admin', [DashboardController::class, 'index'])
@@ -63,7 +62,3 @@ Route::middleware(['auth'])->group(function () {
 
 // Logout 
 Route::post('logout', [AuthController::class, 'logout'])->name(name: 'logout');
-
-
-
-
