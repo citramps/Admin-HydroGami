@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Panduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PanduanController extends Controller
 {
     public function index()
     {
         $panduan = Panduan::all();
-
         return view('panduan.index', compact('panduan'));
     }
 
@@ -22,7 +22,6 @@ class PanduanController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'judul' => 'required|string|max:255',
             'desk_panduan' => 'nullable|string',
@@ -42,13 +41,11 @@ class PanduanController extends Controller
             'judul' => $request->judul,
             'desk_panduan' => $request->desk_panduan,
             'gambar' => $gambarPath,
-            'video' => $request->video, 
+            'video' => $request->video,
         ]);
 
         return redirect()->route('panduan.index')->with('success', 'Panduan berhasil ditambahkan!');
     }
-
-
 
     public function edit($id_panduan)
     {
@@ -70,30 +67,61 @@ class PanduanController extends Controller
         $panduan->judul = $request->input('judul');
         $panduan->desk_panduan = $request->input('desk_panduan');
 
-        // Handle Gambar
         if ($request->hasFile('gambar')) {
-            if ($panduan->gambar && \Storage::exists($panduan->gambar)) {
-                \Storage::delete($panduan->gambar);
+            if ($panduan->gambar && Storage::exists($panduan->gambar)) {
+                Storage::delete($panduan->gambar);
             }
             $panduan->gambar = $request->file('gambar')->store('panduan_images', 'public');
         }
 
-
-        // Update URL Video
         $panduan->video = $request->input('video');
-
         $panduan->save();
 
         return redirect()->route('panduan.index')->with('success', 'Panduan berhasil diperbarui!');
     }
 
-
     public function destroy($id_panduan)
     {
         $panduan = Panduan::findOrFail($id_panduan);
+
+        if ($panduan->gambar && Storage::exists($panduan->gambar)) {
+            Storage::delete($panduan->gambar);
+        }
+
         $panduan->delete();
 
         return response()->json(['message' => 'Panduan berhasil dihapus']);
     }
-}
 
+
+    //USER API
+    public function getAllPanduan()
+    {
+        $panduan = Panduan::all();
+
+        // Format respon JSON
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar panduan berhasil diambil.',
+            'data' => $panduan
+        ], 200);
+    }
+
+    public function getPanduanDetail($id)
+    {
+        $panduan = Panduan::find($id);
+
+        if ($panduan) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail panduan berhasil diambil.',
+                'data' => $panduan
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Panduan tidak ditemukan.'
+            ], 404);
+        }
+    }
+}

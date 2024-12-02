@@ -74,9 +74,10 @@ class AuthController extends Controller
     {
         //Validate
         $rules = [
-            'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|string|unique:users',
             'password' => 'required|string|min:6',
+            'poin' => 'nullable|integer',
         ];
         $validator = Validator::make($req->all(), $rules);
         if ($validator->fails()) {
@@ -84,9 +85,10 @@ class AuthController extends Controller
         }
         // create new user in users table
         $user = User::create([
-            'name' => $req->name,
+            'username' => $req->username,
             'email' => $req->email,
             'password' => Hash::make($req->password),
+            'poin' => $request->poin ?? 0,
         ]);
         $token = $user->createToken('Personal Access Token')->plainTextToken;
         $response = ['user' => $user, 'token' => $token];
