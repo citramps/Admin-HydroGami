@@ -70,7 +70,7 @@
                     <button class="flex items-center space-x-4 focus:outline-none">
                         <input type="text" placeholder="Search"
                             class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
-                        <img src="#" alt="Profile" class="w-12 h-12 rounded-full border-2"
+                        <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
                     <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 hidden">
@@ -102,6 +102,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- Main Content -->
             <h2 class="text-2xl font-bold">Profile Pengguna</h2>
@@ -109,7 +110,7 @@
                 <div class="max-w-xl mx-auto bg-white shadow-md rounded-lg p-10">
 
                     <div class="flex justify-center">
-                        <img src="{{ $admin->foto_profil ? asset('storage/foto_profil/' . $admin->foto_profil) : asset('images/default-profile.png') }}"
+                        <img src="{{ $admin->foto_profil ? asset('storage/' . $admin->foto_profil) : asset('images/user.png') }}"
                             alt="Profile Picture" class="w-40 h-40 rounded-full object-cover border-2">
                     </div>
 
@@ -119,6 +120,7 @@
                             <p class="text-gray-600 font-medium">{{ $admin->username }}</p>
                         </div>
 
+                        
                         <div class="flex justify-between items-center">
                             <label class="text-gray-600 font-medium">Email</label>
                             <p class="text-gray-600 font-medium">{{ $admin->email }}</p>

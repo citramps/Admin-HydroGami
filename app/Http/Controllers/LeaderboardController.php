@@ -24,4 +24,5 @@ class LeaderboardController extends Controller
 
         return view('leaderboard-admin', compact('admin', 'leaderboard'));
     }
+    
 }

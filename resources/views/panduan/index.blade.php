@@ -75,7 +75,7 @@
                     <button class="flex items-center space-x-4 focus:outline-none">
                         <input type="text" placeholder="Search"
                             class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
-                        <img src="#" alt="Profile" class="w-12 h-12 rounded-full border-2"
+                        <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
                     <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 hidden">
@@ -131,11 +131,13 @@
                             <th class="py-3 px-4 w-2/12 text-center">Aksi</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         @foreach ($panduan as $item)
                             <tr class="border-t" data-panduan-id="{{ $item->id_panduan }}">
                                 <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
 
+                                <!-- Kolom Gambar -->
                                 <td class="px-4 py-2 text-center">
                                     @if ($item->gambar)
                                         <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Panduan"
@@ -145,12 +147,14 @@
                                     @endif
                                 </td>
 
-
+                                <!-- Kolom Video -->
                                 <td class="px-4 py-2 text-center">
                                     @if ($item->video)
                                         <a href="{{ $item->video }}" target="_blank" class="block">
-                                            <iframe class="w-full max-w-[250px] h-[140px] rounded" src="{{ $item->video }}"
-                                                frameborder="0" allowfullscreen></iframe>
+                                            <iframe src="{{ embedVideo($item->video) }}" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen style="width: 170px; height: 100px; border-radius: 6px;">
+                                            </iframe>
                                         </a>
                                     @else
                                         <span class="text-gray-500">Tidak Ada</span>

@@ -68,9 +68,10 @@ class PanduanController extends Controller
         $panduan->desk_panduan = $request->input('desk_panduan');
 
         if ($request->hasFile('gambar')) {
-            if ($panduan->gambar && Storage::exists($panduan->gambar)) {
-                Storage::delete($panduan->gambar);
+            if ($panduan->gambar && Storage::disk('public')->exists($panduan->gambar)) {
+                Storage::disk('public')->delete($panduan->gambar);
             }
+
             $panduan->gambar = $request->file('gambar')->store('panduan_images', 'public');
         }
 

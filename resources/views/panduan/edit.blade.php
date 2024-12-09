@@ -107,7 +107,6 @@
                             class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
                             value="{{ $panduan->video }}">
                     </div>
-
                     <div class="text-center">
                         <button type="submit"
                             class="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"> Simpan Perubahan
@@ -116,5 +115,6 @@
                 </form>
             </div>
         </div>
+        
 </body>
 </html>

@@ -20,7 +20,9 @@
         <!-- Side Bar -->
         <div class="w-1/5 bg-custom-green text-white p-6 z-10 flex flex-col">
             <div class="mb-8">
-                <img src="{{ asset('images/hydrogami-logo2.png') }}" alt="HydroGami Logo" class="w-12">
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('images/hydrogami-logo2.png') }}" alt="HydroGami Logo" class="w-12">
+                </div>
             </div>
             <nav class="space-y-4">
                 <a href="{{ route('dashboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
@@ -72,7 +74,7 @@
                     <button class="flex items-center space-x-4 focus:outline-none">
                         <input type="text" placeholder="Search"
                             class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
-                        <img src="{{ $admin->foto_profil }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
+                        <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
                     <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 hidden">
@@ -104,20 +106,20 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- Main Content -->
             <h2 class="text-2xl font-bold mb-8">Edit Profile</h2>
             <div class="flex max-w-6xl mx-auto bg-white shadow-md rounded-lg p-10">
                 <div class="w-2/6 flex flex-col items-center mr-8">
 
-                    <img src="{{ $admin->foto_profil ? asset('storage/foto_profil/' . $admin->foto_profil) : '/path/to/default-profile.jpg' }}"
+                    <img src="{{ $admin->foto_profil ? asset('storage/' . $admin->foto_profil) : 'images/user.png' }}"
                         alt="Profile Picture" class="w-44 h-44 rounded-full shadow-md mb-4 object-cover">
 
                     <label class="block">
                         <input type="file" name="foto_profil"
                             class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-200 hover:file:bg-gray-300">
                     </label>
-
                     @error('foto_profil')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
