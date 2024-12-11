@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanduanController;
-use App\Http\Controllers\SensorDataController;
+use App\Http\Controllers\MQTTController;
+
+Route::post('/mqtt-data', [MQTTController::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,6 @@ Route::prefix('user')->group(function () {
     Route::get('/panduan', [PanduanController::class, 'getAllPanduan']); // Mendapatkan semua panduan
     Route::get('/panduan/{id}', [PanduanController::class, 'getPanduanDetail']); // Mendapatkan detail panduan
 });
-
-Route::post('/sensor-data', [SensorDataController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
