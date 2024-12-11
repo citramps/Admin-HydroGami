@@ -1,4 +1,3 @@
-// Pub.js: Menggunakan MQTT.js untuk mempublikasikan data
 const mqtt = require('mqtt');
 
 // Konfigurasi broker MQTT
@@ -23,6 +22,12 @@ client.on('connect', () => {
   }, 1000); // Kirim setiap 1 detik
 });
 
+// Event handler jika terjadi kesalahan
 client.on('error', (err) => {
   console.error('Kesalahan MQTT:', err);
+});
+
+// Event handler jika broker offline
+client.on('offline', () => {
+  console.error('Broker MQTT offline.');
 });

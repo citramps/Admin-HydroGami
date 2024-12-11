@@ -1,4 +1,3 @@
-// Sub.js: Menggunakan MQTT.js untuk berlangganan data
 const mqtt = require('mqtt');
 
 // Konfigurasi broker MQTT
@@ -11,23 +10,29 @@ const options = {
 
 const client = mqtt.connect(brokerUrl, options);
 
-// Event handler untuk koneksix
+// Event handler untuk koneksi
 client.on('connect', () => {
   console.log('Terhubung ke broker MQTT!');
-  client.subscribe('sensor/data', { qos: 0 }, (err) => {
+  client.subscribe('sensor/data', { qos: 0 }, (err, granted) => {
     if (err) {
       console.error('Gagal berlangganan:', err);
     } else {
-      console.log('Berlangganan topik: sensor/data');
+      console.log('Berlangganan topik:', granted.map(g => g.topic).join(', '));
     }
   });
 });
 
 // Event handler untuk pesan masuk
 client.on('message', (topic, message) => {
-  console.log(`Pesan diterima di ${topic}: ${message.toString()}`);
+  console.log(`Pesan diterima di topik "${topic}": ${message.toString()}`);
 });
 
+// Event handler jika terjadi kesalahan
 client.on('error', (err) => {
   console.error('Kesalahan MQTT:', err);
+});
+
+// Event handler jika broker offline
+client.on('offline', () => {
+  console.error('Broker MQTT offline.');
 });

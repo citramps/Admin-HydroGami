@@ -21,3 +21,8 @@ aedes.on('clientDisconnect', function (client) {
 aedes.on('publish', function (packet, client) {
   console.log(`Pesan diterima di topik "${packet.topic}": ${packet.payload.toString()}`);
 });
+
+// Event saat ada client yang berlangganan ke topik
+aedes.on('subscribe', (subscriptions, client) => {
+  console.log(`Client ${client ? client.id : 'Anonymous'} berlangganan ke topik: ${subscriptions.map(s => s.topic).join(', ')}`);
+});
