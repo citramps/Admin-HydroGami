@@ -1,33 +1,37 @@
 const mqtt = require('mqtt');
 
-// Konfigurasi broker MQTT
-const brokerUrl = 'mqtt://192.168.117.189'; // Ganti dengan IP Broker MQTT Anda
-const options = {
-  clientId: 'Node_Publisher',
-  username: 'mqtt_user',       // Opsional, kosongkan jika tidak ada username
-  password: 'mqtt_password',   // Opsional, kosongkan jika tidak ada password
-};
+// Mengonfigurasi koneksi ke broker MQTT
+const broker = 'mqtt://localhost:1883'; // Alamat broker
+const client = mqtt.connect(broker);
 
-const client = mqtt.connect(brokerUrl, options);
-
-// Event handler untuk koneksi
+// Menunggu koneksi ke broker
 client.on('connect', () => {
-  console.log('Terhubung ke broker MQTT!');
+  console.log('Connected to MQTT Broker');
 
-  // Simulasi data sensor (misalnya, random number)
-  setInterval(() => {
-    const sensorData = Math.floor(Math.random() * 1024); // Ganti dengan data aktual
-    client.publish('sensor/data', sensorData.toString(), { qos: 0, retain: false });
-    console.log(`Data dikirim: ${sensorData}`);
-  }, 1000); // Kirim setiap 1 detik
+  // Data sensor yang akan dikirim
+  const sensorData = {
+    temperature: 25.3,
+    humidity: 60.5,
+    light: 65.2,
+    soil_moisture: 40.3,
+    tds: 350,
+    ph: 7.1,
+  };
+
+  // Mengonversi data menjadi JSON string
+  const message = JSON.stringify(sensorData);
+
+  // Mengirim pesan ke topic "sensor/data"
+  client.publish('sensor/data', message, (err) => {
+    if (err) {
+      console.log('Failed to publish message:', err);
+    } else {
+      console.log('Sensor data sent:', message);
+    }
+  });
 });
 
-// Event handler jika terjadi kesalahan
+// Menangani jika ada error
 client.on('error', (err) => {
-  console.error('Kesalahan MQTT:', err);
-});
-
-// Event handler jika broker offline
-client.on('offline', () => {
-  console.error('Broker MQTT offline.');
+  console.log('Connection error:', err);
 });

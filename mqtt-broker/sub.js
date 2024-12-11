@@ -1,38 +1,33 @@
 const mqtt = require('mqtt');
 
-// Konfigurasi broker MQTT
-const brokerUrl = 'mqtt://192.168.117.189'; // Ganti dengan IP Broker MQTT Anda
-const options = {
-  clientId: 'Node_Subscriber',
-  username: 'mqtt_user',       // Opsional, kosongkan jika tidak ada username
-  password: 'mqtt_password',   // Opsional, kosongkan jika tidak ada password
-};
+// Mengonfigurasi koneksi ke broker MQTT
+const broker = 'mqtt://localhost:1883'; // Alamat broker
+const client = mqtt.connect(broker);
 
-const client = mqtt.connect(brokerUrl, options);
-
-// Event handler untuk koneksi
+// Menunggu koneksi ke broker
 client.on('connect', () => {
-  console.log('Terhubung ke broker MQTT!');
-  client.subscribe('sensor/data', { qos: 0 }, (err, granted) => {
+  console.log('Connected to MQTT Broker');
+  
+  // Berlangganan ke topic "sensor/data"
+  client.subscribe('sensor/data', (err) => {
     if (err) {
-      console.error('Gagal berlangganan:', err);
+      console.log('Failed to subscribe:', err);
     } else {
-      console.log('Berlangganan topik:', granted.map(g => g.topic).join(', '));
+      console.log('Subscribed to topic: sensor/data');
     }
   });
 });
 
-// Event handler untuk pesan masuk
+// Menangani pesan yang diterima
 client.on('message', (topic, message) => {
-  console.log(`Pesan diterima di topik "${topic}": ${message.toString()}`);
+  if (topic === 'sensor/data') {
+    // Mengonversi pesan JSON kembali ke objek
+    const sensorData = JSON.parse(message.toString());
+    console.log('Received sensor data:', sensorData);
+  }
 });
 
-// Event handler jika terjadi kesalahan
+// Menangani jika ada error
 client.on('error', (err) => {
-  console.error('Kesalahan MQTT:', err);
-});
-
-// Event handler jika broker offline
-client.on('offline', () => {
-  console.error('Broker MQTT offline.');
+  console.log('Connection error:', err);
 });
