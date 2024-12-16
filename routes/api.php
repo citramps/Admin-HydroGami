@@ -28,5 +28,9 @@ Route::prefix('user')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return response()->json([
+        'id' => $request->user()->id,
+        'username' => $request->user()->username,
+        'email' => $request->user()->email,
+    ]);
 });
