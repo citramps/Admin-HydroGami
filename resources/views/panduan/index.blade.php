@@ -45,11 +45,10 @@
 
                 <a href="{{ route('leaderboard-admin') }}"
                     class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10 2a1 1 0 01.832.445l4 6A1 1 0 0114 10H6a1 1 0 01-.832-1.555l4-6A1 1 0 0110 2zm.79 7.607A1 1 0 0010 9h0a1 1 0 00-.79.393L4 15h12l-5.21-7.393z" />
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
+
                     <span>Leaderboard</span>
                 </a>
 
@@ -131,65 +130,65 @@
                             <th class="py-3 px-4 w-2/12 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         @foreach ($panduan as $item)
-                            <tr class="border-t" data-panduan-id="{{ $item->id_panduan }}">
-                                <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
+                        <tr class="border-t" data-panduan-id="{{ $item->id_panduan }}">
+                            <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
 
-                                <!-- Kolom Gambar -->
-                                <td class="px-4 py-2 text-center">
-                                    @if ($item->gambar)
-                                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Panduan"
-                                            class="w-full max-w-[150px] h-auto object-cover rounded">
-                                    @else
-                                        <span class="text-gray-500">Tidak Ada</span>
-                                    @endif
-                                </td>
+                            <!-- Kolom Gambar -->
+                            <td class="px-4 py-2 text-center">
+                                @if ($item->gambar)
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Panduan"
+                                    class="w-full max-w-[150px] h-auto object-cover rounded">
+                                @else
+                                <span class="text-gray-500">Tidak Ada</span>
+                                @endif
+                            </td>
 
-                                <!-- Kolom Video -->
-                                <td class="px-4 py-2 text-center">
-                                    @if ($item->video)
-                                        <a href="{{ $item->video }}" target="_blank" class="block">
-                                            <iframe src="{{ embedVideo($item->video) }}" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen style="width: 170px; height: 100px; border-radius: 6px;">
-                                            </iframe>
-                                        </a>
-                                    @else
-                                        <span class="text-gray-500">Tidak Ada</span>
-                                    @endif
-                                </td>
+                            <!-- Kolom Video -->
+                            <td class="px-4 py-2 text-center">
+                                @if ($item->video)
+                                <a href="{{ $item->video }}" target="_blank" class="block">
+                                    <iframe src="{{ embedVideo($item->video) }}" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen style="width: 170px; height: 100px; border-radius: 6px;">
+                                    </iframe>
+                                </a>
+                                @else
+                                <span class="text-gray-500">Tidak Ada</span>
+                                @endif
+                            </td>
 
 
-                                <td class="px-4 py-2 text-justify">{{ $item->judul }}</td>
-                                <td class="px-4 py-2 text-justify">{{ Str::limit($item->desk_panduan, 50) }}</td>
+                            <td class="px-4 py-2 text-justify">{{ $item->judul }}</td>
+                            <td class="px-4 py-2 text-justify">{{ Str::limit($item->desk_panduan, 50) }}</td>
 
-                                <td class="px-4 py-2 text-center">
-                                    <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('panduan.edit', $item->id_panduan) }}"
-                                            class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
-                                            </svg>
-                                            <span class="text-sm font-medium">Edit</span>
-                                        </a>
+                            <td class="px-4 py-2 text-center">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('panduan.edit', $item->id_panduan) }}"
+                                        class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path
+                                                d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
+                                        </svg>
+                                        <span class="text-sm font-medium">Edit</span>
+                                    </a>
 
-                                        <button onclick="openDeleteModal({{ $item->id_panduan }})"
-                                            class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span class="text-sm font-medium">Hapus</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <button onclick="openDeleteModal({{ $item->id_panduan }})"
+                                        class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-sm font-medium">Hapus</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -264,6 +263,7 @@
             panduanIdToDelete = null;
 
         }
+
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.classList.toggle('hidden');
@@ -275,7 +275,7 @@
             document.getElementById('dropdownMenu').classList.add('hidden');
         }
 
-        window.addEventListener('click', function (e) {
+        window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('dropdownMenu');
             if (!e.target.closest('.relative')) {
                 dropdown.classList.add('hidden');

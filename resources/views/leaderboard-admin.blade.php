@@ -48,9 +48,10 @@
                     class="flex items-center py-2 px-4 bg-white text-green-500 rounded shadow">
                     <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10 2a1 1 0 01.832.445l4 6A1 1 0 0114 10H6a1 1 0 01-.832-1.555l4-6A1 1 0 0110 2zm.79 7.607A1 1 0 0010 9h0a1 1 0 00-.79.393L4 15h12l-5.21-7.393z" />
+                        <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
+
+
                     <span>Leaderboard</span>
                 </a>
 
@@ -64,7 +65,7 @@
                 </a>
             </nav>
         </div>
-        
+
         <!-- Profil, Logout -->
         <div class="flex-1 p-10 bg-white">
             <div class="flex justify-between items-center mb-8">
@@ -128,13 +129,14 @@
                     </thead>
                     <tbody>
                         @foreach($leaderboard as $entry)
-                            <tr class="border-t">
-                                <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
-                                <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
-                                <td class="py-4 px-6 text-center">
-                                    {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}</td>
-                            </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
+                            <td class="py-4 px-6 text-center">
+                                {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -159,7 +161,7 @@
                 function confirmLogout() {
                     const logoutModal = document.getElementById('logoutModal');
                     logoutModal.classList.remove('hidden');
-                    document.getElementById('dropdownMenu').classList.add('hidden'); 
+                    document.getElementById('dropdownMenu').classList.add('hidden');
                 }
 
                 function closeModal() {
@@ -167,7 +169,7 @@
                     logoutModal.classList.add('hidden');
                 }
 
-                window.addEventListener('click', function (e) {
+                window.addEventListener('click', function(e) {
                     const dropdown = document.getElementById('dropdownMenu');
                     if (!e.target.closest('.relative')) {
                         dropdown.classList.add('hidden');

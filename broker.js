@@ -9,7 +9,7 @@ broker.on('ready', () => {
 broker.on('published', (packet, client) => {
   if (packet.topic !== '$SYS') {
     const message = packet.payload.toString();
-    console.log(`Message on topic '${packet.topic}': ${message}`);
+    console.log(`Message on topic \n'${packet.topic}': ${message} \n`);
   }
 });
 

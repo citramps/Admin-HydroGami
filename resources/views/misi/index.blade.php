@@ -44,12 +44,12 @@
                     <span>Misi</span>
                 </a>
 
-                <a href="{{ route('leaderboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10 2a1 1 0 01.832.445l4 6A1 1 0 0114 10H6a1 1 0 01-.832-1.555l4-6A1 1 0 0110 2zm.79 7.607A1 1 0 0010 9h0a1 1 0 00-.79.393L4 15h12l-5.21-7.393z" />
+                <a href="{{ route('leaderboard-admin') }}"
+                    class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
+
                     <span>Leaderboard</span>
                 </a>
 
@@ -77,7 +77,7 @@
                         <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
-                    
+
                     <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 hidden">
                         <a href="{{ route('profile.show') }}"
                             class="block px-4 py-2 text-black hover:bg-gray-100 transition-colors duration-200">Profil</a>
@@ -123,7 +123,7 @@
                     <thead>
                         <tr class="border-b">
                             <th class="py-3 px-4 w-1/12 text-center">ID</th>
-                            <th class="py-3 px-4 w-2/12 text-left">NAMA MISI</th>
+                            <th class="py-3 px-4 w-2/12 text-center">NAMA MISI</th>
                             <th class="py-3 px-4 w-4/12 text-center">DESKRIPSI MISI</th>
                             <th class="py-3 px-4 w-1/12 text-center text-green-500">STATUS MISI</th>
                             <th class="py-3 px-4 w-1/12 text-center text-yellow-500 ">JUMLAH POIN</th>
@@ -132,37 +132,37 @@
                     </thead>
                     <tbody>
                         @foreach ($missions as $mission)
-                            <tr class="border-t" data-mission-id="{{ $mission->id_misi }}">
-                                <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 text-left">{{ $mission->nama_misi }}</td>
-                                <td class="px-4 py-2 text-justify">{{ $mission->deskripsi_misi }}</td>
-                                <td class="px-4 py-2 text-center text-green-500">{{ $mission->status_misi }}</td>
-                                <td class="px-4 py-2 text-center text-yellow-500">{{ $mission->poin }} Poin</td>
-                                <td class="px-4 py-2 text-center">
-                                    <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('misi.edit', $mission->id_misi) }}"
-                                            class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
-                                            </svg>
-                                            <span class="text-sm font-medium">Edit</span>
-                                        </a>
+                        <tr class="border-t" data-mission-id="{{ $mission->id_misi }}">
+                            <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-2 text-center">{{ $mission->nama_misi }}</td>
+                            <td class="px-4 py-2 text-justify">{{ $mission->deskripsi_misi }}</td>
+                            <td class="px-4 py-2 text-center text-green-500">{{ $mission->status_misi }}</td>
+                            <td class="px-4 py-2 text-center text-yellow-500">{{ $mission->poin }} Poin</td>
+                            <td class="px-4 py-2 text-center">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('misi.edit', $mission->id_misi) }}"
+                                        class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path
+                                                d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
+                                        </svg>
+                                        <span class="text-sm font-medium">Edit</span>
+                                    </a>
 
-                                        <button onclick="openDeleteModal({{ $mission->id_misi }})"
-                                            class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span class="text-sm font-medium">Hapus</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <button onclick="openDeleteModal({{ $mission->id_misi }})"
+                                        class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-sm font-medium">Hapus</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -201,10 +201,12 @@
         }
 
         let missionIdToDelete = null;
+
         function openDeleteModal(missionId) {
             missionIdToDelete = missionId;
             document.getElementById('deleteModal').classList.remove('hidden');
         }
+
         function confirmDelete() {
             if (missionIdToDelete) {
                 fetch(`/misi/${missionIdToDelete}`, {
@@ -228,6 +230,7 @@
                 });
             }
         }
+
         function closeModal() {
             {
                 document.getElementById('deleteModal').classList.add('hidden');
@@ -245,12 +248,13 @@
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.classList.toggle('hidden');
         }
+
         function confirmLogout() {
             const logoutModal = document.getElementById('logoutModal');
             logoutModal.classList.remove('hidden');
-            document.getElementById('dropdownMenu').classList.add('hidden'); 
+            document.getElementById('dropdownMenu').classList.add('hidden');
         }
-        window.addEventListener('click', function (e) {
+        window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('dropdownMenu');
             if (!e.target.closest('.relative')) {
                 dropdown.classList.add('hidden');
