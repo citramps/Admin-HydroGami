@@ -4,9 +4,9 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanduanController;
-use App\Http\Controllers\MQTTController;
+use App\Http\Controllers\SensorDataController;
 
-Route::post('/mqtt-data', [MQTTController::class, 'store']);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,9 @@ Route::post('/mqtt-data', [MQTTController::class, 'store']);
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/sensor-data', [SensorDataController::class, 'store']);
+Route::get('/sensor-data', [SensorDataController::class, 'index']);
 
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);

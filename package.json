@@ -1,36 +1,27 @@
 {
-  "dependencies": {
-    "mqtt": "^5.10.3"
-  },
   "name": "admin-hydrogami",
   "version": "1.0.0",
-  "description": "PBL IF-16 HYDROGAMI: Integrasi IoT dan Gamifikasi Pada Tanaman Hidroponik Berbasis Mobile 2024",
-  "main": "vite.config.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "PBL IF-16 HYDROGAMI 2024",
+  "main": "app.js",
   "scripts": {
+    "start": "node broker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "PBL",
     "MQTT",
     "IoT",
     "Sensor",
     "DHT",
-    "11",
-    "Sensor",
-    "TDS",
-    "Meter",
-    "Sensor",
-    "PH",
-    "Sensor",
-    "Capative",
-    "Soil",
-    "Moisture",
-    "Sensor",
-    "BH1750"
+    "Hydrogami",
+    "ESP8266"
   ],
-  "author": "PBL IF-16 Politeknik Negeri Batam",
-  "license": "ISC"
+  "author": "Kelompok PBL IF-16 Polibatam",
+  "license": "ISC",
+  "dependencies": {
+    "aedes": "^0.51.3",
+    "axios": "^1.7.9",
+    "bson": "^6.10.1",
+    "mongodb": "^6.12.0",
+    "mqtt": "^5.10.3"
+  }
 }

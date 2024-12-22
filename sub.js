@@ -15,7 +15,7 @@ var topics = [
 
 // Fungsi untuk menangani pesan dari broker
 client.on('message', (topic, message) => {
-  console.log('Received message on ${topic}: ${message.toString()}')
+  console.log(`Received message on ${topic}: ${message.toString()}`)
 })
 
 // Langganan ke semua topik
@@ -23,7 +23,7 @@ client.on('connect', () => {
   console.log('Connected to broker!')
   client.subscribe(topics, (err) => {
     if (!err) {
-      console.log('Subscribed to topics: ${topics.join(', ')}')
+      console.log(`Subscribed to topics: ${topics.join(', ')} \n`)
     } else {
       console.error('Failed to subscribe:', err)
     }
