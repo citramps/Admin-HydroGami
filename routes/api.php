@@ -37,3 +37,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         'email' => $request->user()->email,
     ]);
 });
+
+Route::get('/test', function () {
+    return ['message' => 'API berjalan'];
+});

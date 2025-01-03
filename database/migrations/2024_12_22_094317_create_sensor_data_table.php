@@ -10,12 +10,12 @@ class CreateSensorDataTable extends Migration
     {
         Schema::create('sensor_data', function (Blueprint $table) {
             $table->id();
-            $table->float('temperature');
-            $table->float('humidity');
-            $table->float('light');
-            $table->float('soil_moisture');
+            $table->double('temperature', 8, 2);
+            $table->double('humidity', 8, 2);
+            $table->double('light', 8, 2);
+            $table->double('soil_moisture', 8, 2);
             $table->integer('tds');
-            $table->integer('ph');
+            $table->double('ph', 8, 3);
             $table->timestamps();
         });
     }
