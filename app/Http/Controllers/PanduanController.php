@@ -25,8 +25,8 @@ class PanduanController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'desk_panduan' => 'nullable|string',
-            'gambar' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'video' => 'nullable|url',
+            'gambar' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'video' => 'required|url',
         ]);
 
         $gambarPath = null;

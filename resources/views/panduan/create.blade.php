@@ -44,7 +44,8 @@
                     <span>Misi</span>
                 </a>
 
-                <a href="{{ route('leaderboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                <a href="{{ route('leaderboard-admin') }}"
+                    class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -90,14 +91,17 @@
                     <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2" for="gambar">Gambar Panduan</label>
                         <input type="file" name="gambar" id="gambar"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 text-sm text-gray-500">
+                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 text-sm text-gray-500"
+                            required>
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2" for="video">Video Panduan (URL)</label>
                         <input type="url" name="video" id="video" placeholder="Masukkan URL Video Panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500">
+                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
+                            required>
                     </div>
+
 
                     <div class="text-center">
                         <button type="submit"
@@ -108,6 +112,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
