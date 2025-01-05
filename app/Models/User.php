@@ -43,4 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getProfilePictureUrlAttribute()
+{
+    return $this->profile_picture
+        ? asset('storage/' . $this->profile_picture)
+        : asset('default-profile.png'); // Default jika tidak ada foto
+}
+
 }
