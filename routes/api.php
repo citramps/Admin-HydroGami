@@ -19,6 +19,17 @@ use App\Http\Controllers\SensorDataController;
 |
 */
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/auth/update-profile', [AuthController::class, 'updateProfile']);
+    Route::get('/user', function (Request $request) {
+        return response()->json([
+            'id' => $request->user()->id,
+            'username' => $request->user()->username,
+            'email' => $request->user()->email,
+        ]);
+    });
+});
+
 Route::post('/sensor-data', [SensorDataController::class, 'store']);
 Route::get('/sensor-data', [SensorDataController::class, 'index']);
 

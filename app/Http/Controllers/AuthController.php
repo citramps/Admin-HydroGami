@@ -127,4 +127,58 @@ class AuthController extends Controller
         $response = ['user' => $user, 'token' => $token];
         return response()->json($response, 200);
     }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $user = $request->user();
+
+            $validator = Validator::make($request->all(), [
+                'username' => 'required|string',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'current_password' => 'required_with:password|string',
+                'password' => 'nullable|string|min:6',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validasi gagal',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            // Verify current password if trying to change password
+            if ($request->filled('password')) {
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return response()->json([
+                        'message' => 'Password saat ini tidak sesuai'
+                    ], 422);
+                }
+            }
+
+            $userData = [
+                'username' => $request->username,
+                'email' => $request->email,
+            ];
+
+            if ($request->filled('password')) {
+                $userData['password'] = Hash::make($request->password);
+            }
+
+            $user->update($userData);
+
+            return response()->json([
+                'message' => 'Profile berhasil diperbarui',
+                'user' => [
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'email' => $user->email,
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
