@@ -19,7 +19,7 @@
     <div class="flex justify-center items-center h-screen">
         <div class="bg-white p-10 rounded-lg shadow-md text-center" style="width: 900px;">
             <div class="flex justify-center mb-4">
-                <img src="{{ asset('images/hydrogami-logo.png') }}" alt="HydroGami Logo" class="w-12">
+                <img src="{{ asset('images/hydrogami-logo.png') }}" alt="HydroGami Logo" class="w-24">
             </div>
             <h2 class="text-2xl text-gray-800 font-bold">Login</h2>
             <p class="text-gray-600 mb-8">Silahkan Login terlebih dahulu</p>
