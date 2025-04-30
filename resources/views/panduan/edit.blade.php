@@ -15,6 +15,7 @@
     </style>
 </head>
 
+
 <body>
     <div class="flex min-h-screen">
 
@@ -22,7 +23,7 @@
         <div class="w-1/5 bg-custom-green text-white p-6 z-10 flex flex-col">
             <div class="mb-8">
                 <div class="flex justify-center mb-4">
-                    <img src="{{ asset('images/hydrogami-logo2.png') }}" alt="HydroGami Logo" class="w-28">
+                    <img src="{{ asset('images/logo-hydrogami2.png') }}" alt="HydroGami Logo" class="w-28">
                 </div>
             </div>
             <nav class="space-y-4">
