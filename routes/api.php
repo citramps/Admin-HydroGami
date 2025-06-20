@@ -5,10 +5,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\SensorDataController;
-<<<<<<< HEAD
 use App\Http\Controllers\MisiController;
 use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\NotifikasiController;
 
 
 /*
@@ -21,9 +21,6 @@ use App\Http\Controllers\LeaderboardController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-=======
-use App\Http\Controllers\NotifikasiController;
->>>>>>> cbf03ab56bc8841ea0eac7ad93f808e93fa84012
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-profile', [AuthController::class, 'updateProfile']); // Ubah post menjadi put

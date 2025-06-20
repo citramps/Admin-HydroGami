@@ -13,7 +13,7 @@ class MisiController extends Controller
     // Tampilkan semua misi
     public function index()
     {
-        $missions = Misi::latest()->paginate(10);      // pagination biar nggak berat
+        $missions = Misi::all();
         return view('misi.index', compact('missions'));
     }
 
