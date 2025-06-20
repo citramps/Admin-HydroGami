@@ -17,6 +17,7 @@ class Reward extends Model
         'id_admin',
     ];
 
+    
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'id_admin');

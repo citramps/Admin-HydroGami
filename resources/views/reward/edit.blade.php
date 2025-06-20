@@ -88,6 +88,7 @@
                                 class="w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400">
                         </div>
 
+                        
                         <div>
                             <label for="tipe_reward" class="block text-gray-700 font-semibold mb-2">Tipe Reward</label>
                             <select id="tipe_reward" name="tipe_reward" onchange="toggleSubtipe()"

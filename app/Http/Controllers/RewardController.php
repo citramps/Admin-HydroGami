@@ -74,7 +74,6 @@ class RewardController extends Controller
         ]);
     }
 
-     /* ---------- HELPER ---------- */
     private function validateRequest(Request $req)
     {
         $req->validate([
