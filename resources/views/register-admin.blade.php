@@ -14,12 +14,13 @@
     </style>
 </head>
 
+
 <body class="bg-custom-green">
     <div class="absolute top-0 left-0 w-32 h-32 bg-green-300 rounded-lg "></div>
     <div class="flex justify-center items-center h-screen">
         <div class="bg-white p-10 rounded-lg shadow-md text-center" style="width: 900px;">
             <div class="flex justify-center mb-4">
-                <img src="{{ asset('images/hydrogami-logo.png') }}" alt="HydroGami Logo" class="w-12">
+                <img src="{{ asset('images/logo-hydrogami.png') }}" alt="HydroGami Logo" class="w-24">
             </div>
             <h2 class="text-2xl text-gray-800 font-bold">Daftar</h2>
             <p class="text-gray-600">Silahkan Buat Akun Anda terlebih dahulu</p>

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\SensorDataController;
+<<<<<<< HEAD
 use App\Http\Controllers\MisiController;
 use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\LeaderboardController;
@@ -20,17 +21,16 @@ use App\Http\Controllers\LeaderboardController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+=======
+use App\Http\Controllers\NotifikasiController;
+>>>>>>> cbf03ab56bc8841ea0eac7ad93f808e93fa84012
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::put('/auth/update-profile', [AuthController::class, 'updateProfile']);
-    Route::get('/user', function (Request $request) {
-        return response()->json([
-            'id' => $request->user()->id,
-            'username' => $request->user()->username,
-            'email' => $request->user()->email,
-        ]);
-    });
+    Route::put('/update-profile', [AuthController::class, 'updateProfile']); // Ubah post menjadi put
 });
+Route::get('/notifikasi', [NotifikasiController::class, 'index']);
+Route::post('/notifikasi', [NotifikasiController::class, 'store']);
+Route::put('/notifikasi/{id}/read', [NotifikasiController::class, 'markAsRead']);
 
 Route::post('/sensor-data', [SensorDataController::class, 'store']);
 Route::get('/sensor-data', [SensorDataController::class, 'index']);
