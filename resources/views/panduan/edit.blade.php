@@ -67,54 +67,58 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-10 bg-white">
-            <h2 class="text-2xl font-bold mb-4">Edit Panduan Gamifikasi</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <form action="{{ route('panduan.update', $panduan->id_panduan) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+        <!-- Main Content -->
+<div class="flex-1 bg-gray-100 min-h-screen py-10 px-20">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Edit Panduan</h2>
+    <div class="bg-white shadow-xl rounded-2xl p-8">
+        <form action="{{ route('panduan.update', $panduan->id_panduan) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                    <div class="mb-4">
-                        <label for="id_panduan" class="block text-gray-700 font-medium mb-2">ID Panduan</label>
-                        <input type="text" id="id_panduan" name="id_panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->id_panduan }}" readonly>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="id_panduan" class="block text-gray-700 font-semibold mb-2">ID Panduan</label>
+                    <input type="text" id="id_panduan" name="id_panduan" value="{{ $panduan->id_panduan }}" readonly
+                        class="w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
 
-                    <div class="mb-4">
-                        <label for="judul" class="block text-gray-700 font-medium mb-2">Judul Panduan</label>
-                        <input type="text" id="judul" name="judul"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->judul }}">
-                    </div>
+                <div>
+                    <label for="judul" class="block text-gray-700 font-semibold mb-2">Judul Panduan</label>
+                    <input type="text" id="judul" name="judul" value="{{ $panduan->judul }}"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
 
-                    <div class="mb-4">
-                        <label for="desk_panduan" class="block text-gray-700 font-medium mb-2">Deskripsi Panduan</label>
-                        <textarea id="desk_panduan" name="desk_panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500">{{ $panduan->desk_panduan }}</textarea>
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="desk_panduan" class="block text-gray-700 font-semibold mb-2">Deskripsi Panduan</label>
+                    <textarea id="desk_panduan" name="desk_panduan" rows="4"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">{{ $panduan->desk_panduan }}</textarea>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="gambar" class="block text-gray-700 font-medium mb-2">Gambar</label>
-                        <input type="file" id="gambar" name="gambar"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 text-sm text-gray-500">
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="gambar" class="block text-gray-700 font-semibold mb-2">Gambar Panduan</label>
+                    <input type="file" id="gambar" name="gambar"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                    
+                    @if ($panduan->gambar && file_exists(public_path('storage/' . $panduan->gambar)))
+                    @endif
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="video">Video Panduan (URL)</label>
-                        <input type="url" name="video" id="video" placeholder="Masukkan URL Video Panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->video }}">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"> Simpan Perubahan
-                        </button>
-                    </div>
-                </form>
+                <div class="md:col-span-2">
+                    <label for="video" class="block text-gray-700 font-semibold mb-2">Link Video Panduan</label>
+                    <input type="url" id="video" name="video" value="{{ $panduan->video }}"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
             </div>
-        </div>
+
+            <div class="mt-8 text-center">
+                <button type="submit"
+                    class="px-6 py-2 bg-custom-green text-white font-bold rounded-lg hover:bg-green-600 transition duration-200 shadow-md">
+                    Simpan Perubahan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
         
 </body>
 </html>

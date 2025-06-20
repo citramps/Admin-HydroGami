@@ -67,31 +67,40 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-10 bg-white">
-            <h2 class="text-2xl font-bold mb-4">Tambah Misi Gamifikasi</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <form action="{{ route('misi.store') }}" method="POST">
-                    @csrf
+            <div class="flex-1 bg-gray-100 min-h-screen py-10 px-20">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Tambah Misi Gamifikasi</h2>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="nama_misi">Nama Misi</label>
+        <div class="bg-white shadow-xl rounded-2xl p-8">
+            <form action="{{ route('misi.store') }}" method="POST">
+                @csrf
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="nama_misi" class="block text-gray-700 font-semibold mb-2">Nama Misi</label>
                         <input type="text" name="nama_misi" id="nama_misi" placeholder="Masukkan Nama Misi Gamifikasi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             required>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="deskripsi_misi">Deskripsi Misi</label>
-                        <textarea name="deskripsi_misi" id="deskripsi_misi"
+                    <div>
+                        <label for="poin" class="block text-gray-700 font-semibold mb-2">Jumlah Poin Gamifikasi</label>
+                        <input type="number" name="poin" id="poin" placeholder="Masukkan Poin Misi Gamifikasi"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            required>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="deskripsi_misi" class="block text-gray-700 font-semibold mb-2">Deskripsi Misi</label>
+                        <textarea name="deskripsi_misi" id="deskripsi_misi" rows="4"
                             placeholder="Masukkan Deskripsi Misi Gamifikasi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             required></textarea>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="status_misi">Status Misi</label>
+                    <div>
+                        <label for="status_misi" class="block text-gray-700 font-semibold mb-2">Status Misi</label>
                         <select name="status_misi" id="status_misi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             required>
                             <option value="" disabled selected>Pilih Status Misi</option>
                             <option value="aktif">Aktif</option>
@@ -99,21 +108,28 @@
                         </select>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="poin">Jumlah Poin Gamifikasi</label>
-                        <input type="number" name="poin" id="poin" placeholder="Masukkan Poin Misi Gamifikasi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
+                    <div>
+                        <label for="tipe_misi" class="block text-gray-700 font-semibold mb-2">Tipe Misi</label>
+                        <select name="tipe_misi" id="tipe_misi"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             required>
+                            <option value="" disabled selected>Pilih Tipe Misi</option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                        </select>
                     </div>
+                    
+                </div>
 
-                    <div class="text-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-custom-green text-white font-semibold rounded-md hover:bg-green-600">+
-                            Tambah Misi</button>
-                    </div>
-                </form>
-            </div>
+                <div class="mt-8 text-center">
+                    <button type="submit"
+                        class="px-6 py-2 bg-custom-green text-white font-bold rounded-lg hover:bg-green-600 transition duration-200 shadow-md">
+                        + Tambah Misi
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
     </div>
 </body>
 </html>

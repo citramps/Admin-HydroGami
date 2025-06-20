@@ -12,6 +12,28 @@
         .bg-custom-green {
             background-color: #29CC74;
         }
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%; 
+            font-weight: bolder;
+            font-size: 0.75rem;
+        }
+        .rank-1 {
+            background-color: #FFD700;
+            color: #000;
+        }
+        .rank-2 {
+            background-color: #C0C0C0;
+            color: #000;
+        }
+        .rank-3 {
+            background-color: #CD7F32;
+            color: #000;
+        }
     </style>
 </head>
 
@@ -110,29 +132,44 @@
             </div>
 
             <!-- Main Content -->
-            <div class="flex-1 bg-white">
-                <div class="mb-4">
-                    <h2 class="text-2xl font-bold">Top Mater Hidroponik</h2>
+            <div class="flex-1 bg-white p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Top Master Hidroponik</h2>
                 </div>
-            </div>
-
-
-            <div class="bg-white shadow-md rounded-lg">
-                <table class="min-w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="py-3 px-4 text-center">ID Pengguna</th>
-                            <th class="py-3 px-4 text-center">Nama Pengguna</th>
-                            <th class="py-3 px-4 text-center">Total Poin</th>
-                            <th class="py-3 px-4 text-center">Dibuat Pada</th>
-                        </tr>
-                    </thead>
+                
+                    <div class="bg-white shadow-md rounded-lg overflow-x-auto mb-8">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3 px-4 text-center">Rank</th>
+                                <th class="py-3 px-4 text-center">ID Pengguna</th>
+                                <th class="py-3 px-4 text-center">Nama Pengguna</th>
+                                <th class="py-3 px-4 text-center">Level</th>
+                                <th class="py-3 px-4 text-center">Total Poin</th>
+                                <th class="py-3 px-4 text-center">Total Koin</th>
+                                <th class="py-3 px-4 text-center">Dibuat Pada</th>
+                            </tr>
+                        </thead>
                     <tbody>
-                        @foreach($leaderboard as $entry)
+                        @foreach($leaderboard as $index => $entry)
                         <tr class="border-t">
-                            <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
-                            <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
-                            <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
+                            <td class="py-4 px-6 text-center">
+                                @if($index === 0)
+                                    <span class="rank-badge rank-1">1</span>
+                                @elseif($index === 1)
+                                    <span class="rank-badge rank-2">2</span>
+                                @elseif($index === 2)
+                                    <span class="rank-badge rank-3">3</span>
+                                @else
+                                    {{ $index + 1 }}
+                                @endif
+                            </td>
+                            <td class="py-4 px-6 text-center">{{ $entry->id }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->username }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->level }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->poin }}</td>
+                            <td class="py-4 px-6 text-center">{{ $entry->coin }}</td>
+
                             <td class="py-4 px-6 text-center">
                                 {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}
                             </td>

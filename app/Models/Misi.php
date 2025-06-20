@@ -14,12 +14,13 @@ class Misi extends Model
     protected $primaryKey = 'id_misi';
 
     protected $fillable = [
-        'id_admin',
-        'nama_misi',
-        'deskripsi_misi',
-        'status_misi',
-        'poin',
-    ];
+    'id_admin',
+    'nama_misi',
+    'deskripsi_misi',
+    'status_misi',
+    'tipe_misi', 
+    'poin',
+];
 
 
     public function admin()
@@ -27,4 +28,3 @@ class Misi extends Model
         return $this->belongsTo(Admin::class, 'id_admin');
     }
 }
-
