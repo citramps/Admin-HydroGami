@@ -67,52 +67,55 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
-        <div class="flex-1 p-10 bg-white">
-            <h2 class="text-2xl font-bold mb-4">Tambah Panduan Gamifikasi</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <form action="{{ route('panduan.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+          <!-- Main Content -->
+<div class="flex-1 bg-gray-100 min-h-screen py-10 px-20">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Tambah Panduan Gamifikasi</h2>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="judul">Judul Panduan</label>
-                        <input type="text" name="judul" id="judul" placeholder="Masukkan Judul Panduan Gamifikasi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            required>
-                    </div>
+    <div class="bg-white shadow-xl rounded-2xl p-8">
+        <form action="{{ route('panduan.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="desk_panduan">Deskripsi Panduan</label>
-                        <textarea name="desk_panduan" id="desk_panduan"
-                            placeholder="Masukkan Deskripsi Panduan Gamifikasi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            required></textarea>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="judul" class="block text-gray-700 font-semibold mb-2">Judul Panduan</label>
+                    <input type="text" name="judul" id="judul" placeholder="Masukkan Judul Panduan Gamifikasi"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                        required>
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="gambar">Gambar Panduan</label>
-                        <input type="file" name="gambar" id="gambar"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 text-sm text-gray-500"
-                            required>
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="desk_panduan" class="block text-gray-700 font-semibold mb-2">Deskripsi Panduan</label>
+                    <textarea name="desk_panduan" id="desk_panduan" rows="4"
+                        placeholder="Masukkan Deskripsi Panduan Gamifikasi"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                        required></textarea>
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="video">Video Panduan (URL)</label>
-                        <input type="url" name="video" id="video" placeholder="Masukkan URL Video Panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            required>
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="gambar" class="block text-gray-700 font-semibold mb-2">Gambar Panduan</label>
+                    <input type="file" name="gambar" id="gambar"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-sm text-gray-500"
+                        required>
+                </div>
 
-
-                    <div class="text-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-custom-green text-white font-semibold rounded-md hover:bg-green-600">+
-                            Tambah Panduan</button>
-                    </div>
-                </form>
+                <div class="md:col-span-2">
+                    <label for="video" class="block text-gray-700 font-semibold mb-2">Video Panduan (URL)</label>
+                    <input type="url" name="video" id="video" placeholder="Masukkan URL Video Panduan"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                        required>
+                </div>
             </div>
-        </div>
+
+            <div class="mt-8 text-center">
+                <button type="submit"
+                    class="px-6 py-2 bg-custom-green text-white font-bold rounded-lg hover:bg-green-600 transition duration-200 shadow-md">
+                    + Tambah Panduan
+                </button>
+            </div>
+        </form>
     </div>
+</div>
+</div>
 
 </body>
 

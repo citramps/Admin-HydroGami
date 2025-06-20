@@ -108,94 +108,96 @@
             </div>
 
             <!-- Main Content -->
-            <div class="flex-1 bg-white">
-                <div class="mb-4">
-                    <h2 class="text-2xl font-bold">Daftar Panduan</h2>
+            <!-- Main Content -->
+            <div class="flex-1 bg-white p-6">
+                <!-- Judul dan tombol tambah -->
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Daftar Panduan</h2>
+                    <a href="{{ route('panduan.create') }}"
+                        class="inline-flex items-center gap-1 bg-custom-green hover:bg-green-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Tambah Panduan
+                    </a>
                 </div>
-                <div class="mb-8">
-                    <a href="{{ route('panduan.create') }}" class="bg-custom-green text-white px-4 py-2 rounded">+
-                        Tambah Panduan</a>
+
+                <!-- Tabel Panduan -->
+                <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3 px-4 text-center w-1/12">ID</th>
+                                <th class="py-3 px-4 text-center w-2/12">Gambar</th>
+                                <th class="py-3 px-4 text-center w-2/12">Video</th>
+                                <th class="py-3 px-4 text-center w-2/12">Judul</th>
+                                <th class="py-3 px-4 text-center w-3/12">Deskripsi</th>
+                                <th class="py-3 px-4 text-center w-2/12">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($panduan as $item)
+                                <tr class="hover:bg-gray-50" data-panduan-id="{{ $item->id_panduan }}">
+                                    <td class="py-3 px-4 text-center font-medium">{{ $loop->iteration }}</td>
+
+                                    <!-- Kolom Gambar -->
+                                    <td class="px-4 py-2 text-center">
+                                        @if ($item->gambar && file_exists(public_path('storage/' . $item->gambar)))
+                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Panduan"
+                                                class="w-full max-w-[150px] h-auto object-cover rounded">
+                                        @else
+                                            <span class="text-gray-500">Tidak Ada</span>
+                                        @endif
+                                    </td>
+
+
+                                    <!-- Kolom Video -->
+                                    <td class="py-3 px-4 text-center">
+                                        @if ($item->video)
+                                            <a href="{{ $item->video }}" target="_blank" class="block">
+                                                <iframe src="{{ embedVideo($item->video) }}" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen class="rounded" style="width: 170px; height: 100px;">
+                                                </iframe>
+                                            </a>
+                                        @else
+                                            <span class="text-gray-500">Tidak Ada</span>
+                                        @endif
+                                    </td>
+
+                                    <td class="py-3 px-4 text-justify">{{ $item->judul }}</td>
+                                    <td class="py-3 px-4 text-justify">{{ Str::limit($item->desk_panduan, 50) }}</td>
+
+                                    <td class="py-3 px-4">
+                                        <div class="flex justify-center gap-2">
+                                            <a href="{{ route('panduan.edit', $item->id_panduan) }}"
+                                                class="flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md px-3 py-1 transition">
+                                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0z" />
+                                                </svg>
+                                                <span>Edit</span>
+                                            </a>
+                                            <button onclick="openDeleteModal({{ $item->id_panduan }})"
+                                                class="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white rounded-md px-3 py-1 transition">
+                                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zM9 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>Hapus</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-
-            <div class="bg-white shadow-md rounded-lg">
-                <table class="min-w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="py-3 px-4 w-1/12 text-center">ID</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Gambar</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Video</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Judul</th>
-                            <th class="py-3 px-4 w-3/12 text-center">Deskripsi</th>
-                            <th class="py-3 px-4 w-2/12 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($panduan as $item)
-                        <tr class="border-t" data-panduan-id="{{ $item->id_panduan }}">
-                            <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
-
-                            <!-- Kolom Gambar -->
-                            <td class="px-4 py-2 text-center">
-                                @if ($item->gambar)
-                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Panduan"
-                                    class="w-full max-w-[150px] h-auto object-cover rounded">
-                                @else
-                                <span class="text-gray-500">Tidak Ada</span>
-                                @endif
-                            </td>
-
-                            <!-- Kolom Video -->
-                            <td class="px-4 py-2 text-center">
-                                @if ($item->video)
-                                <a href="{{ $item->video }}" target="_blank" class="block">
-                                    <iframe src="{{ embedVideo($item->video) }}" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen style="width: 170px; height: 100px; border-radius: 6px;">
-                                    </iframe>
-                                </a>
-                                @else
-                                <span class="text-gray-500">Tidak Ada</span>
-                                @endif
-                            </td>
-
-
-                            <td class="px-4 py-2 text-justify">{{ $item->judul }}</td>
-                            <td class="px-4 py-2 text-justify">{{ Str::limit($item->desk_panduan, 50) }}</td>
-
-                            <td class="px-4 py-2 text-center">
-                                <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('panduan.edit', $item->id_panduan) }}"
-                                        class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path
-                                                d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
-                                        </svg>
-                                        <span class="text-sm font-medium">Edit</span>
-                                    </a>
-
-                                    <button onclick="openDeleteModal({{ $item->id_panduan }})"
-                                        class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="text-sm font-medium">Hapus</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
 
     <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg w-80 text-center">
