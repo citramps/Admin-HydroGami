@@ -70,7 +70,7 @@ return [
     |
     */
 
-'timezone' => env('APP_TIMEZONE', 'UTC'), // Pastikan ini membaca dari .env
+    'timezone' => env('APP_TIMEZONE', 'UTC'), // Pastikan ini membaca dari .env
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

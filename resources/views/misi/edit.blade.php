@@ -45,6 +45,13 @@
                     </svg>
                     <span>Misi</span>
                 </a>
+                <a href="{{ route('reward.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 576 512">
+                        <path
+                            d="M288 0C129 0 0 57.3 0 128v256c0 70.7 129 128 288 128s288-57.3 288-128V128C576 57.3 447 0 288 0zM64 384V176c29.7 20.9 71.5 36.2 120 44.2V428.1c-48.5-8-90.3-23.3-120-44.1zM288 464c-20.3 0-40-1.4-58.8-4.1V228.8c18.7 1.4 38.5 2.2 58.8 2.2s40.1-.8 58.8-2.2v231.1c-18.8 2.7-38.5 4.1-58.8 4.1zM512 384c-29.7 20.9-71.5 36.2-120 44.2V220.2c48.5-8 90.3-23.3 120-44.2V384z" />
+                    </svg>
+                    <span>Reward</span>
+                </a>
 
                 <a href="{{ route('leaderboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
@@ -67,58 +74,65 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-10 bg-white">
-            <h2 class="text-2xl font-bold mb-4">Edit Misi Gamifikasi</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex-1 bg-gray-100 min-h-screen py-10 px-20">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Edit Misi Gamifikasi</h2>
+            <div class="bg-white shadow-xl rounded-2xl p-8">
                 <form action="{{ route('misi.update', $mission->id_misi) }}" method="POST">
                     @csrf
                     @method('PUT')
 
-                    <div class="mb-4">
-                        <label for="id_misi" class="block text-gray-700 font-medium mb-2">ID Misi</label>
-                        <input type="text" id="id_misi" name="id_misi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $mission->id_misi }}" readonly>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="id_misi" class="block text-gray-700 font-semibold mb-2">ID Misi</label>
+                            <input type="text" id="id_misi" name="id_misi" value="{{ $mission->id_misi }}" readonly
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-100">
+                        </div>
+
+                        <div>
+                            <label for="nama_misi" class="block text-gray-700 font-semibold mb-2">Nama Misi</label>
+                            <input type="text" id="nama_misi" name="nama_misi" value="{{ $mission->nama_misi }}"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="deskripsi_misi" class="block text-gray-700 font-semibold mb-2">Deskripsi Misi</label>
+                            <textarea id="deskripsi_misi" name="deskripsi_misi" rows="4"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">{{ $mission->deskripsi_misi }}</textarea>
+                        </div>
+
+                        <div>
+                            <label for="status_misi" class="block text-gray-700 font-semibold mb-2">Status Misi</label>
+                            <select id="status_misi" name="status_misi"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                                <option value="aktif" {{ $mission->status_misi == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="tidak aktif" {{ $mission->status_misi == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="tipe_misi" class="block text-gray-700 font-semibold mb-2">Tipe Misi</label>
+                            <select id="tipe_misi" name="tipe_misi"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                                <option value="harian" {{ $mission->jenis_misi == 'harian' ? 'selected' : '' }}>Harian</option>
+                                <option value="mingguan" {{ $mission->jenis_misi == 'mingguan' ? 'selected' : '' }}>Mingguan</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="poin" class="block text-gray-700 font-semibold mb-2">Jumlah Poin Gamifikasi</label>
+                            <input type="number" id="poin" name="poin" value="{{ $mission->poin }}"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                        </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="nama_misi" class="block text-gray-700 font-medium mb-2">Nama Misi</label>
-                        <input type="text" id="nama_misi" name="nama_misi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $mission->nama_misi }}">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="deskripsi_misi" class="block text-gray-700 font-medium mb-2">Deskripsi Misi</label>
-                        <textarea id="deskripsi_misi" name="deskripsi_misi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500">{{ $mission->deskripsi_misi }}</textarea>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="status_misi" class="block text-gray-700 font-medium mb-2">Status Misi</label>
-                        <select type="text" id="status_misi" name="status_misi"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $mission->status_misi }}">
-                            <option value="aktif">Aktif</option>
-                            <option value="tidak aktif">Tidak Aktif</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="poin" class="block text-gray-700 font-medium mb-2">Jumlah Poin Gamifikasi</label>
-                        <input type="number" id="poin" name="poin"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $mission->poin }}">
-                    </div>
-
-                    <div class="text-center">
+                    <div class="mt-8 text-center">
                         <button type="submit"
-                            class="px-4 py-2 bg-custom-green text-white font-semibold rounded-md hover:bg-green-600">Simpan
+                            class="px-6 py-2 bg-custom-green text-white font-bold rounded-lg hover:bg-green-600 transition duration-200 shadow-md">Simpan
                             Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+        </div>
 </body>
 </html>

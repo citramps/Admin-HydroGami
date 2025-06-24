@@ -45,6 +45,14 @@
                     <span>Misi</span>
                 </a>
 
+                <a href="{{ route('reward.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 576 512">
+                        <path
+                            d="M288 0C129 0 0 57.3 0 128v256c0 70.7 129 128 288 128s288-57.3 288-128V128C576 57.3 447 0 288 0zM64 384V176c29.7 20.9 71.5 36.2 120 44.2V428.1c-48.5-8-90.3-23.3-120-44.1zM288 464c-20.3 0-40-1.4-58.8-4.1V228.8c18.7 1.4 38.5 2.2 58.8 2.2s40.1-.8 58.8-2.2v231.1c-18.8 2.7-38.5 4.1-58.8 4.1zM512 384c-29.7 20.9-71.5 36.2-120 44.2V220.2c48.5-8 90.3-23.3 120-44.2V384z" />
+                    </svg>
+                    <span>Reward</span>
+                </a>
+
                 <a href="{{ route('leaderboard-admin') }}"
                     class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -73,8 +81,7 @@
                 </div>
                 <div class="relative">
                     <button class="flex items-center space-x-4 focus:outline-none">
-                        <input type="text" placeholder="Search"
-                            class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
+                       
                         <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
@@ -109,66 +116,88 @@
             </div>
 
             <!-- Main Content -->
-            <div class="flex-1 bg-white">
-                <div class="mb-4">
-                    <h2 class="text-2xl font-bold">List Misi Gamifikasi</h2>
+            <!-- Main Content -->
+            <div class="flex-1 bg-white p-6">
+                <!-- Judul dan tombol tambah -->
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">List Misi Gamifikasi</h2>
+                    <a href="{{ route('misi.create') }}"
+                        class="inline-flex items-center gap-1 bg-custom-green hover:bg-green-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Tambah Misi
+                    </a>
+
                 </div>
-                <div class="mb-8">
-                    <a href="{{ route('misi.create') }}" class="bg-custom-green text-white px-4 py-2 rounded">+ Tambah
-                        Misi</a>
+
+                <!-- Tabel Misi -->
+                <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3 px-4 text-center w-1/12">ID</th>
+                                <th class="py-3 px-4 text-center w-2/12">Nama Misi</th>
+                                <th class="py-3 px-4 text-center w-3/12">Deskripsi</th>
+                                <th class="py-3 px-4 text-center w-1/12">Status</th>
+                                <th class="py-3 px-4 text-center w-1/12">Tipe</th>
+                                <th class="py-3 px-4 text-center w-1/12">Poin</th>
+                                <th class="py-3 px-4 text-center w-2/12">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($missions as $mission)
+                                <tr class="hover:bg-gray-50" data-mission-id="{{ $mission->id_misi }}">
+                                    <td class="py-3 px-4 text-center font-medium">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="py-3 px-4 text-center">
+                                        {{ $mission->nama_misi }}
+                                    </td>
+                                    <td class="py-3 px-4 text-justify">
+                                        {{ Str::limit($mission->deskripsi_misi, 80) }}
+                                    </td>
+                                    <td class="py-3 px-4 text-center">
+                                        <span class="inline-flex min-w-[90px] justify-center items-center px-2.5 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap {{ $mission->status_misi === 'aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">{{ ucfirst($mission->status_misi) }}</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-center">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
+                                {{ $mission->tipe_misi === 'harian' ? 'bg-blue-100 text-blue-800' : 'bg-indigo-100 text-indigo-800' }}">
+                                            {{ ucfirst($mission->tipe_misi) }}
+                                        </span>
+                                    </td>
+                                    <td class="py-3 px-4 text-center text-yellow-600 font-semibold">
+                                        {{ $mission->poin }} Poin
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex justify-center gap-2">
+                                            <a href="{{ route('misi.edit', $mission->id_misi) }}"
+                                                class="flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md px-3 py-1 transition">
+                                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0z" />
+                                                </svg>
+                                                <span>Edit</span>
+                                            </a>
+                                            <button onclick="openDeleteModal({{ $mission->id_misi }})"
+                                                class="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white rounded-md px-3 py-1 transition">
+                                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zM9 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>Hapus</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="bg-white shadow-md rounded-lg">
-                <table class="min-w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="py-3 px-4 w-1/12 text-center">ID</th>
-                            <th class="py-3 px-4 w-2/12 text-center">NAMA MISI</th>
-                            <th class="py-3 px-4 w-4/12 text-center">DESKRIPSI MISI</th>
-                            <th class="py-3 px-4 w-1/12 text-center text-green-500">STATUS MISI</th>
-                            <th class="py-3 px-4 w-1/12 text-center text-yellow-500 ">JUMLAH POIN</th>
-                            <th class="py-3 px-4 w-2/12 text-center">AKSI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($missions as $mission)
-                        <tr class="border-t" data-mission-id="{{ $mission->id_misi }}">
-                            <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2 text-center">{{ $mission->nama_misi }}</td>
-                            <td class="px-4 py-2 text-justify">{{ $mission->deskripsi_misi }}</td>
-                            <td class="px-4 py-2 text-center text-green-500">{{ $mission->status_misi }}</td>
-                            <td class="px-4 py-2 text-center text-yellow-500">{{ $mission->poin }} Poin</td>
-                            <td class="px-4 py-2 text-center">
-                                <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('misi.edit', $mission->id_misi) }}"
-                                        class="flex items-center justify-center bg-yellow-400 text-white w-16 h-8 rounded-md space-x-2 hover:bg-yellow-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path
-                                                d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0zm-1.414 2L10 10.586 8.414 9l6-6L16 4.586z" />
-                                        </svg>
-                                        <span class="text-sm font-medium">Edit</span>
-                                    </a>
-
-                                    <button onclick="openDeleteModal({{ $mission->id_misi }})"
-                                        class="flex items-center justify-center bg-red-500 text-white w-20 h-8 rounded-md space-x-2 hover:bg-red-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M8 4a1 1 0 00-1 1v1H3a1 1 0 000 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-4V5a1 1 0 00-1-1H8zm1 4a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 00-2 0v6a1 1 0 002 0V8z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="text-sm font-medium">Hapus</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
     <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

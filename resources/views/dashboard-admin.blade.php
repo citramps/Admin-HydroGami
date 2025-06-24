@@ -12,13 +12,34 @@
         .bg-custom-green {
             background-color: #29CC74;
         }
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%; 
+            font-weight: bolder;
+            font-size: 0.75rem;
+        }
+        .rank-1 {
+            background-color: #FFD700;
+            color: #000;
+        }
+        .rank-2 {
+            background-color: #C0C0C0;
+            color: #000;
+        }
+        .rank-3 {
+            background-color: #CD7F32;
+            color: #000;
+        }
     </style>
 </head>
 
 
 <body>
     <div class="flex min-h-screen">
-
         <!-- Side Bar -->
         <div class="w-1/5 bg-custom-green text-white p-6 z-10 flex flex-col">
             <div class="mb-8">
@@ -46,12 +67,19 @@
                     <span>Misi</span>
                 </a>
 
+                <a href="{{ route('reward.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 576 512">
+                        <path
+                            d="M288 0C129 0 0 57.3 0 128v256c0 70.7 129 128 288 128s288-57.3 288-128V128C576 57.3 447 0 288 0zM64 384V176c29.7 20.9 71.5 36.2 120 44.2V428.1c-48.5-8-90.3-23.3-120-44.1zM288 464c-20.3 0-40-1.4-58.8-4.1V228.8c18.7 1.4 38.5 2.2 58.8 2.2s40.1-.8 58.8-2.2v231.1c-18.8 2.7-38.5 4.1-58.8 4.1zM512 384c-29.7 20.9-71.5 36.2-120 44.2V220.2c48.5-8 90.3-23.3 120-44.2V384z" />
+                    </svg>
+                    <span>Reward</span>
+                </a>
+
                 <a href="{{ route('leaderboard-admin') }}"
                     class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
-
                     <span>Leaderboard</span>
                 </a>
 
@@ -66,7 +94,7 @@
             </nav>
         </div>
 
-        <!-- Profil, Logout -->
+        <!-- Main Content Area -->
         <div class="flex-1 p-10 bg-white">
             <div class="flex justify-between items-center mb-8">
                 <div>
@@ -74,8 +102,7 @@
                 </div>
                 <div class="relative">
                     <button class="flex items-center space-x-4 focus:outline-none">
-                        <input type="text" placeholder="Search"
-                            class="py-2 px-4 rounded-full border border-gray-300 text-sm focus:ring-2 focus:ring-green-500 transition-all duration-300">
+                       
                         <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
@@ -110,92 +137,132 @@
             </div>
 
             <!-- Main Content -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold">Top Master Hidroponik</h2>
-            </div>
-            <div class="bg-white shadow-md rounded-lg mb-8">
-                <table class="min-w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-3 px-4 text-center">ID Pengguna</th>
-                            <th class="py-3 px-4 text-center">Nama Pengguna</th>
-                            <th class="py-3 px-4 text-center">Total Poin</th>
-                            <th class="py-3 px-4 text-center">Dibuat Pada</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($leaderboard as $entry)
-                        <tr class="border-t">
-                            <td class="py-4 px-6 text-center">{{ $entry->id_pengguna }}</td>
-                            <td class="py-4 px-6 text-center">{{ $entry->nama_pengguna }}</td>
-                            <td class="py-4 px-6 text-center">{{ $entry->total_poin }}</td>
-                            <td class="py-4 px-6 text-center">
-                                {{ \Carbon\Carbon::parse($entry->created_at)->format('d M Y H:i') }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <div class="flex-1 bg-white p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Top 5 Master Hidroponik</h2>
+                </div>
+                
+                <div class="bg-white shadow-md rounded-lg overflow-x-auto mb-8">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3 px-4 text-center">Rank</th>
+                                <th class="py-3 px-4 text-center">ID Pengguna</th>
+                                <th class="py-3 px-4 text-center">Nama Pengguna</th>
+                                <th class="py-3 px-4 text-center">Level</th>
+                                <th class="py-3 px-4 text-center">Total Poin</th>
+                                <th class="py-3 px-4 text-center">Total Koin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($leaderboard as $index => $entry)
+                            <tr class="border-t">
+                                <td class="py-4 px-6 text-center">
+                                    @if($index === 0)
+                                        <span class="rank-badge rank-1">1</span>
+                                    @elseif($index === 1)
+                                        <span class="rank-badge rank-2">2</span>
+                                    @elseif($index === 2)
+                                        <span class="rank-badge rank-3">3</span>
+                                    @else
+                                        {{ $index + 1 }}
+                                    @endif
+                                </td>
+                                <td class="py-4 px-6 text-center">{{ $entry->id }}</td>
+                                <td class="py-4 px-6 text-center">{{ $entry->username }}</td>
+                                <td class="py-4 px-6 text-center">{{ $entry->level }}</td>
+                                <td class="py-4 px-6 text-center">{{ $entry->poin }}</td>
+                                <td class="py-4 px-6 text-center">{{ $entry->coin }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-            <h2 class="text-2xl font-bold mb-4">Grafik Player Setiap Minggu</h2>
-            <div class="bg-white shadow-md rounded-lg p-10 mb-8">
-                <canvas id="weeklyPlayerChart" class="w-full h-auto"></canvas>
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Grafik Player Setiap Minggu</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <canvas id="weeklyPlayerChart" height="300"></canvas>
+                </div>
             </div>
-            <canvas id="weeklyPlayerChart" width="100" height="50"></canvas>
 
             <script>
                 function toggleDropdown(event) {
                     event.stopPropagation();
-
                     const dropdown = document.getElementById('dropdownMenu');
                     dropdown.classList.toggle('hidden');
                 }
+
+                // Weekly Player Chart
+                const weeklyPlayerData = {
+                    labels: @json($weeklyPlayerData['weeks']),
+                    counts: @json($weeklyPlayerData['player_counts'])
+                };
 
                 const ctx = document.getElementById('weeklyPlayerChart').getContext('2d');
                 const weeklyPlayerChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5', 'Minggu 6', 'Minggu 7', 'Minggu 8'],
+                        labels: weeklyPlayerData.labels,
                         datasets: [{
-                            label: 'Jumlah Player',
-                            data: [20, 35, 25, 45, 30, 25, 30, 45],
+                            label: 'Jumlah Player Baru',
+                            data: weeklyPlayerData.counts,
                             fill: true,
-                            borderColor: 'rgba(79, 70, 229, 1)', // Warna garis
-                            backgroundColor: 'rgba(79, 70, 229, 0.1)', // Warna area
-                            pointBackgroundColor: 'rgba(79, 70, 229, 1)',
-                            tension: 0.4, // Membuat kurva halus
+                            borderColor: 'rgba(41, 204, 116, 1)', // Warna hijau HydroGami
+                            backgroundColor: 'rgba(41, 204, 116, 0.1)',
+                            pointBackgroundColor: 'rgba(41, 204, 116, 1)',
+                            tension: 0.4,
+                            borderWidth: 2
                         }]
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        },
                         scales: {
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Jumlah Player'
+                                    text: 'Jumlah Player',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    stepSize: 1
                                 }
                             },
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Minggu'
+                                    text: 'Minggu',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
                                 }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
                             }
                         }
                     }
                 });
-
-                function toggleDropdown() {
-                    const dropdown = document.getElementById('dropdownMenu');
-                    dropdown.classList.toggle('hidden');
-                }
 
                 function confirmLogout() {
                     const logoutModal = document.getElementById('logoutModal');
@@ -217,6 +284,6 @@
                 });
             </script>
         </div>
+    </div>
 </body>
-
 </html>

@@ -45,6 +45,14 @@
                     <span>Misi</span>
                 </a>
 
+                <a href="{{ route('reward.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 576 512">
+                        <path
+                            d="M288 0C129 0 0 57.3 0 128v256c0 70.7 129 128 288 128s288-57.3 288-128V128C576 57.3 447 0 288 0zM64 384V176c29.7 20.9 71.5 36.2 120 44.2V428.1c-48.5-8-90.3-23.3-120-44.1zM288 464c-20.3 0-40-1.4-58.8-4.1V228.8c18.7 1.4 38.5 2.2 58.8 2.2s40.1-.8 58.8-2.2v231.1c-18.8 2.7-38.5 4.1-58.8 4.1zM512 384c-29.7 20.9-71.5 36.2-120 44.2V220.2c48.5-8 90.3-23.3 120-44.2V384z" />
+                    </svg>
+                    <span>Reward</span>
+                </a>
+
                 <a href="{{ route('leaderboard-admin') }}"
                     class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
@@ -68,54 +76,58 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-10 bg-white">
-            <h2 class="text-2xl font-bold mb-4">Edit Panduan Gamifikasi</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <form action="{{ route('panduan.update', $panduan->id_panduan) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+        <!-- Main Content -->
+<div class="flex-1 bg-gray-100 min-h-screen py-10 px-20">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Edit Panduan</h2>
+    <div class="bg-white shadow-xl rounded-2xl p-8">
+        <form action="{{ route('panduan.update', $panduan->id_panduan) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                    <div class="mb-4">
-                        <label for="id_panduan" class="block text-gray-700 font-medium mb-2">ID Panduan</label>
-                        <input type="text" id="id_panduan" name="id_panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->id_panduan }}" readonly>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="id_panduan" class="block text-gray-700 font-semibold mb-2">ID Panduan</label>
+                    <input type="text" id="id_panduan" name="id_panduan" value="{{ $panduan->id_panduan }}" readonly
+                        class="w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
 
-                    <div class="mb-4">
-                        <label for="judul" class="block text-gray-700 font-medium mb-2">Judul Panduan</label>
-                        <input type="text" id="judul" name="judul"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->judul }}">
-                    </div>
+                <div>
+                    <label for="judul" class="block text-gray-700 font-semibold mb-2">Judul Panduan</label>
+                    <input type="text" id="judul" name="judul" value="{{ $panduan->judul }}"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
 
-                    <div class="mb-4">
-                        <label for="desk_panduan" class="block text-gray-700 font-medium mb-2">Deskripsi Panduan</label>
-                        <textarea id="desk_panduan" name="desk_panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500">{{ $panduan->desk_panduan }}</textarea>
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="desk_panduan" class="block text-gray-700 font-semibold mb-2">Deskripsi Panduan</label>
+                    <textarea id="desk_panduan" name="desk_panduan" rows="4"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">{{ $panduan->desk_panduan }}</textarea>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="gambar" class="block text-gray-700 font-medium mb-2">Gambar</label>
-                        <input type="file" id="gambar" name="gambar"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 text-sm text-gray-500">
-                    </div>
+                <div class="md:col-span-2">
+                    <label for="gambar" class="block text-gray-700 font-semibold mb-2">Gambar Panduan</label>
+                    <input type="file" id="gambar" name="gambar"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                    
+                    @if ($panduan->gambar && file_exists(public_path('storage/' . $panduan->gambar)))
+                    @endif
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2" for="video">Video Panduan (URL)</label>
-                        <input type="url" name="video" id="video" placeholder="Masukkan URL Video Panduan"
-                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500"
-                            value="{{ $panduan->video }}">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"> Simpan Perubahan
-                        </button>
-                    </div>
-                </form>
+                <div class="md:col-span-2">
+                    <label for="video" class="block text-gray-700 font-semibold mb-2">Link Video Panduan</label>
+                    <input type="url" id="video" name="video" value="{{ $panduan->video }}"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                </div>
             </div>
-        </div>
+
+            <div class="mt-8 text-center">
+                <button type="submit"
+                    class="px-6 py-2 bg-custom-green text-white font-bold rounded-lg hover:bg-green-600 transition duration-200 shadow-md">
+                    Simpan Perubahan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
         
 </body>
 </html>
