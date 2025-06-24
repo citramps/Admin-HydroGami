@@ -103,11 +103,20 @@
                         </select>
                     </div>
 
+                    <!-- Koin yang Dibutuhkan (hanya untuk redeem) -->
+                    <div id="koinDibutuhkanContainer" class="hidden">
+                        <label for="koin_dibutuhkan" class="block text-gray-700 font-semibold mb-2">Koin yang Dibutuhkan</label>
+                        <input type="number" name="koin_dibutuhkan" id="koin_dibutuhkan"
+                            placeholder="Masukkan jumlah koin yang dibutuhkan"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            min="1">
+                    </div>
+
                     <!-- Jumlah -->
                     <div id="jumlahContainer" class="hidden md:col-span-2">
                         <label for="jumlah" class="block text-gray-700 font-semibold mb-2">Jumlah</label>
                         <input type="number" name="jumlah" id="jumlah"
-                            placeholder="Masukkan jumlah poin, coin, atau rupiah"
+                            placeholder="Masukkan jumlah poin, koin, atau rupiah"
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             min="0">
                     </div>
@@ -131,6 +140,8 @@
     const subtipeSelect = document.getElementById('subtipe_gacha');
     const jumlahContainer = document.getElementById('jumlahContainer');
     const jumlahInput = document.getElementById('jumlah');
+    const koinDibutuhkanContainer = document.getElementById('koinDibutuhkanContainer');
+    const koinDibutuhkanInput = document.getElementById('koin_dibutuhkan');
 
     tipeSelect.addEventListener('change', function () {
         const tipe = this.value;
@@ -138,15 +149,25 @@
         if (tipe === 'gacha') {
             subtipeContainer.classList.remove('hidden');
             jumlahContainer.classList.add('hidden');
+            koinDibutuhkanContainer.classList.add('hidden');
             jumlahInput.value = '';
             jumlahInput.required = false;
+            koinDibutuhkanInput.value = '';
+            koinDibutuhkanInput.required = false;
         } else if (tipe === 'redeem') {
             subtipeContainer.classList.add('hidden');
             jumlahContainer.classList.remove('hidden');
+            koinDibutuhkanContainer.classList.remove('hidden');
             jumlahInput.required = true;
+            koinDibutuhkanInput.required = true;
         } else {
             subtipeContainer.classList.add('hidden');
             jumlahContainer.classList.add('hidden');
+            koinDibutuhkanContainer.classList.add('hidden');
+            jumlahInput.value = '';
+            jumlahInput.required = false;
+            koinDibutuhkanInput.value = '';
+            koinDibutuhkanInput.required = false;
         }
     });
 

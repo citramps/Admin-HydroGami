@@ -88,10 +88,9 @@
                                 class="w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400">
                         </div>
 
-                        
                         <div>
                             <label for="tipe_reward" class="block text-gray-700 font-semibold mb-2">Tipe Reward</label>
-                            <select id="tipe_reward" name="tipe_reward" onchange="toggleSubtipe()"
+                            <select id="tipe_reward" name="tipe_reward" onchange="toggleFields()"
                                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                                 required>
                                 <option value="">-- Pilih Tipe --</option>
@@ -105,7 +104,7 @@
                         <div id="subtipe_container">
                             <label for="subtipe_gacha" class="block text-gray-700 font-semibold mb-2">Subtipe
                                 Gacha</label>
-                            <select id="subtipe_gacha" name="subtipe_gacha"
+                            <select id="subtipe_gacha" name="subtipe_gacha" onchange="toggleJumlah()"
                                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                                 <option value="">-- Pilih Subtipe --</option>
                                 <option value="exp" {{ $reward->subtipe_gacha == 'exp' ? 'selected' : '' }}>EXP</option>
@@ -116,7 +115,14 @@
                             </select>
                         </div>
 
-                        <div class="md:col-span-2">
+                        <div id="koin_dibutuhkan_container">
+                            <label for="koin_dibutuhkan" class="block text-gray-700 font-semibold mb-2">Koin yang Dibutuhkan</label>
+                            <input type="number" id="koin_dibutuhkan" name="koin_dibutuhkan" value="{{ $reward->koin_dibutuhkan }}"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                                min="1" placeholder="Masukkan koin yang dibutuhkan">
+                        </div>
+
+                        <div id="jumlah_container" class="md:col-span-2">
                             <label for="jumlah" class="block text-gray-700 font-semibold mb-2">Jumlah</label>
                             <input type="number" id="jumlah" name="jumlah" value="{{ $reward->jumlah }}"
                                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
@@ -135,19 +141,45 @@
     </div>
 
     <script>
-        function toggleSubtipe() {
+        function toggleFields() {
             const tipe = document.getElementById('tipe_reward').value;
-            const subtipe = document.getElementById('subtipe_container');
-            subtipe.style.display = tipe === 'gacha' ? 'block' : 'none';
+            const subtipeContainer = document.getElementById('subtipe_container');
+            const koinContainer = document.getElementById('koin_dibutuhkan_container');
+            const jumlahContainer = document.getElementById('jumlah_container');
 
-            if (tipe !== 'gacha') {
-                document.getElementById('subtipe_gacha').value = '';
+            if (tipe === 'gacha') {
+                subtipeContainer.style.display = 'block';
+                koinContainer.style.display = 'none';
+                toggleJumlah(); // Update jumlah container based on subtipe
+            } else if (tipe === 'redeem') {
+                subtipeContainer.style.display = 'none';
+                koinContainer.style.display = 'block';
+                jumlahContainer.style.display = 'block';
+            } else {
+                subtipeContainer.style.display = 'none';
+                koinContainer.style.display = 'none';
+                jumlahContainer.style.display = 'none';
             }
         }
 
-        // Jalankan saat pertama kali halaman dimuat
-        document.addEventListener("DOMContentLoaded", toggleSubtipe);
+        function toggleJumlah() {
+            const tipe = document.getElementById('tipe_reward').value;
+            const subtipe = document.getElementById('subtipe_gacha').value;
+            const jumlahContainer = document.getElementById('jumlah_container');
+
+            if (tipe === 'gacha') {
+                if (subtipe === 'exp' || subtipe === 'coin') {
+                    jumlahContainer.style.display = 'block';
+                } else {
+                    jumlahContainer.style.display = 'none';
+                }
+            }
+        }
+
+        // Initialize fields on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleFields();
+        });
     </script>
 </body>
-
 </html>

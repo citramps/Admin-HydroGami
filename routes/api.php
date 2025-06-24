@@ -9,6 +9,7 @@ use App\Http\Controllers\MisiController;
 use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\RewardController;
 
 
 /*
@@ -63,6 +64,12 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/leaderboard', [LeaderboardController::class, 'index']);
+
+Route::prefix('rewards')->group(function () {
+    Route::get('/', [RewardController::class, 'apiIndex']);
+    Route::get('/gacha', [RewardController::class, 'apiGachaRewards']);
+    Route::get('/redeem', [RewardController::class, 'apiRedeemRewards']);
+});
 
 
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\MisiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\RewardController;
 
 
 
@@ -62,6 +63,16 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Halaman Rewards
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reward', [RewardController::class, 'index'])->name('reward.index');
+    Route::get('/reward/create', [RewardController::class, 'create'])->name('reward.create');
+    Route::post('/reward', [RewardController::class, 'store'])->name('reward.store');
+    Route::get('/reward/{id}/edit', [RewardController::class, 'edit'])->name('reward.edit');
+    Route::put('/reward/{id}', [RewardController::class, 'update'])->name('reward.update');
+    Route::delete('/reward/{id}', [RewardController::class, 'destroy'])->name('reward.destroy');
+});
 
 // Logout 
 Route::post('logout', [AuthController::class, 'logout'])->name(name: 'logout');

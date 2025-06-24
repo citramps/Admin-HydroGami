@@ -11,13 +11,12 @@ class Reward extends Model
 
     protected $fillable = [
         'tipe_reward',
-        'subtipe_reward',
-        'subtipe_gacha',   
+        'subtipe_gacha',
+        'koin_dibutuhkan',
         'jumlah',
         'id_admin',
     ];
 
-    
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'id_admin');
