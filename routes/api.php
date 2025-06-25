@@ -24,11 +24,17 @@ use App\Http\Controllers\RewardController;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::put('/update-profile', [AuthController::class, 'updateProfile']); // Ubah post menjadi put
+    Route::put('/update-profile', [AuthController::class, 'updateProfile']);
 });
-Route::get('/notifikasi', [NotifikasiController::class, 'index']);
-Route::post('/notifikasi', [NotifikasiController::class, 'store']);
-Route::put('/notifikasi/{id}/read', [NotifikasiController::class, 'markAsRead']);
+
+Route::prefix('notifikasi')->group(function () {
+    Route::get('/', [NotifikasiController::class, 'index']);
+    Route::post('/', [NotifikasiController::class, 'store']);
+    Route::put('/{id}/read', [NotifikasiController::class, 'markAsRead']);
+    Route::delete('/{id}', [NotifikasiController::class, 'destroy']);
+});
+
+Route::get('/sensor_data', [NotifikasiController::class, 'getSensorData']);
 
 Route::post('/sensor-data', [SensorDataController::class, 'store']);
 Route::get('/sensor-data', [SensorDataController::class, 'index']);
