@@ -7,6 +7,8 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('android-chrome-512x512.png') }}">
+
     <style>
         .bg-custom-green {
             background-color: #29CC74;

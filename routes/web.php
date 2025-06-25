@@ -9,7 +9,9 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RewardController;
 
-
+Route::get('/', function () {
+    return redirect()->route('login-admin');
+});
 
 Route::get('/register-admin', [AuthController::class, 'showRegisterAdminForm'])->name('register-admin');
 Route::post('/register-admin', [AuthController::class, 'registerAdmin'])->name('register-admin');
