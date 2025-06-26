@@ -121,4 +121,23 @@ public function store(Request $request)
         ], 500);
     }
 }
+public function destroyAll()
+{
+    try {
+        // Hapus semua notifikasi tanpa filter user
+        $deleted = Notifikasi::truncate(); // atau Notifikasi::query()->delete()
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Semua notifikasi berhasil dihapus',
+            'data' => $deleted
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal menghapus notifikasi',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }

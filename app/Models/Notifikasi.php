@@ -22,7 +22,8 @@ class Notifikasi extends Model
         'pesan',
         'status',
         'dibaca',
-        'waktu_dibuat'
+        'waktu_dibuat',
+        'user_id'
     ];
 
     // Set timestamp fields
@@ -34,4 +35,8 @@ class Notifikasi extends Model
     {
         return $this->belongsTo(SensorData::class, 'id_sensor', 'id');
     }
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

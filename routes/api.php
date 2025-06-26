@@ -32,6 +32,8 @@ Route::prefix('notifikasi')->group(function () {
     Route::post('/', [NotifikasiController::class, 'store']);
     Route::put('/{id}/read', [NotifikasiController::class, 'markAsRead']);
     Route::delete('/{id}', [NotifikasiController::class, 'destroy']);
+    Route::delete('/', [NotifikasiController::class, 'destroyAll']); 
+
 });
 
 Route::get('/sensor_data', [NotifikasiController::class, 'getSensorData']);
