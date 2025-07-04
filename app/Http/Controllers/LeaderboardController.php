@@ -9,7 +9,7 @@ class LeaderboardController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::select('id', 'username', 'poin', 'coin', 'level', 'created_at')
+        $users = User::select('id', 'name', 'poin', 'coin', 'level', 'created_at')
             ->orderByDesc('poin')
             ->take(50)
             ->get();
