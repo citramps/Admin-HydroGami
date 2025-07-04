@@ -3,34 +3,53 @@
 return [
 
     'defaults' => [
-    'guard' => 'web',  // Menggunakan guard default 'web'
-    'passwords' => 'users', // Bisa diganti sesuai kebutuhan
-],
-
-'guards' => [
-    'web' => [
-        'driver' => 'session',
-        'provider' => 'admins', // Anda bisa pakai 'admins' jika sudah mendefinisikan provider
+        'guard' => 'web', // default guard tetap 'web' buat user biasa
+        'passwords' => 'users',
     ],
-],
 
-'providers' => [
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Admin::class,  // Pastikan model Admin sudah benar
+    'guards' => [
+        // Guard buat user biasa (pegawai)
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        // Guard buat admin
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
-],
 
-'passwords' => [
-    'admins' => [
-        'provider' => 'admins',  // Untuk reset password (bisa diubah sesuai kebutuhan)
-        'table' => 'password_reset_tokens',
-        'expire' => 60,
-        'throttle' => 60,
+    'providers' => [
+        // Provider buat user biasa (pegawai)
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        // Provider buat admin
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
-],
 
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
-
 ];
