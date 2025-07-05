@@ -11,7 +11,7 @@ class LeaderboardController extends Controller
     {
         $users = User::select('id', 'name', 'poin', 'coin', 'level', 'created_at')
             ->orderByDesc('poin')
-            ->take(5)
+            ->take(50)
             ->get();
 
         // Return JSON for API requests

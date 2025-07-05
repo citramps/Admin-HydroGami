@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $admin = Auth::user();
         
         // Data leaderboard
-        $leaderboard = User::select('id', 'username', 'poin', 'coin', 'level', 'created_at')
+        $leaderboard = User::select('id', 'name', 'poin', 'coin', 'level', 'created_at')
             ->orderByDesc('poin')
             ->take(5)
             ->get();
