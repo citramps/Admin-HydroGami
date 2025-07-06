@@ -14,6 +14,7 @@ class Reward extends Model
         'subtipe_gacha',
         'koin_dibutuhkan',
         'jumlah',
+        'nama_reward',
         'id_admin',
     ];
 

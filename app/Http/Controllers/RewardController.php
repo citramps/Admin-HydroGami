@@ -28,11 +28,12 @@ class RewardController extends Controller
         $this->validateRequest($request);
 
         $data = [
-            'id_admin' => Auth::id(),
+            'id_admin' => Auth::guard('admin')->id(),
             'tipe_reward' => $request->tipe_reward,
             'subtipe_gacha' => $request->tipe_reward === 'gacha' ? $request->subtipe_gacha : null,
             'koin_dibutuhkan' => $request->tipe_reward === 'redeem' ? $request->koin_dibutuhkan : null,
             'jumlah' => $this->resolveJumlah($request),
+            'nama_reward' => $this->generateNamaReward($request),
         ];
 
         Reward::create($data);
@@ -59,6 +60,7 @@ class RewardController extends Controller
             'subtipe_gacha' => $request->tipe_reward === 'gacha' ? $request->subtipe_gacha : null,
             'koin_dibutuhkan' => $request->tipe_reward === 'redeem' ? $request->koin_dibutuhkan : null,
             'jumlah' => $this->resolveJumlah($request),
+            'nama_reward' => $this->generateNamaReward($request),
         ]);
 
         return redirect()->route('reward.index')
@@ -75,6 +77,7 @@ class RewardController extends Controller
         ]);
     }
 
+    // Validasi input
     private function validateRequest(Request $req)
     {
         $req->validate([
@@ -106,15 +109,31 @@ class RewardController extends Controller
         ]);
     }
 
+    // Hitung jumlah
     private function resolveJumlah(Request $req)
     {
-        // zonk → null, lainnya ambil input
         return ($req->tipe_reward === 'gacha' && $req->subtipe_gacha === 'zonk')
                ? null
                : $req->jumlah;
     }
 
-    // Untuk API
+    // Otomatis buat nama reward
+    private function generateNamaReward(Request $req)
+    {
+        if ($req->tipe_reward === 'redeem') {
+            return 'Redeem ' . $req->jumlah . ' Koin';
+        }
+
+        if ($req->tipe_reward === 'gacha') {
+            return $req->subtipe_gacha === 'zonk' 
+                ? 'ZONK!' 
+                : 'Gacha ' . strtoupper($req->subtipe_gacha) . ' ' . $req->jumlah;
+        }
+
+        return 'Reward Tidak Diketahui';
+    }
+
+    // API: semua reward
     public function apiIndex()
     {
         $rewards = Reward::all();
@@ -124,31 +143,33 @@ class RewardController extends Controller
         ]);
     }
 
+    // API: reward gacha
     public function apiGachaRewards()
-{
-    $rewards = Reward::where('tipe_reward', 'gacha')->get();
-    return response()->json([
-        'success' => true,
-        'data' => $this->transformGachaRewards($rewards)
-    ]);
-}
+    {
+        $rewards = Reward::where('tipe_reward', 'gacha')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $this->transformGachaRewards($rewards)
+        ]);
+    }
 
-public function apiRedeemRewards()
-{
-    $rewards = Reward::where('tipe_reward', 'redeem')->get();
-    return response()->json([
-        'success' => true,
-        'data' => $rewards->map(function ($reward) {
-            return [
-                'id' => $reward->id_reward,
-                'type' => $reward->tipe_reward,
-                'amount' => $reward->jumlah,
-                'koin_dibutuhkan' => $reward->koin_dibutuhkan,
-                'label' => 'Rp ' . number_format($reward->jumlah, 0, ',', '.'),
-            ];
-        })
-    ]);
-}
+    // API: reward redeem
+    public function apiRedeemRewards()
+    {
+        $rewards = Reward::where('tipe_reward', 'redeem')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $rewards->map(function ($reward) {
+                return [
+                    'id' => $reward->id_reward,
+                    'type' => $reward->tipe_reward,
+                    'amount' => $reward->jumlah,
+                    'koin_dibutuhkan' => $reward->koin_dibutuhkan,
+                    'label' => 'Rp ' . number_format($reward->jumlah, 0, ',', '.'),
+                ];
+            })
+        ]);
+    }
 
     private function transformGachaRewards($rewards)
     {
@@ -161,18 +182,18 @@ public function apiRedeemRewards()
                 'label' => $reward->subtipe_gacha === 'zonk' 
                     ? 'ZONK!' 
                     : $reward->jumlah . ' ' . strtoupper($reward->subtipe_gacha),
-                'color' => $this->getColorForReward($reward->subtipe_gacha)
+                'color' => $this->getColorForReward($reward->subtipe_gacha),
             ];
         });
     }
 
     private function getColorForReward($subtype)
     {
-        switch ($subtype) {
-            case 'exp': return '#4CAF50'; // Hijau
-            case 'coin': return '#FFC107'; // Kuning
-            case 'zonk': return '#F44336'; // Merah
-            default: return '#2196F3'; // Biru
-        }
+        return match ($subtype) {
+            'exp' => '#4CAF50',
+            'coin' => '#FFC107',
+            'zonk' => '#F44336',
+            default => '#2196F3',
+        };
     }
 }

@@ -9,13 +9,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rewards', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_reward');
-            $table->string('subtipe_gacha');
+            $table->bigIncrements('id_reward'); // sinkron dengan model
+            $table->unsignedBigInteger('id_admin');
+            $table->string('tipe_reward');
+            $table->string('subtipe_gacha')->nullable();
             $table->integer('koin_dibutuhkan')->nullable();
-            // Add other necessary columns
+            $table->integer('jumlah')->nullable();
+            $table->string('nama_reward'); // penting!
             $table->timestamps();
+
+            $table->foreign('id_admin')->references('id_admin')->on('admin')->onDelete('cascade');
         });
+
     }
 
     public function down()
