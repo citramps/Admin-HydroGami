@@ -9,22 +9,36 @@ use Illuminate\Support\Facades\Validator;
 class NotifikasiController extends Controller
 {
     public function index()
-    {
-        try {
-            $notifications = Notifikasi::orderBy('created_at', 'desc')->get();
+{
+    try {
+        $notifications = Notifikasi::orderBy('created_at', 'desc')->get();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Data notifikasi berhasil diambil',
-                'data' => $notifications
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-            ], 500);
-        }
+        // Ubah data JSON ke array
+        $formatted = $notifications->map(function ($notif) {
+            return [
+                'id' => $notif->id,
+                'type' => $notif->type,
+                'notifiable_type' => $notif->notifiable_type,
+                'notifiable_id' => $notif->notifiable_id,
+                'data' => json_decode($notif->data, true), // ⬅️ decode string ke array
+                'read_at' => $notif->read_at,
+                'created_at' => $notif->created_at,
+                'updated_at' => $notif->updated_at,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data notifikasi berhasil diambil',
+            'data' => $formatted
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ], 500);
     }
+}
 
     public function store(Request $request)
     {
