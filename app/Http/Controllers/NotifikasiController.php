@@ -20,7 +20,7 @@ class NotifikasiController extends Controller
                 'type' => $notif->type,
                 'notifiable_type' => $notif->notifiable_type,
                 'notifiable_id' => $notif->notifiable_id,
-                'data' => json_decode($notif->data, true), // ⬅️ decode string ke array
+                'data' => $notif->data, // ⬅️ decode string ke array
                 'read_at' => $notif->read_at,
                 'created_at' => $notif->created_at,
                 'updated_at' => $notif->updated_at,
