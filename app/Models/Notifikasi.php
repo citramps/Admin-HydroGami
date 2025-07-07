@@ -2,41 +2,39 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\DatabaseNotification;
 
-class Notifikasi extends Model
+class Notifikasi extends DatabaseNotification
 {
-    use HasFactory;
-
-    // Definisikan nama tabel
+    // Jika kamu ingin eksplisit
     protected $table = 'notifikasi';
 
-    // Definisikan primary key
-    protected $primaryKey = 'id_notifikasi';
-
-    // Definisikan kolom yang bisa diisi
+    // Jika ingin menentukan kolom yang boleh diisi secara manual
     protected $fillable = [
-        'id_sensor',
-        'jenis_sensor',
-        'pesan',
-        'status',
-        'dibaca',
-        'waktu_dibuat',
-        'user_id'
+        'id',
+        'type',
+        'notifiable_type',
+        'notifiable_id',
+        'data',
+        'read_at',
+        'created_at',
+        'updated_at',
     ];
 
-    // Set timestamp fields
-    const CREATED_AT = 'waktu_dibuat';
-    const UPDATED_AT = null; // Karena tidak ada kolom updated_at
-
-    // Relasi dengan tabel sensor_data
-    public function sensorData()
-    {
-        return $this->belongsTo(SensorData::class, 'id_sensor', 'id');
-    }
+    // Jika kamu ingin relasi ke user (asumsi notifiable_type = 'App\Models\User')
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    {
+        return $this->belongsTo(\App\Models\User::class, 'notifiable_id');
+    }
+
+    // Akses data notifikasi sebagai array (jika data disimpan dalam format json)
+    public function getDataAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = is_array($value) ? json_encode($value) : $value;
+    }
 }
