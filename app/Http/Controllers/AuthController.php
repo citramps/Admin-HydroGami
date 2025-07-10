@@ -152,7 +152,7 @@ class AuthController extends Controller
             // Cek password saat ini jika ada update password
             if ($request->filled('password')) {
                 if (!Hash::check($request->current_password, $user->password)) {
-                    return response()->json(['message' => 'Current password is incorrect'], 400);
+                    return response()->json(['message' => 'Password saat ini salah'], 400);
                 }
             }
 
@@ -174,7 +174,7 @@ class AuthController extends Controller
             $user->update($userData);
 
             return response()->json([
-                'message' => 'Profile updated successfully',
+                'message' => 'Profil berhasil diupdate',
                 'user' => [
                     'username' => $user->username,
                     'email' => $user->email
