@@ -1,66 +1,159 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HydroGami - Integration of IoT and Gamification on Hydroponic Plants
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+HydroGami Admin Panel adalah platform manajemen berbasis web yang dirancang khusus untuk administrator sistem HydroGami. Panel ini memungkinkan pengelolaan menyeluruh terhadap seluruh aspek sistem monitoring hidroponik berbasis IoT dengan fitur gamifikasi.
 
-## About Laravel
+## Fitur Utama
+- Dashboard analitik pengguna
+- Manajemen misi gamifikasi (CRUD)
+- Manajemen panduan (CRUD)
+- Manajemen reward (CRUD)
+- Melihat leaderboard pengguna
+- Manajemen profil admin
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalasi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Prasyarat
+- PHP 8.0 atau lebih baru
+- Composer 2.0+
+- MySQL 5.7+ atau MariaDB 10.2+
+- Node.js 14.x+ & npm
+- Web server (Apache)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Langkah-langkah Instalasi
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/yourusername/hydrogami-admin.git
+   cd hydrogami-admin
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Install dependencies**
+   composer install
+   npm install
+   npm run build
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Konfigurasi environment**
+   cp .env.example .env
+   php artisan key:generate
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Setup database**
+   php artisan migrate --seed
 
-## Laravel Sponsors
+3. **Jalankan aplikasi**
+   php artisan serve
+   Akses panel di: http://localhost:8000
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+## Panduan Penggunaan
+### 1. Registrasi Akun Baru
+1. Akses /register
+2. Isi formulir dengan:
+   - Nama lengkap
+   - Email valid
+   - Password (minimal 8 karakter)
+3. Klik "Register"
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+### 2. Login ke Aplikasi
+1. Akses /login
+2. Masukkan email dan password
+3. Klik "Login"
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+### 3. Dashboard Utama
+Halaman utama yang menampilkan:
+- Leaderboard: Peringkat pengguna berdasarkan skor
+- Grafik Pengguna: Visualisasi aktivitas pengguna
+- Menu Navigasi cepat ke semua fitur admin
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### 4. Manajemen Misi
+#### Tambah Misi Baru:
+1. Navigasi ke menu "Misi"
+2. Klik "Tambah Misi"
+3. Isi form:
+   - Nama Misi
+   - Jumlah Poin
+   - Deskripsi
+   - Status (Aktif/Tidak Aktif)
+4. Klik "Tambah Misi"
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Edit Misi:
+1. Cari misi di daftar misi
+2. Klik ikon "Edit"
+3. Modifikasi data
+4. Klik "Simpan Perubahan"
 
-## License
+#### Hapus Misi:
+1. Cari misi di daftar misi
+2. Klik ikon "Hapus"
+3. Konfirmasi penghapusan
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### 5. Manajemen Panduan
+#### Tambah Panduan Baru:
+1. Navigasi ke menu "Panduan"
+2. Klik "Tambah Panduan"
+3. Isi form:
+   - Judul Panduan
+   - Deskripsi
+   - Upload gambar
+   - Link video youtube
+4. Klik "Tambah Panduan"
+
+#### Edit Panduan:
+1. Cari panduan di daftar panduan
+2. Klik ikon "Edit"
+3. Modifikasi data
+4. Klik "Simpan Perubahan"
+
+#### Hapus Panduan:
+1. Cari panduan di daftar panduan
+2. Klik ikon "Hapus"
+3. Konfirmasi penghapusan
+
+
+### 6. Manajemen Reward
+#### Tambah Reward Baru:
+1. Navigasi ke menu "Reward"
+2. Klik "Tambah Reward"
+3. Isi form:
+   - Tipe (Gacha/Redeem)
+   - Subtipe (EXP/Coin/Zonk)
+   - Jumlah
+4. Klik "Tambah Reward"
+
+#### Edit Reward:
+1. Cari rewatd di daftar reward
+2. Klik ikon "Edit"
+3. Modifikasi data
+4. Klik "Simpan Perubahan"
+
+#### Hapus Reward:
+1. Cari reward di daftar reward
+2. Klik ikon "Hapus"
+3. Konfirmasi penghapusan
+
+
+### 7. Leaderboard
+Fitur untuk melihat peringkat pengguna berdasarkan:
+- ID Pengguna
+- Nama
+- Level
+- Total Poin
+- Total Koin
+- Waktu Perolehan
+
+
+### 8. Manajemen Profil
+1. Klik menu profil di navbar
+2. Pilih "Edit Profil"
+3. Ubah data yang diperlukan
+4. Klik "Simpan Perubahan"
+
+
+### 9. Logout:
+1. Klik menu profil di navbar
+2. Pilih "Logout"
+3. Konfirmasi logout
+
+
