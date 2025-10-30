@@ -22,6 +22,15 @@
         html {
             scroll-behavior: smooth;
         }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .scrolling-wrapper {
+            animation: scroll 40s linear infinite;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -384,9 +393,8 @@
             <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 md:p-12 mb-12">
                 <div class="grid md:grid-cols-2 gap-8 mb-8">
                     <div>
-                        <h3 class="text-2xl font-bold text-hydro-green mb-4">Proyek PBL IF-16</h3>
+                        <h3 class="text-2xl font-bold text-hydro-green mb-4">HydroGami Team</h3>
                         <div class="space-y-2 text-gray-700">
-                            <p><strong>Pengusul:</strong> Yeni Rokhayati, S.Si., M.Sc.</p>
                             <p><strong>Manajer Proyek:</strong> Hamdani Arif, S.Pd., M.Sc.</p>
                             <p><strong>Institusi:</strong> Politeknik Negeri Batam</p>
                             <p><strong>Program Studi:</strong> D3 Teknik Informatika</p>
@@ -401,32 +409,95 @@
                 </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Tim Pengembang</h3>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-gradient-to-br from-hydro-green to-hydro-light text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                    <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CA</div>
-                    <h4 class="font-bold text-lg mb-2">Clinton Alfaro</h4>
-                    <p class="text-sm opacity-90 mb-2">3312301080</p>
-                    <p class="text-sm font-semibold">Ketua Tim</p>
-                    <p class="text-xs opacity-75">Hardware & Integration</p>
-                </div>
-                
-
-                
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                    <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">NP</div>
-                    <h4 class="font-bold text-lg mb-2">Nania Prima Citra Aulia</h4>
-                    <p class="text-sm opacity-90 mb-2">3312301056</p>
-                    <p class="text-sm font-semibold">Mobile Developer</p>
-                    <p class="text-xs opacity-75">App Development</p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                    <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CM</div>
-                    <h4 class="font-bold text-lg mb-2">Citra Miranda Purnama Sari</h4>
-                    <p class="text-sm opacity-90 mb-2">3312301070</p>
-                    <p class="text-sm font-semibold">Documentation</p>
-                    <p class="text-xs opacity-75">Web Developer</p>
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Tim Pengembang (HydroGami Team)</h3>
+            <div class="relative w-full overflow-hidden">
+                <div class="flex scrolling-wrapper space-x-6 p-4">
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-hydro-green to-hydro-light text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CA</div>
+                        <h4 class="font-bold text-lg mb-2">Clinton Alfaro</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301080</p>
+                        <p class="text-sm font-semibold">Ketua Tim</p>
+                        <p class="text-xs opacity-75">Hardware & Integration</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">NP</div>
+                        <h4 class="font-bold text-lg mb-2">Nania Prima Citra Aulia</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301056</p>
+                        <p class="text-sm font-semibold">Mobile Developer</p>
+                        <p class="text-xs opacity-75">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CM</div>
+                        <h4 class="font-bold text-lg mb-2">Citra Miranda Purnama Sari</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301070</p>
+                        <p class="text-sm font-semibold">Documentation</p>
+                        <p class="text-xs opacity-75">Web Developer</p>
+                    </div>
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JS</div>
+                        <h4 class="font-bold text-lg mb-2">Jihan Safinatunnaja</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301065</p>
+                        <p class="text-sm font-semibold">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JJ</div>
+                        <h4 class="font-bold text-lg mb-2">Juan Jonathan Nainggolan</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301009</p>
+                        <p class="text-sm font-semibold">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">YF</div>
+                        <h4 class="font-bold text-lg mb-2">Yoel Feliks Hutabarat</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301083</p>
+                        <p class="text-sm font-semibold">Web Developer</p>
+                    </div>
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-hydro-green to-hydro-light text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CA</div>
+                        <h4 class="font-bold text-lg mb-2">Clinton Alfaro</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301080</p>
+                        <p class="text-sm font-semibold">Ketua Tim</p>
+                        <p class="text-xs opacity-75">Hardware & Integration</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">NP</div>
+                        <h4 class="font-bold text-lg mb-2">Nania Prima Citra Aulia</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301056</p>
+                        <p class="text-sm font-semibold">Mobile Developer</p>
+                        <p class="text-xs opacity-75">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CM</div>
+                        <h4 class="font-bold text-lg mb-2">Citra Miranda Purnama Sari</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301070</p>
+                        <p class="text-sm font-semibold">Documentation</p>
+                        <p class="text-xs opacity-75">Web Developer</p>
+                    </div>
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JS</div>
+                        <h4 class="font-bold text-lg mb-2">Jihan Safinatunnaja</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301065</p>
+                        <p class="text-sm font-semibold">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JJ</div>
+                        <h4 class="font-bold text-lg mb-2">Juan Jonathan Nainggolan</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301009</p>
+                        <p class="text-sm font-semibold">App Development</p>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">YF</div>
+                        <h4 class="font-bold text-lg mb-2">Yoel Feliks Hutabarat</h4>
+                        <p class="text-sm opacity-90 mb-2">3312301083</p>
+                        <p class="text-sm font-semibold">Web Developer</p>
+                    </div>
                 </div>
             </div>
         </div>
