@@ -7,21 +7,22 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
-    protected function schedule(Schedule $schedule): void
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Cleanup semua misi expired setiap hari jam 00:01
+        $schedule->call(function () {
+            app(\App\Http\Controllers\MisiController::class)->cleanupAllExpiredMissions();
+        })->dailyAt('00:01');
+
+        // Reset misi mingguan setiap Senin jam 00:10
+        $schedule->call(function () {
+            app(\App\Http\Controllers\MisiController::class)->resetWeeklyMissions();
+        })->weeklyOn(1, '00:10'); // Setiap Senin jam 00:10
     }
 
-    /**
-     * Register the commands for the application.
-     */
-    protected function commands(): void
+    protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

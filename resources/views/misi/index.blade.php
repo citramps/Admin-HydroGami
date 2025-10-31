@@ -14,7 +14,6 @@
     </style>
 </head>
 
-
 <body>
     <div class="flex min-h-screen">
 
@@ -58,7 +57,6 @@
                     <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
-
                     <span>Leaderboard</span>
                 </a>
 
@@ -81,7 +79,6 @@
                 </div>
                 <div class="relative">
                     <button class="flex items-center space-x-4 focus:outline-none">
-                       
                         <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-12 h-12 rounded-full border-2"
                             onclick="toggleDropdown(event)">
                     </button>
@@ -100,36 +97,90 @@
                     </div>
                 </div>
             </div>
-            <div id="logoutModal"
-                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div class="bg-white p-6 rounded-lg w-80 text-center">
-                    <div class="text-yellow-500 text-4xl mb-4">!</div>
-                    <h3 class="text-lg font-semibold">Apakah Anda Yakin?</h3>
-                    <p class="text-sm text-gray-600">Anda akan keluar dari akun Anda.</p>
-                    <div class="flex justify-between mt-6">
-                        <a href="{{ route('login-admin') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya,
-                            Logout</a>
-                        <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak,
-                            Batalkan!</button>
+
+            <!-- Card Informasi Misi -->
+            <div class="grid grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Total Misi</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ $missions->count() }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Misi Manual</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ $missions->where('is_auto_generated', false)->count() }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-purple-100 rounded-lg">
+                            <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Misi Otomatis</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ $missions->where('is_auto_generated', true)->count() }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-red-100 rounded-lg">
+                            <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Misi Expired</p>
+                            <p class="text-2xl font-bold text-gray-900" id="expiredCount">0</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <!-- Main Content -->
             <div class="flex-1 bg-white p-6">
                 <!-- Judul dan tombol tambah -->
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-2xl font-bold text-gray-800">List Misi Gamifikasi</h2>
-                    <a href="{{ route('misi.create') }}"
-                        class="inline-flex items-center gap-1 bg-custom-green hover:bg-green-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Tambah Misi
-                    </a>
-
+                    <div class="flex gap-2">
+                        <a href="{{ route('misi.create') }}"
+                            class="inline-flex items-center gap-1 bg-custom-green hover:bg-green-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Tambah Misi
+                        </a>
+                        
+                        <!-- Tombol untuk manajemen misi otomatis -->
+                        <button onclick="deleteExpiredAutoMissions()"
+                                class="inline-flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">                            <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            Hapus Misi Expired
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Tabel Misi -->
@@ -139,9 +190,10 @@
                             <tr>
                                 <th class="py-3 px-4 text-center w-1/12">ID</th>
                                 <th class="py-3 px-4 text-center w-2/12">Nama Misi</th>
-                                <th class="py-3 px-4 text-center w-3/12">Deskripsi</th>
+                                <th class="py-3 px-4 text-center w-2/12">Deskripsi</th>
                                 <th class="py-3 px-4 text-center w-1/12">Status</th>
                                 <th class="py-3 px-4 text-center w-1/12">Tipe</th>
+                                <th class="py-3 px-4 text-center w-1/12">Sumber</th>
                                 <th class="py-3 px-4 text-center w-1/12">Poin</th>
                                 <th class="py-3 px-4 text-center w-2/12">Aksi</th>
                             </tr>
@@ -154,34 +206,68 @@
                                     </td>
                                     <td class="py-3 px-4 text-center">
                                         {{ $mission->nama_misi }}
+                                        @if($mission->is_auto_generated && $mission->parameter_type)
+                                            <br>
+                                            <span class="text-xs text-gray-500">({{ strtoupper($mission->parameter_type) }})</span>
+                                        @endif
                                     </td>
                                     <td class="py-3 px-4 text-justify">
-                                        {{ Str::limit($mission->deskripsi_misi, 80) }}
+                                        {{ Str::limit($mission->deskripsi_misi, 60) }}
+                                        @if($mission->is_auto_generated && $mission->expires_at)
+                                            <br>
+                                            @php
+                                                $isExpired = \Carbon\Carbon::parse($mission->expires_at)->isPast();
+                                            @endphp
+                                            <span class="text-xs {{ $isExpired ? 'text-red-500' : 'text-orange-500' }}">
+                                                Expires: {{ \Carbon\Carbon::parse($mission->expires_at)->format('d M Y H:i') }}
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <span class="inline-flex min-w-[90px] justify-center items-center px-2.5 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap {{ $mission->status_misi === 'aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">{{ ucfirst($mission->status_misi) }}</span>
+                                        <span class="inline-flex min-w-[90px] justify-center items-center px-2.5 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap {{ $mission->status_misi === 'aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ ucfirst($mission->status_misi) }}
+                                        </span>
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
-                                {{ $mission->tipe_misi === 'harian' ? 'bg-blue-100 text-blue-800' : 'bg-indigo-100 text-indigo-800' }}">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $mission->tipe_misi === 'harian' ? 'bg-blue-100 text-blue-800' : 'bg-indigo-100 text-indigo-800' }}">
                                             {{ ucfirst($mission->tipe_misi) }}
                                         </span>
+                                    </td>
+                                    <td class="py-3 px-4 text-center">
+                                        @if($mission->is_auto_generated)
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800">
+                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"/>
+                                                </svg>
+                                                AUTO
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
+                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                                </svg>
+                                                MANUAL
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="py-3 px-4 text-center text-yellow-600 font-semibold">
                                         {{ $mission->poin }} Poin
                                     </td>
                                     <td class="py-3 px-4">
                                         <div class="flex justify-center gap-2">
-                                            <a href="{{ route('misi.edit', $mission->id_misi) }}"
-                                                class="flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md px-3 py-1 transition">
-                                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0z" />
-                                                </svg>
-                                                <span>Edit</span>
-                                            </a>
-                                            <button onclick="openDeleteModal({{ $mission->id_misi }})"
+                                            @if(!$mission->is_auto_generated)
+                                                <!-- Tombol Edit hanya untuk misi manual -->
+                                                <a href="{{ route('misi.edit', $mission->id_misi) }}"
+                                                    class="flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md px-3 py-1 transition">
+                                                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M17.414 2.586a2 2 0 010 2.828L8.414 14.414a1 1 0 01-.293.207l-4 1a1 1 0 01-1.207-1.207l1-4a1 1 0 01.207-.293l9-9a2 2 0 012.828 0z" />
+                                                    </svg>
+                                                    <span>Edit</span>
+                                                </a>
+                                            @endif
+                                            
+                                            <!-- Tombol Hapus untuk SEMUA jenis misi -->
+                                            <button onclick="openDeleteModal({{ $mission->id_misi }}, '{{ addslashes($mission->nama_misi) }}', {{ $mission->is_auto_generated ? 'true' : 'false' }})"
                                                 class="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white rounded-md px-3 py-1 transition">
                                                 <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd"
@@ -198,42 +284,69 @@
                     </table>
                 </div>
             </div>
+        </div>
     </div>
 
+    <!-- Modal Delete -->
     <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg w-80 text-center">
             <div class="text-yellow-500 text-4xl mb-4">!</div>
-            <h3 class="text-lg font-semibold">Apakah Kamu Yakin?</h3>
-            <p class="text-sm text-gray-600">Anda tidak akan dapat mengembalikan data ini!</p>
+            <h3 class="text-lg font-semibold" id="deleteModalTitle">Apakah Kamu Yakin?</h3>
+            <p class="text-sm text-gray-600" id="deleteModalMessage">Anda tidak akan dapat mengembalikan data ini!</p>
             <div class="flex justify-between mt-6">
-                <button onclick="confirmDelete()" class="bg-custom-green text-white px-4 py-2 rounded">Ya,
-                    Hapus</button>
+                <button onclick="confirmDelete()" class="bg-custom-green text-white px-4 py-2 rounded">Ya, Hapus</button>
                 <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak, Batalkan!</button>
             </div>
         </div>
     </div>
 
+    <!-- Modal Success -->
     <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg w-80 text-center">
             <div class="text-green-500 text-4xl mb-4">✓</div>
-            <h3 class="text-lg font-semibold">Data Misi Berhasil Dihapus</h3>
+            <h3 class="text-lg font-semibold" id="successModalTitle">Data Misi Berhasil Dihapus</h3>
             <button onclick="closeModal()" class="mt-4 bg-custom-green text-white px-4 py-2 rounded">OK</button>
         </div>
     </div>
 
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg w-80 text-center">
+            <div class="text-yellow-500 text-4xl mb-4">!</div>
+            <h3 class="text-lg font-semibold">Apakah Anda Yakin?</h3>
+            <p class="text-sm text-gray-600">Anda akan keluar dari akun Anda.</p>
+            <div class="flex justify-between mt-6">
+                <a href="{{ route('login-admin') }}" class="bg-custom-green text-white px-4 py-2 rounded">Ya, Logout</a>
+                <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded">Tidak, Batalkan!</button>
+            </div>
+        </div>
+    </div>
 
     <script>
+        let missionIdToDelete = null;
+        let isAutoMission = false;
+
         function toggleDropdown(event) {
             event.stopPropagation();
-
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.classList.toggle('hidden');
         }
 
-        let missionIdToDelete = null;
-
-        function openDeleteModal(missionId) {
+        function openDeleteModal(missionId, missionName, isAuto) {
             missionIdToDelete = missionId;
+            isAutoMission = isAuto;
+            
+            const title = document.getElementById('deleteModalTitle');
+            const message = document.getElementById('deleteModalMessage');
+            
+            if (isAuto) {
+                title.textContent = 'Hapus Misi Otomatis?';
+                message.textContent = `Misi "${missionName}" akan dihapus. Misi otomatis mungkin akan dibuat kembali oleh sistem.`;
+            } else {
+                title.textContent = 'Hapus Misi Manual?';
+                message.textContent = `Misi "${missionName}" akan dihapus secara permanen!`;
+            }
+            
             document.getElementById('deleteModal').classList.remove('hidden');
         }
 
@@ -243,40 +356,64 @@
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
                     },
                 }).then(response => {
                     if (response.ok) {
                         closeModal();
+                        const successTitle = document.getElementById('successModalTitle');
+                        successTitle.textContent = isAutoMission ? 
+                            'Misi Otomatis Berhasil Dihapus!' : 
+                            'Misi Manual Berhasil Dihapus!';
+                        
                         document.getElementById("successModal").classList.remove("hidden");
-
                         document.querySelector(`[data-mission-id="${missionIdToDelete}"]`).remove();
-
+                        
+                        // Update statistics
+                        updateStatistics();
+                        
                         setTimeout(() => {
                             document.getElementById("successModal").classList.add("hidden");
                         }, 2000);
                     } else {
                         alert("Gagal menghapus data misi. Coba lagi.");
                     }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan saat menghapus misi.");
+                });
+            }
+        }
+
+        function deleteExpiredAutoMissions() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua misi otomatis yang sudah expired?')) {
+                fetch('/misi/auto/expired', {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Berhasil menghapus ${data.deleted_count} misi otomatis expired!`);
+                        location.reload(); // Reload halaman untuk update data
+                    } else {
+                        alert('Gagal menghapus misi expired: ' + data.message);
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus misi expired.');
                 });
             }
         }
 
         function closeModal() {
-            {
-                document.getElementById('deleteModal').classList.add('hidden');
-                document.getElementById('successModal').classList.add('hidden');
-                missionIdToDelete = null;
-            }
-
-            {
-                const logoutModal = document.getElementById('logoutModal');
-                logoutModal.classList.add('hidden');
-            }
-        }
-
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.classList.toggle('hidden');
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('successModal').classList.add('hidden');
+            document.getElementById('logoutModal').classList.add('hidden');
+            missionIdToDelete = null;
+            isAutoMission = false;
         }
 
         function confirmLogout() {
@@ -284,6 +421,37 @@
             logoutModal.classList.remove('hidden');
             document.getElementById('dropdownMenu').classList.add('hidden');
         }
+
+        function updateStatistics() {
+            // Update total missions count
+            const totalMissions = document.querySelectorAll('tbody tr').length;
+            
+            // Update auto missions count
+            const autoMissions = document.querySelectorAll('tbody tr').length - 
+                               document.querySelectorAll('a[href*="/edit"]').length;
+            
+            // Update manual missions count
+            const manualMissions = document.querySelectorAll('a[href*="/edit"]').length;
+            
+            // Update expired missions count
+            const expiredMissions = document.querySelectorAll('.text-red-500').length;
+            document.getElementById('expiredCount').textContent = expiredMissions;
+            
+            // You might want to update other statistics here if needed
+            console.log('Statistics updated:', {
+                total: totalMissions,
+                auto: autoMissions,
+                manual: manualMissions,
+                expired: expiredMissions
+            });
+        }
+
+        // Initialize expired missions count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const expiredMissions = document.querySelectorAll('.text-red-500').length;
+            document.getElementById('expiredCount').textContent = expiredMissions;
+        });
+
         window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('dropdownMenu');
             if (!e.target.closest('.relative')) {
