@@ -1,6 +1,11 @@
-# HydroGami - Integration of IoT and Gamification on Hydroponic Plants
+# PROYEK PBL IF-16: HydroGami - Integration of IoT and Gamification on Hydroponic Plants
 
 HydroGami Admin Panel adalah platform manajemen berbasis web yang dirancang khusus untuk administrator sistem HydroGami. Panel ini memungkinkan pengelolaan menyeluruh terhadap seluruh aspek sistem monitoring hidroponik berbasis IoT dengan fitur gamifikasi.
+
+## Tim Pengembang (HydroGami Team)
+- **Jihan Safinatunnaja** (3312301065) - App Development
+- **Juan Jonathan Nainggolan** (3312301009) - App Development
+- **Yoel Feliks Hutabarat** (3312301083) - Web Developer
 
 ## Fitur Utama
 - Dashboard analitik pengguna

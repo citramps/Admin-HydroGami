@@ -10,7 +10,7 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RewardController;
 
 Route::get('/', function () {
-    return redirect()->route('login-admin');
+    return view('landing');
 });
 
 Route::get('/register-admin', [AuthController::class, 'showRegisterAdminForm'])->name('register-admin');
