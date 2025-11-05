@@ -10,6 +10,7 @@ use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,14 @@ Route::prefix('rewards')->group(function () {
     Route::get('/', [RewardController::class, 'apiIndex']);
     Route::get('/gacha', [RewardController::class, 'apiGachaRewards']);
     Route::get('/redeem', [RewardController::class, 'apiRedeemRewards']);
+});
+
+// =====================================================
+// LANDING PAGE DATA
+// =====================================================
+Route::prefix('landing')->group(function () {
+    Route::get('/leaderboard', [LandingPageController::class, 'getLeaderboardData']);
+    Route::get('/chart', [LandingPageController::class, 'getChartData']);
 });
 
 // =====================================================

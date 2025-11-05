@@ -18,7 +18,6 @@
         }
     </script>
     <style>
-        /* Custom style to ensure smooth scrolling from JS works correctly */
         html {
             scroll-behavior: smooth;
         }
@@ -30,6 +29,56 @@
 
         .scrolling-wrapper {
             animation: scroll 40s linear infinite;
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
+        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #808080); }
+        .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
+        
+        /* Custom styles for team section */
+        .team-container {
+            position: relative;
+        }
+
+        .team-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+
+        .team-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        .team-member-card {
+            flex: 0 0 auto;
+            width: 16rem; /* Default width for mobile */
+            margin-right: 1.5rem;
+        }
+        
+        @media (min-width: 640px) {
+            .team-member-card {
+                width: 18rem; /* Width for small screens and up */
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .team-member-card {
+                width: 20rem; /* Width for medium screens and up */
+            }
         }
     </style>
 </head>
@@ -63,6 +112,8 @@
                         <li><a href="#problem" class="text-white hover:opacity-80 transition font-medium">Tantangan</a></li>
                         <li><a href="#solution" class="text-white hover:opacity-80 transition font-medium">Solusi</a></li>
                         <li><a href="#features" class="text-white hover:opacity-80 transition font-medium">Fitur</a></li>
+                        <li><a href="#peringkat" class="text-white hover:opacity-80 transition font-medium">Peringkat</a></li>
+                        <li><a href="#grafik" class="text-white hover:opacity-80 transition font-medium">Grafik</a></li>
                         <li><a href="#about" class="text-white hover:opacity-80 transition font-medium">Tentang</a></li>
                     </ul>
                     <a href="{{ route('login-admin') }}" class="bg-white text-hydro-green px-5 py-2 rounded-full font-semibold hover:shadow-lg hover:bg-gray-100 transition-transform transform hover:-translate-y-0.5">Login Admin</a>
@@ -80,12 +131,14 @@
             </div>
         </div>
 
-        <!-- Mobile Menu (collapsible) -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden">
             <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <li><a href="#problem" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Tantangan</a></li>
                 <li><a href="#solution" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Solusi</a></li>
                 <li><a href="#features" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Fitur</a></li>
+                <li><a href="#peringkat" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Peringkat</a></li>
+                <li><a href="#grafik" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Grafik</a></li>
                 <li><a href="#about" class="text-white hover:bg-hydro-light block px-3 py-2 rounded-md text-base font-medium">Tentang</a></li>
             </ul>
             <div class="pt-4 pb-3 border-t border-green-400">
@@ -112,16 +165,16 @@
             <div class="inline-block bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6">
                 🌱 Sistem Hidroponik Cerdas
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 break-words">HYDROGAMI: Ubah Cara Anda Bertanam Hidroponik</h1>
-            <p class="text-xl md:text-2xl mb-10 opacity-95 max-w-3xl mx-auto">Integrasi Cerdas IoT dan Gamifikasi untuk Pantau dan Rawat Tanaman Hidroponik Anda Kapan Saja, Di Mana Saja.</p>
-            <div class="flex flex-wrap gap-4 justify-center">
-                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center gap-2">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">HYDROGAMI: Ubah Cara Anda Bertanam Hidroponik</h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-10 opacity-95 max-w-3xl mx-auto">Integrasi Cerdas IoT dan Gamifikasi untuk Pantau dan Rawat Tanaman Hidroponik Anda Kapan Saja, Di Mana Saja.</p>
+            <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                     </svg>
                     Unduh Aplikasi Sekarang
                 </a>
-                <a href="#demo" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-hydro-green transition flex items-center gap-2">
+                <a href="#demo" class="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-hydro-green transition flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -133,84 +186,84 @@
     </section>
 
     <!-- Problem Section -->
-    <section id="problem" class="py-20 px-4 bg-white">
+    <section id="problem" class="py-16 sm:py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Merawat Hidroponik Penuh Tantangan?</h2>
-            <p class="text-center text-gray-600 text-lg mb-16 max-w-3xl mx-auto">Kami memahami kesulitan yang Anda hadapi</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Merawat Hidroponik Penuh Tantangan?</h2>
+            <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16 max-w-3xl mx-auto">Kami memahami kesulitan yang Anda hadapi</p>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">🔍</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Sulit Dipantau</h3>
-                    <p class="text-gray-600">Kondisi penting seperti pH air, nutrisi, suhu, dan cahaya harus dipantau terus-menerus untuk menghindari risiko gagal panen.</p>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 p-6 sm:p-8 rounded-2xl border-2 border-red-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">🔍</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Sulit Dipantau</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Kondisi penting seperti pH air, nutrisi, suhu, dan cahaya harus dipantau terus-menerus untuk menghindari risiko gagal panen.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-8 rounded-2xl border-2 border-yellow-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">😕</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Kurang Motivasi</h3>
-                    <p class="text-gray-600">Seringkali pengguna, terutama pemula, kesulitan untuk konsisten dan termotivasi dalam melakukan perawatan rutin.</p>
+                <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 sm:p-8 rounded-2xl border-2 border-yellow-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">😕</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Kurang Motivasi</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Seringkali pengguna, terutama pemula, kesulitan untuk konsisten dan termotivasi dalam melakukan perawatan rutin.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">⏰</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Memakan Waktu</h3>
-                    <p class="text-gray-600">Pengecekan manual membatasi waktu dan tidak praktis, terutama bagi Anda yang sibuk.</p>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border-2 border-blue-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">⏰</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Memakan Waktu</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Pengecekan manual membatasi waktu dan tidak praktis, terutama bagi Anda yang sibuk.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Solution Section -->
-    <section id="solution" class="py-20 px-4 bg-gradient-to-br from-green-50 to-emerald-50">
+    <section id="solution" class="py-16 sm:py-20 px-4 bg-gradient-to-br from-green-50 to-emerald-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Solusi Inovatif</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">HYDROGAMI, Solusi Pertanian Hidroponik Modern Anda</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">HydroGami hadir untuk mengatasi semua tantangan tersebut. Kami menggabungkan sistem monitoring tanaman berbasis Internet of Things (IoT) dengan elemen gamifikasi yang menyenangkan untuk meningkatkan efisiensi, produktivitas, dan keterlibatan Anda dalam merawat tanaman.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">HYDROGAMI, Solusi Pertanian Hidroponik Modern Anda</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">HydroGami hadir untuk mengatasi semua tantangan tersebut. Kami menggabungkan sistem monitoring tanaman berbasis Internet of Things (IoT) dengan elemen gamifikasi yang menyenangkan untuk meningkatkan efisiensi, produktivitas, dan keterlibatan Anda dalam merawat tanaman.</p>
             </div>
             
-            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mt-12">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 mt-12">
+                <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
                     <div>
-                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-8 rounded-2xl flex items-center justify-center min-h-[400px]">
+                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-8 rounded-2xl flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
                             <div class="text-center">
-                                <div class="text-8xl mb-6">🌱</div>
-                                <div class="text-6xl mb-4">📱</div>
-                                <p class="text-hydro-green font-bold text-2xl">IoT + Gamifikasi</p>
+                                <div class="text-6xl sm:text-8xl mb-6">🌱</div>
+                                <div class="text-5xl sm:text-6xl mb-4">📱</div>
+                                <p class="text-hydro-green font-bold text-xl sm:text-2xl">IoT + Gamifikasi</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="space-y-6">
                         <div class="flex gap-4 items-start">
-                            <div class="bg-hydro-green text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 text-xl font-bold">✓</div>
+                            <div class="bg-hydro-green text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center flex-shrink-0 text-lg sm:text-xl font-bold">✓</div>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Monitoring Real-Time</h4>
-                                <p class="text-gray-600">Sensor IoT canggih memantau semua parameter vital tanaman 24/7</p>
+                                <h4 class="font-bold text-base sm:text-lg mb-2">Monitoring Real-Time</h4>
+                                <p class="text-sm sm:text-base text-gray-600">Sensor IoT canggih memantau semua parameter vital tanaman 24/7</p>
                             </div>
                         </div>
                         
                         <div class="flex gap-4 items-start">
-                            <div class="bg-hydro-green text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 text-xl font-bold">✓</div>
+                            <div class="bg-hydro-green text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center flex-shrink-0 text-lg sm:text-xl font-bold">✓</div>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Gamifikasi Menyenangkan</h4>
-                                <p class="text-gray-600">Sistem poin, misi, dan leaderboard membuat perawatan tanaman jadi seru</p>
+                                <h4 class="font-bold text-base sm:text-lg mb-2">Gamifikasi Menyenangkan</h4>
+                                <p class="text-sm sm:text-base text-gray-600">Sistem poin, misi, dan leaderboard membuat perawatan tanaman jadi seru</p>
                             </div>
                         </div>
                         
                         <div class="flex gap-4 items-start">
-                            <div class="bg-hydro-green text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 text-xl font-bold">✓</div>
+                            <div class="bg-hydro-green text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center flex-shrink-0 text-lg sm:text-xl font-bold">✓</div>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Kontrol Otomatis</h4>
-                                <p class="text-gray-600">Sistem mengatur penyiraman dan nutrisi secara otomatis</p>
+                                <h4 class="font-bold text-base sm:text-lg mb-2">Kontrol Otomatis</h4>
+                                <p class="text-sm sm:text-base text-gray-600">Sistem mengatur penyiraman dan nutrisi secara otomatis</p>
                             </div>
                         </div>
                         
                         <div class="flex gap-4 items-start">
-                            <div class="bg-hydro-green text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 text-xl font-bold">✓</div>
+                            <div class="bg-hydro-green text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center flex-shrink-0 text-lg sm:text-xl font-bold">✓</div>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Akses Mobile</h4>
-                                <p class="text-gray-600">Pantau dan kontrol dari mana saja via smartphone Anda</p>
+                                <h4 class="font-bold text-base sm:text-lg mb-2">Akses Mobile</h4>
+                                <p class="text-sm sm:text-base text-gray-600">Pantau dan kontrol dari mana saja via smartphone Anda</p>
                             </div>
                         </div>
                     </div>
@@ -220,160 +273,233 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section id="why-hydrogami" class="py-20 px-4 bg-white">
+    <section id="why-hydrogami" class="py-16 sm:py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12 sm:mb-16">
                 <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Nilai Unggul</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kenapa Harus Memilih HYDROGAMI?</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Kami bukan sekadar alat, kami adalah partner pertumbuhan tanaman Anda.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kenapa Harus Memilih HYDROGAMI?</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Kami bukan sekadar alat, kami adalah partner pertumbuhan tanaman Anda.</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-2 border-green-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">🎮</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Perawatan Jadi Seru</h3>
-                    <p class="text-gray-600">Lupakan rutinitas yang membosankan. Dengan sistem misi dan poin, kami mengubah kewajiban merawat tanaman menjadi sebuah permainan yang memotivasi.</p>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 sm:p-8 rounded-2xl border-2 border-green-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">🎮</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Perawatan Jadi Seru</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Lupakan rutinitas yang membosankan. Dengan sistem misi dan poin, kami mengubah kewajiban merawat tanaman menjadi sebuah permainan yang memotivasi.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">💡</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Keputusan Cerdas Berbasis Data</h3>
-                    <p class="text-gray-600">Tidak ada lagi tebak-tebakan. Sensor kami memberikan data akurat sehingga Anda bisa memberikan perlakuan yang paling tepat untuk hasil panen optimal.</p>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border-2 border-blue-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">💡</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Keputusan Cerdas Berbasis Data</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Tidak ada lagi tebak-tebakan. Sensor kami memberikan data akurat sehingga Anda bisa memberikan perlakuan yang paling tepat untuk hasil panen optimal.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-8 rounded-2xl border-2 border-yellow-100 hover:shadow-xl transition">
-                    <div class="text-5xl mb-4">⏰</div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Hemat Waktu & Tenaga</h3>
-                    <p class="text-gray-600">Dengan notifikasi pintar dan kontrol otomatis, Anda bisa mengelola kebun hidroponik Anda dari mana saja, kapan saja, langsung dari genggaman.</p>
+                <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 sm:p-8 rounded-2xl border-2 border-yellow-100 hover:shadow-xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">⏰</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Hemat Waktu & Tenaga</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Dengan notifikasi pintar dan kontrol otomatis, Anda bisa mengelola kebun hidroponik Anda dari mana saja, kapan saja, langsung dari genggaman.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 bg-white">
+    <section id="features" class="py-16 sm:py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12 sm:mb-16">
                 <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Fitur Lengkap</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Apa Saja yang Bisa Dilakukan HYDROGAMI?</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Apa Saja yang Bisa Dilakukan HYDROGAMI?</h2>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl hover:shadow-2xl transition">
-                    <div class="text-5xl mb-4">📊</div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Monitoring Real-Time</h3>
-                    <p class="text-gray-700">Pantau kondisi vital tanaman Anda seperti pH, TDS, suhu, kelembaban, dan intensitas cahaya langsung dari ponsel Anda, 24/7.</p>
+            <div class="grid sm:grid-cols-2 gap-6 sm:gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">📊</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Monitoring Real-Time</h3>
+                    <p class="text-sm sm:text-base text-gray-700">Pantau kondisi vital tanaman Anda seperti pH, TDS, suhu, kelembaban, dan intensitas cahaya langsung dari ponsel Anda, 24/7.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl hover:shadow-2xl transition">
-                    <div class="text-5xl mb-4">🎮</div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Gamifikasi Interaktif</h3>
-                    <p class="text-gray-700">Jadikan perawatan tanaman lebih seru! Selesaikan misi harian, kumpulkan poin, naik level, dan bersaing dengan pengguna lain di leaderboard.</p>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">🎮</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Gamifikasi Interaktif</h3>
+                    <p class="text-sm sm:text-base text-gray-700">Jadikan perawatan tanaman lebih seru! Selesaikan misi harian, kumpulkan poin, naik level, dan bersaing dengan pengguna lain di leaderboard.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl hover:shadow-2xl transition">
-                    <div class="text-5xl mb-4">⚙️</div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Kontrol Otomatis</h3>
-                    <p class="text-gray-700">Sistem dapat mengontrol perangkat penting seperti pompa penyiraman secara otomatis, memastikan tanaman Anda selalu dalam kondisi ideal.</p>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">⚙️</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Kontrol Otomatis</h3>
+                    <p class="text-sm sm:text-base text-gray-700">Sistem dapat mengontrol perangkat penting seperti pompa penyiraman secara otomatis, memastikan tanaman Anda selalu dalam kondisi ideal.</p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl hover:shadow-2xl transition">
-                    <div class="text-5xl mb-4">📖</div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Panduan Cerdas</h3>
-                    <p class="text-gray-700">Akses panduan lengkap, mulai dari merakit sistem hingga pengelolaan tanaman, langsung di dalam aplikasi untuk membantu Anda sukses.</p>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
+                    <div class="text-4xl sm:text-5xl mb-4">📖</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Panduan Cerdas</h3>
+                    <p class="text-sm sm:text-base text-gray-700">Akses panduan lengkap, mulai dari merakit sistem hingga pengelolaan tanaman, langsung di dalam aplikasi untuk membantu Anda sukses.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works" class="py-20 px-4 bg-gradient-to-br from-hydro-green to-hydro-light text-white">
+    <section id="how-it-works" class="py-16 sm:py-20 px-4 bg-gradient-to-br from-hydro-green to-hydro-light text-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12 sm:mb-16">
                 <span class="inline-block bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-4">Cara Kerja</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Semudah 1-2-3</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Semudah 1-2-3</h2>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-2xl border-2 border-white border-opacity-20">
-                    <div class="bg-white text-hydro-green w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold mb-6 mx-auto">1</div>
-                    <h3 class="text-2xl font-bold mb-3 text-center">Pasang Sensor</h3>
-                    <p class="text-center opacity-90">Sensor canggih kami akan mengumpulkan data vital dari sistem hidroponik Anda.</p>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border-2 border-white border-opacity-20">
+                    <div class="bg-white text-hydro-green w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold mb-6 mx-auto">1</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 text-center">Pasang Sensor</h3>
+                    <p class="text-center opacity-90 text-sm sm:text-base">Lihat semua data, dapatkan notifikasi, dan mainkan misi gamifikasi langsung dari aplikasi HydroGami di ponsel Anda.</p>
                 </div>
                 
-                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-2xl border-2 border-white border-opacity-20">
-                    <div class="bg-white text-hydro-green w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold mb-6 mx-auto">2</div>
-                    <h3 class="text-2xl font-bold mb-3 text-center">Data Terkirim</h3>
-                    <p class="text-center opacity-90">Mikrokontroler ESP32 memproses dan mengirimkan data secara real-time ke server melalui koneksi Wi-Fi.</p>
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border-2 border-white border-opacity-20">
+                    <div class="bg-white text-hydro-green w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold mb-6 mx-auto">2</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 text-center">Monitor & Kontrol</h3>
+                    <p class="text-center opacity-90 text-sm sm:text-base">Pantau kondisi tanaman Anda secara real-time dan kontrol sistem secara otomatis atau manual sesuai kebutuhan.</p>
                 </div>
                 
-                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-2xl border-2 border-white border-opacity-20">
-                    <div class="bg-white text-hydro-green w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold mb-6 mx-auto">3</div>
-                    <h3 class="text-2xl font-bold mb-3 text-center">Pantau & Mainkan</h3>
-                    <p class="text-center opacity-90">Lihat semua data, dapatkan notifikasi, dan mainkan misi gamifikasi langsung dari aplikasi HydroGami di ponsel Anda.</p>
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border-2 border-white border-opacity-20">
+                    <div class="bg-white text-hydro-green w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold mb-6 mx-auto">3</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 text-center">Nikmati Hasil</h3>
+                    <p class="text-center opacity-90 text-sm sm:text-base">Dapatkan hasil panen yang optimal sambil menikmati pengalaman bertanam yang menyenangkan dengan sistem gamifikasi.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Case Study -->
-    <section class="py-20 px-4 bg-gray-50">
+    <!-- Peringkat Section -->
+    <section id="peringkat" class="py-16 sm:py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
+            <div class="text-center mb-8 sm:mb-12">
+                <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Peringkat</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Top 5 Master Hidroponik</h2>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-x-auto mb-8">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
+                        <tr>
+                            <th class="py-3 px-4 text-center">Rank</th>
+                            <th class="py-3 px-4 text-center">Nama Pengguna</th>
+                            <th class="py-3 px-4 text-center">Level</th>
+                            <th class="py-3 px-4 text-center">Total Koin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">
+                                <span class="rank-badge rank-1">1</span>
+                            </td>
+                            <td class="py-4 px-6 text-center">HidroMaster01</td>
+                            <td class="py-4 px-6 text-center">25</td>
+                            <td class="py-4 px-6 text-center">1250</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">
+                                <span class="rank-badge rank-2">2</span>
+                            </td>
+                            <td class="py-4 px-6 text-center">GreenThumb99</td>
+                            <td class="py-4 px-6 text-center">22</td>
+                            <td class="py-4 px-6 text-center">1100</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">
+                                <span class="rank-badge rank-3">3</span>
+                            </td>
+                            <td class="py-4 px-6 text-center">AquaFarmer</td>
+                            <td class="py-4 px-6 text-center">20</td>
+                            <td class="py-4 px-6 text-center">980</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">4</td>
+                            <td class="py-4 px-6 text-center">LeafLover</td>
+                            <td class="py-4 px-6 text-center">18</td>
+                            <td class="py-4 px-6 text-center">850</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-4 px-6 text-center">5</td>
+                            <td class="py-4 px-6 text-center">HydroNewbie</td>
+                            <td class="py-4 px-6 text-center">15</td>
+                            <td class="py-4 px-6 text-center">720</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grafik Section -->
+    <section id="grafik" class="py-16 sm:py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12">
+                <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Grafik</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Grafik Player Setiap Minggu</h2>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                <canvas id="weeklyPlayerChart" class="w-full" height="300"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="py-16 sm:py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 sm:mb-12">
                 <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Studi Kasus</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Sukses Bersama Pakcoy</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Proyek HydroGami telah berhasil diuji coba pada tanaman Pakcoy dalam skala kecil, menunjukkan bahwa sistem kami dapat membantu pengguna memonitor kondisi tanaman secara efisien sekaligus meningkatkan interaksi melalui pendekatan yang menyenangkan dan kompetitif.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Sukses Bersama Pakcoy</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Proyek HydroGami telah berhasil diuji coba pada tanaman Pakcoy dalam skala kecil, menunjukkan bahwa sistem kami dapat membantu pengguna memonitor kondisi tanaman secara efisien sekaligus meningkatkan interaksi melalui pendekatan yang menyenangkan dan kompetitif.</p>
             </div>
             
-            <div class="bg-gradient-to-br from-hydro-green to-hydro-light text-white rounded-3xl p-8 md:p-12">
-                <div class="grid md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl text-center border-2 border-white border-opacity-20">
-                        <div class="text-4xl font-bold mb-2">100%</div>
-                        <div class="text-sm opacity-90">Akurasi Sensor</div>
+            <div class="bg-gradient-to-br from-hydro-green to-hydro-light text-white rounded-3xl p-6 sm:p-8 md:p-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-xl text-center border-2 border-white border-opacity-20">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">100%</div>
+                        <div class="text-xs sm:text-sm opacity-90">Akurasi Sensor</div>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl text-center border-2 border-white border-opacity-20">
-                        <div class="text-4xl font-bold mb-2">2 dtk</div>
-                        <div class="text-sm opacity-90">Update Real-Time</div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-xl text-center border-2 border-white border-opacity-20">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">2 dtk</div>
+                        <div class="text-xs sm:text-sm opacity-90">Update Real-Time</div>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl text-center border-2 border-white border-opacity-20">
-                        <div class="text-4xl font-bold mb-2">45%</div>
-                        <div class="text-sm opacity-90">↑ Engagement Pengguna</div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-xl text-center border-2 border-white border-opacity-20">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">45%</div>
+                        <div class="text-xs sm:text-sm opacity-90">↑ Engagement Pengguna</div>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl text-center border-2 border-white border-opacity-20">
-                        <div class="text-4xl font-bold mb-2">30%</div>
-                        <div class="text-sm opacity-90">↑ Efisiensi Air</div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-xl text-center border-2 border-white border-opacity-20">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">30%</div>
+                        <div class="text-xs sm:text-sm opacity-90">↑ Efisiensi Air</div>
                     </div>
                 </div>
                 
-                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl border-2 border-white border-opacity-20">
-                    <h4 class="font-bold text-xl mb-4">Parameter yang Dimonitor:</h4>
-                    <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-xl border-2 border-white border-opacity-20">
+                    <h4 class="font-bold text-lg sm:text-xl mb-4">Parameter yang Dimonitor:</h4>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">🌡️</span>
-                            <span>Suhu Udara (DHT22)</span>
+                            <span class="text-xl sm:text-2xl">🌡️</span>
+                            <span class="text-sm sm:text-base">Suhu Udara (DHT22)</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">💧</span>
-                            <span>Kelembaban Udara</span>
+                            <span class="text-xl sm:text-2xl">💧</span>
+                            <span class="text-sm sm:text-base">Kelembaban Udara</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">🌿</span>
-                            <span>Kelembaban Tanah</span>
+                            <span class="text-xl sm:text-2xl">🌿</span>
+                            <span class="text-sm sm:text-base">Kelembaban Tanah</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">🧪</span>
-                            <span>pH Air</span>
+                            <span class="text-xl sm:text-2xl">🧪</span>
+                            <span class="text-sm sm:text-base">pH Air</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">⚗️</span>
-                            <span>TDS/Nutrisi</span>
+                            <span class="text-xl sm:text-2xl">⚗️</span>
+                            <span class="text-sm sm:text-base">TDS/Nutrisi</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-2xl">☀️</span>
-                            <span>Intensitas Cahaya</span>
+                            <span class="text-xl sm:text-2xl">☀️</span>
+                            <span class="text-sm sm:text-base">Intensitas Cahaya</span>
                         </div>
                     </div>
                 </div>
@@ -382,19 +508,20 @@
     </section>
 
     <!-- About Us -->
-    <section id="about" class="py-20 px-4 bg-white">
+    <section id="about" class="py-16 sm:py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12 sm:mb-16">
                 <span class="inline-block bg-hydro-green text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Tim Kami</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Dikembangkan oleh Talenta Muda Polibatam</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">HYDROGAMI adalah Proyek Belajar Lapangan (PBL) yang dikembangkan dengan penuh dedikasi oleh tim mahasiswa Program Studi D3 Teknik Informatika, Politeknik Negeri Batam angkatan 2023.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Dikembangkan oleh Talenta Muda Polibatam</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">HYDROGAMI adalah Proyek Belajar Lapangan (PBL) yang dikembangkan dengan penuh dedikasi oleh tim mahasiswa Program Studi D3 Teknik Informatika, Politeknik Negeri Batam angkatan 2023.</p>
             </div>
             
-            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 md:p-12 mb-12">
-                <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-6 sm:p-8 md:p-12 mb-8 sm:mb-12">
+                <div class="grid md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
                     <div>
-                        <h3 class="text-2xl font-bold text-hydro-green mb-4">HydroGami Team</h3>
-                        <div class="space-y-2 text-gray-700">
+                        <img src="{{ asset('images/profile/Hamdani.png') }}" alt="Hamdani Arif" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 object-cover border-4 border-hydro-green">
+                        <h3 class="text-xl sm:text-2xl font-bold text-hydro-green mb-4">HydroGami Team</h3>
+                        <div class="space-y-2 text-sm sm:text-base text-gray-700">
                             <p><strong>Manajer Proyek:</strong> Hamdani Arif, S.Pd., M.Sc.</p>
                             <p><strong>Institusi:</strong> Politeknik Negeri Batam</p>
                             <p><strong>Program Studi:</strong> D3 Teknik Informatika</p>
@@ -402,101 +529,70 @@
                     </div>
                     <div class="flex items-center justify-center">
                         <div class="text-center">
-                            <div class="text-6xl mb-4">🎓</div>
-                            <p class="text-hydro-green font-bold text-xl">Semester Genap 2024-2025</p>
+                            <div class="text-5xl sm:text-6xl mb-4">🎓</div>
+                            <p class="text-hydro-green font-bold text-lg sm:text-xl">Semester Genap 2024-2025</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Tim Pengembang (HydroGami Team)</h3>
-            <div class="relative w-full overflow-hidden">
-                <div class="flex scrolling-wrapper space-x-6 p-4">
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-hydro-green to-hydro-light text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CA</div>
-                        <h4 class="font-bold text-lg mb-2">Clinton Alfaro</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301080</p>
-                        <p class="text-sm font-semibold">Ketua Tim</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-6 sm:mb-8">Tim Pengembang (HydroGami Team)</h3>
+            
+            <!-- Team Section with Horizontal Scrolling -->
+            <div class="relative team-container">
+                <!-- Scroll Indicators Removed -->
+                
+                <!-- Team Cards Container -->
+                <div class="team-scroll-container" id="team-scroll">
+                    <!-- Team Member 1 -->
+                    <div class="team-member-card bg-gradient-to-br from-hydro-green to-hydro-light text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Clinton.jpg') }}" alt="Clinton Alfaro" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Clinton Alfaro</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301080</p>
+                        <p class="text-xs sm:text-sm font-semibold">Ketua Tim</p>
                         <p class="text-xs opacity-75">Hardware & Integration</p>
                     </div>
                     
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">NP</div>
-                        <h4 class="font-bold text-lg mb-2">Nania Prima Citra Aulia</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301056</p>
-                        <p class="text-sm font-semibold">Mobile Developer</p>
+                    <!-- Team Member 2 -->
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Nania.jpg') }}" alt="Nania Prima Citra Aulia" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Nania Prima Citra Aulia</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301056</p>
+                        <p class="text-xs sm:text-sm font-semibold">Mobile Developer</p>
                         <p class="text-xs opacity-75">App Development</p>
                     </div>
                     
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CM</div>
-                        <h4 class="font-bold text-lg mb-2">Citra Miranda Purnama Sari</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301070</p>
-                        <p class="text-sm font-semibold">Documentation</p>
+                    <!-- Team Member 3 -->
+                    <div class="team-member-card bg-gradient-to-br from-pink-500 to-pink-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Citra.jpg') }}" alt="Citra Miranda Purnama Sari" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Citra Miranda Purnama Sari</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301070</p>
+                        <p class="text-xs sm:text-sm font-semibold">Documentation</p>
                         <p class="text-xs opacity-75">Web Developer</p>
                     </div>
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JS</div>
-                        <h4 class="font-bold text-lg mb-2">Jihan Safinatunnaja</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301065</p>
-                        <p class="text-sm font-semibold">App Development</p>
+                    
+                    <!-- Team Member 4 -->
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Jihan.jpg') }}" alt="Jihan Safinatunnaja" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Jihan Safinatunnaja</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301065</p>
+                        <p class="text-xs sm:text-sm font-semibold">App Development</p>
                     </div>
                     
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JJ</div>
-                        <h4 class="font-bold text-lg mb-2">Juan Jonathan Nainggolan</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301009</p>
-                        <p class="text-sm font-semibold">App Development</p>
+                    <!-- Team Member 5 -->
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                            <img src="{{ asset('images/profile/Juan.jpg') }}" alt="Juan Jonathan Nainggolan" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Juan Jonathan Nainggolan</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301009</p>
+                        <p class="text-xs sm:text-sm font-semibold">App Development</p>
                     </div>
                     
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">YF</div>
-                        <h4 class="font-bold text-lg mb-2">Yoel Feliks Hutabarat</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301083</p>
-                        <p class="text-sm font-semibold">Web Developer</p>
-                    </div>
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-hydro-green to-hydro-light text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CA</div>
-                        <h4 class="font-bold text-lg mb-2">Clinton Alfaro</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301080</p>
-                        <p class="text-sm font-semibold">Ketua Tim</p>
-                        <p class="text-xs opacity-75">Hardware & Integration</p>
-                    </div>
-                    
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">NP</div>
-                        <h4 class="font-bold text-lg mb-2">Nania Prima Citra Aulia</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301056</p>
-                        <p class="text-sm font-semibold">Mobile Developer</p>
-                        <p class="text-xs opacity-75">App Development</p>
-                    </div>
-                    
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">CM</div>
-                        <h4 class="font-bold text-lg mb-2">Citra Miranda Purnama Sari</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301070</p>
-                        <p class="text-sm font-semibold">Documentation</p>
-                        <p class="text-xs opacity-75">Web Developer</p>
-                    </div>
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JS</div>
-                        <h4 class="font-bold text-lg mb-2">Jihan Safinatunnaja</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301065</p>
-                        <p class="text-sm font-semibold">App Development</p>
-                    </div>
-                    
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">JJ</div>
-                        <h4 class="font-bold text-lg mb-2">Juan Jonathan Nainggolan</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301009</p>
-                        <p class="text-sm font-semibold">App Development</p>
-                    </div>
-                    
-                    <div class="flex-shrink-0 w-64 bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
-                        <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold border-4 border-white border-opacity-30">YF</div>
-                        <h4 class="font-bold text-lg mb-2">Yoel Feliks Hutabarat</h4>
-                        <p class="text-sm opacity-90 mb-2">3312301083</p>
-                        <p class="text-sm font-semibold">Web Developer</p>
+                    <!-- Team Member 6 -->
+                    <div class="team-member-card bg-gradient-to-br from-pink-500 to-pink-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Yoel.jpg') }}" alt="Yoel Feliks Hutabarat" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Yoel Feliks Hutabarat</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301083</p>
+                        <p class="text-xs sm:text-sm font-semibold">Web Developer</p>
                     </div>
                 </div>
             </div>
@@ -504,7 +600,7 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="py-20 px-4 bg-gradient-to-br from-hydro-green to-green-700 text-white text-center relative overflow-hidden">
+    <section class="py-16 sm:py-20 px-4 bg-gradient-to-br from-hydro-green to-green-700 text-white text-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -516,16 +612,16 @@
             </svg>
         </div>
         <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">Siap Memulai Petualangan Hidroponik Anda?</h2>
-            <p class="text-xl md:text-2xl mb-10 opacity-95">Jangan biarkan perawatan tanaman menjadi beban. Jadikan lebih mudah, lebih cerdas, dan lebih menyenangkan dengan HydroGami.</p>
+            <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-6">Siap Memulai Petualangan Hidroponik Anda?</h2>
+            <p class="text-lg sm:text-xl md:text-2xl mb-10 opacity-95">Jangan biarkan perawatan tanaman menjadi beban. Jadikan lebih mudah, lebih cerdas, dan lebih menyenangkan dengan HydroGami.</p>
             <div class="flex flex-wrap gap-4 justify-center">
-                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl hover:-translate-y-2 transition transform flex items-center gap-3">
-                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-2 transition transform flex items-center gap-3">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                     </svg>
                     <div class="text-left">
                         <div class="text-xs opacity-75">Unduh di</div>
-                        <div class="text-xl font-bold">Google Play</div>
+                        <div class="text-lg sm:text-xl font-bold">Google Play</div>
                     </div>
                 </a>
             </div>
@@ -533,11 +629,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
+    <footer class="bg-gray-900 text-white py-10 sm:py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
                 <div>
-                    <h3 class="text-2xl font-bold mb-4 text-hydro-light">HYDROGAMI</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-hydro-light">HYDROGAMI</h3>
                     <p class="text-gray-400 text-sm mb-4">Sistem monitoring tanaman hidroponik berbasis IoT dengan elemen gamifikasi untuk meningkatkan efisiensi dan keterlibatan pengguna.</p>
                     <div class="flex gap-3">
                         <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-hydro-green transition">
@@ -553,7 +649,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-lg">Menu</h4>
+                    <h4 class="font-bold mb-4 text-base sm:text-lg">Menu</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
                         <li><a href="#problem" class="hover:text-white transition">Tantangan</a></li>
                         <li><a href="#solution" class="hover:text-white transition">Solusi</a></li>
@@ -564,7 +660,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-lg">Kontak</h4>
+                    <h4 class="font-bold mb-4 text-base sm:text-lg">Kontak</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -583,7 +679,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-lg">Dokumen</h4>
+                    <h4 class="font-bold mb-4 text-base sm:text-lg">Dokumen</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
                         <li><a href="#" class="hover:text-white transition flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -614,16 +710,135 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 text-center">
-                <p class="text-gray-500 text-sm">&copy; 2025 HYDROGAMI - PBL IF-16 Politeknik Negeri Batam. All rights reserved.</p>
-                <p class="text-gray-600 text-xs mt-2">Dikembangkan dengan ❤️ oleh Tim D3 Teknik Informatika</p>
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024-2025 HYDROGAMI Team - Politeknik Negeri Batam. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
+        // Chart.js initialization
+        const ctx = document.getElementById('weeklyPlayerChart').getContext('2d');
+        const weeklyPlayerChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Will be populated by API
+                datasets: [{
+                    label: 'Jumlah Player Baru',
+                    data: [], // Will be populated by API
+                    fill: true,
+                    borderColor: 'rgba(41, 204, 116, 1)',
+                    backgroundColor: 'rgba(41, 204, 116, 0.1)',
+                    pointBackgroundColor: 'rgba(41, 204, 116, 1)',
+                    tension: 0.4,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Jumlah Player',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            stepSize: 1
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Minggu',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch and update leaderboard
+            fetch('/api/landing/leaderboard')
+                .then(response => response.json())
+                .then(data => {
+                    const leaderboardBody = document.querySelector('#peringkat table tbody');
+                    leaderboardBody.innerHTML = ''; // Clear dummy data
+                    data.forEach((user, index) => {
+                        const rank = index + 1;
+                        let rankBadge = `<td class="py-4 px-6 text-center">${rank}</td>`;
+                        if (rank === 1) {
+                            rankBadge = `<td class="py-4 px-6 text-center"><span class="rank-badge rank-1">1</span></td>`;
+                        } else if (rank === 2) {
+                            rankBadge = `<td class="py-4 px-6 text-center"><span class="rank-badge rank-2">2</span></td>`;
+                        } else if (rank === 3) {
+                            rankBadge = `<td class="py-4 px-6 text-center"><span class="rank-badge rank-3">3</span></td>`;
+                        }
+
+                        const row = `
+                            <tr class="border-t">
+                                ${rankBadge}
+                                <td class="py-4 px-6 text-center">${user.username}</td>
+                                <td class="py-4 px-6 text-center">${user.level}</td>
+                                <td class="py-4 px-6 text-center">${user.coin}</td>
+                            </tr>`;
+                        leaderboardBody.innerHTML += row;
+                    });
+                });
+
+            // Fetch and update chart
+            fetch('/api/landing/chart')
+                .then(response => response.json())
+                .then(data => {
+                    weeklyPlayerChart.data.labels = data.weeks;
+                    weeklyPlayerChart.data.datasets[0].data = data.player_counts;
+                    weeklyPlayerChart.update();
+                });
+
+
+            const scrollContainer = document.getElementById('team-scroll');
+            
+            // --- Content Duplication for seamless loop ---
+            const originalContent = scrollContainer.innerHTML;
+            scrollContainer.innerHTML += originalContent;
+            // -----------------------------------------
+
+            function animateScroll() {
+                scrollContainer.scrollLeft += 0.5;
+                if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 2)) {
+                    scrollContainer.scrollLeft = 0;
+                }
+                requestAnimationFrame(animateScroll);
+            }
+
+            animateScroll();
+            
+            // Mobile menu functionality
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const openIcon = document.getElementById('menu-open-icon');
@@ -635,22 +850,20 @@
                 closeIcon.classList.toggle('hidden');
             });
 
-            // Smooth scroll for navigation links
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        // Hide mobile menu on link click
                         if (!mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                             openIcon.classList.remove('hidden');
                             closeIcon.classList.add('hidden');
                         }
                         
-                        // Scroll to element
-                        const offset = 80; // Adjust this value to match your navbar height
+                        const offset = 80;
                         const bodyRect = document.body.getBoundingClientRect().top;
                         const elementRect = targetElement.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
@@ -664,7 +877,7 @@
                 });
             });
 
-            // Scroll-triggered animations for sections
+            // Intersection Observer for animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -681,34 +894,29 @@
                 observer.observe(section);
             });
 
-            // Page transition effect
+            // Page transition overlay
             const pageTransitionOverlay = document.getElementById('page-transition-overlay');
-            // Select all links that don't start with # and don't have target="_blank"
             const transitionLinks = document.querySelectorAll('a:not([href^="#"]):not([target="_blank"])');
 
             transitionLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
 
-                    // Ensure it's a valid, non-anchor, non-javascript link
                     if (href && href !== '#' && !href.startsWith('javascript:')) {
-                        e.preventDefault(); // Stop immediate navigation
+                        e.preventDefault();
                         
-                        // Show overlay
                         pageTransitionOverlay.classList.remove('hidden');
                         setTimeout(() => {
                             pageTransitionOverlay.classList.remove('opacity-0');
-                        }, 10); // A small delay to ensure transition is applied
+                        }, 10);
 
-                        // Wait for fade-in, then navigate
                         setTimeout(() => {
                             window.location.href = href;
-                        }, 300); // This should match the transition duration
+                        }, 300);
                     }
                 });
             });
         });
     </script>
-
 </body>
 </html>
