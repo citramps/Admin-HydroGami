@@ -669,7 +669,7 @@
                     </svg> --}}
                     <div class="text-left">
                         {{-- <div class="text-xs opacity-75">Unduh di</div> --}}
-                        <div class="text-lg sm:text-xl font-bold">Unduh</div>
+                        <div class="text-lg sm:text-xl font-bold">Unduh Aplikasi</div>
                     </div>
                 </a>
             </div>
