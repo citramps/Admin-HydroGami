@@ -15,60 +15,63 @@
 </head>
 
 
-<body>
-    <div class="flex min-h-screen">
+<body class="font-karla">
+ <div class="flex min-h-screen">
 
         <!-- Side Bar -->
-        <div class="w-1/5 bg-custom-green text-white p-6 z-10 flex flex-col">
-            <div class="mb-8">
-                <div class="flex justify-center mb-4">
-                    <img src="{{ asset('images/logo-hydrogami2.png') }}" alt="HydroGami Logo" class="w-28">
-                </div>
+        <div class="sidebar w-64 bg-custom-green text-white p-4 z-30 flex flex-col">
+            <div class="mb-8 flex justify-center">
+                <img src="{{ asset('images/logo-hydrogami2.png') }}" alt="HydroGami Logo" class="logo-img w-20 transition-all duration-300">
             </div>
-            <nav class="space-y-4">
-                <a href="{{ route('dashboard-admin') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
+            <nav class="space-y-2 flex-1">
+                <a href="{{ route('dashboard-admin') }}" class="flex items-center py-3 px-3 hover:bg-green-300 rounded-lg transition-colors group">
+                    <svg class="w-5 h-5 mr-3 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M10 2.828l7 7V17a2 2 0 01-2 2h-3a1 1 0 01-1-1v-4a1 1 0 00-1-1H8a1 1 0 00-1 1v4a1 1 0 01-1 1H3a2 2 0 01-2-2v-7.172l7-7a1 1 0 011.414 0z" />
                     </svg>
-                    <span>Dashboard</span>
+                    <span class="sidebar-text font-medium">Dashboard</span>
                 </a>
 
-                <a href="{{ route('misi.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"
+                <a href="{{ route('misi.index') }}" class="flex items-center py-3 px-3 hover:bg-green-300 rounded-lg transition-colors group">
+                    <svg class="w-5 h-5 mr-3 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
                     </svg>
-                    <span>Misi</span>
+                    <span class="sidebar-text font-medium">Misi</span>
                 </a>
 
-                <a href="{{ route('reward.index') }}" class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 576 512">
+                <a href="{{ route('reward.index') }}" class="flex items-center py-3 px-3 hover:bg-green-300 rounded-lg transition-colors group">
+                    <svg class="w-5 h-5 mr-3 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 576 512">
                         <path
                             d="M288 0C129 0 0 57.3 0 128v256c0 70.7 129 128 288 128s288-57.3 288-128V128C576 57.3 447 0 288 0zM64 384V176c29.7 20.9 71.5 36.2 120 44.2V428.1c-48.5-8-90.3-23.3-120-44.1zM288 464c-20.3 0-40-1.4-58.8-4.1V228.8c18.7 1.4 38.5 2.2 58.8 2.2s40.1-.8 58.8-2.2v231.1c-18.8 2.7-38.5 4.1-58.8 4.1zM512 384c-29.7 20.9-71.5 36.2-120 44.2V220.2c48.5-8 90.3-23.3 120-44.2V384z" />
                     </svg>
-                    <span>Reward</span>
+                    <span class="sidebar-text font-medium">Reward</span>
                 </a>
 
                 <a href="{{ route('leaderboard-admin') }}"
-                    class="flex items-center py-2 px-4 hover:bg-green-300 rounded">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    class="flex items-center py-3 px-3 hover:bg-green-300 rounded-lg transition-colors group">
+                    <svg class="w-5 h-5 mr-3 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M6 3a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H6zM12 7a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2z" clip-rule="evenodd" />
                     </svg>
-
-                    <span>Leaderboard</span>
+                    <span class="sidebar-text font-medium">Leaderboard</span>
                 </a>
-
-                <a href="{{ route('panduan.index') }}"
-                    class="flex items-center py-2 px-4 bg-white text-green-500 rounded shadow">
-                    <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"
+                <a href="{{ route('panduan.index') }}" class="flex items-center py-3 px-3 bg-white text-green-500 rounded-lg shadow group">
+                    <svg class="w-5 h-5 mr-3 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm3 3h4a1 1 0 010 2H8a1 1 0 010-2z" />
                     </svg>
-                    <span>Panduan</span>
+                    <span class="sidebar-text font-medium">Panduan</span>
+                </a>
+                <a href="{{ route('pump-logs') }}"
+                    class="flex items-center py-3 px-3 hover:bg-green-300 rounded-lg transition-colors group">
+                    <svg class="w-5 h-5 mr-3 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="sidebar-text font-medium">Log Kontrol</span>
                 </a>
             </nav>
         </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\LogPompaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +125,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // REDEEM REWARD (Protected)
     Route::post('/rewards/redeem', [RewardController::class, 'redeemReward']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    // API untuk log pompa dari Flutter
+    Route::post('/pump-control-logs', [LogPompaController::class, 'store']);
 });
 
 // =====================================================

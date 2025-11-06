@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\LogPompaController;
 
 Route::get('/', function () {
     return view('landing');
@@ -26,6 +27,9 @@ Route::get('/login', function () {
 Route::get('/dashboard-admin', [DashboardController::class, 'index'])
     ->name('dashboard-admin')
     ->middleware('auth:admin');
+
+// ✅ PERBAIKI: Route langsung tanpa .index
+Route::get('/pump-logs', [LogPompaController::class, 'index'])->name('pump-logs')->middleware('auth:admin');
 
 // UBAH: Ganti semua middleware jadi 'auth:admin'
 Route::middleware('auth:admin')->group(function () {
