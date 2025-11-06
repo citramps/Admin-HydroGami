@@ -178,13 +178,13 @@
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">HYDROGAMI: Ubah Cara Anda Bertanam Hidroponik</h1>
             <p class="text-lg sm:text-xl md:text-2xl mb-10 opacity-95 max-w-3xl mx-auto">Integrasi Cerdas IoT dan Gamifikasi untuk Pantau dan Rawat Tanaman Hidroponik Anda Kapan Saja, Di Mana Saja.</p>
             <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://polibatam.id/app-hydrogami" target="_blank" class="bg-white text-hydro-green px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
+                    {{-- <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                    </svg>
+                    </svg> --}}
                     Unduh Aplikasi Sekarang
                 </a>
-                <a href="#demo" class="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-hydro-green transition flex items-center justify-center gap-2">
+                <a href="https://www.youtube.com/watch?v=u51-uGlqHjw" class="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-hydro-green transition flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -663,13 +663,13 @@
             <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-6">Siap Memulai Petualangan Hidroponik Anda?</h2>
             <p class="text-lg sm:text-xl md:text-2xl mb-10 opacity-95">Jangan biarkan perawatan tanaman menjadi beban. Jadikan lebih mudah, lebih cerdas, dan lebih menyenangkan dengan HydroGami.</p>
             <div class="flex flex-wrap gap-4 justify-center">
-                <a href="https://play.google.com/store" target="_blank" class="bg-white text-hydro-green px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-2 transition transform flex items-center gap-3">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://polibatam.id/app-hydrogami" target="_blank" class="bg-white text-hydro-green px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:shadow-2xl hover:-translate-y-2 transition transform flex items-center gap-3">
+                    {{-- <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                    </svg>
+                    </svg> --}}
                     <div class="text-left">
-                        <div class="text-xs opacity-75">Unduh di</div>
-                        <div class="text-lg sm:text-xl font-bold">Google Play</div>
+                        {{-- <div class="text-xs opacity-75">Unduh di</div> --}}
+                        <div class="text-lg sm:text-xl font-bold">Unduh</div>
                     </div>
                 </a>
             </div>
