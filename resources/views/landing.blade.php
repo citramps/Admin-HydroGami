@@ -45,22 +45,32 @@
         .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-2 { background: linear-gradient(135deg, #C0C0C0, #808080); }
         .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
-        
-        /* Custom styles for team section */
-        .team-container {
-            position: relative;
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
         }
 
-        .team-scroll-container {
-            display: flex;
+        .scroller {
+            max-width: 100%;
             overflow-x: auto;
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none;  /* IE and Edge */
         }
 
-        .team-scroll-container::-webkit-scrollbar {
+        .scroller::-webkit-scrollbar {
             display: none; /* Chrome, Safari and Opera */
+        }
+
+        .scroller__inner {
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+        }
+
+        .scroller__inner:hover {
+            /* The animation will be paused using JavaScript */
         }
         
         .team-member-card {
@@ -225,12 +235,8 @@
             <div class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 mt-12">
                 <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
                     <div>
-                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-8 rounded-2xl flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
-                            <div class="text-center">
-                                <div class="text-6xl sm:text-8xl mb-6">🌱</div>
-                                <div class="text-5xl sm:text-6xl mb-4">📱</div>
-                                <p class="text-hydro-green font-bold text-xl sm:text-2xl">IoT + Gamifikasi</p>
-                            </div>
+                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-8 rounded-2xl flex items-center justify-center min-h-[300px] sm:min-h-[400px] overflow-hidden">
+                            <img src="{{ asset('images/Hydrogami.jpg') }}" alt="IoT + Gamifikasi" class="w-full h-full object-cover rounded-2xl">
                         </div>
                     </div>
                     
@@ -315,7 +321,7 @@
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
                     <div class="text-4xl sm:text-5xl mb-4">📊</div>
                     <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Monitoring Real-Time</h3>
-                    <p class="text-sm sm:text-base text-gray-700">Pantau kondisi vital tanaman Anda seperti pH, TDS, suhu, kelembaban, dan intensitas cahaya langsung dari ponsel Anda, 24/7.</p>
+                    <p class="text-sm sm:text-base text-gray-700">Pantau kondisi vital tanaman Anda seperti pH, TDS, suhu, kelembaban udara, kelembaban tanah, dan intensitas cahaya langsung dari ponsel Anda, 24/7.</p>
                 </div>
                 
                 <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 sm:p-8 rounded-2xl hover:shadow-2xl transition">
@@ -517,20 +523,14 @@
             </div>
             
             <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-6 sm:p-8 md:p-12 mb-8 sm:mb-12">
-                <div class="grid md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <div class="flex flex-col items-center text-center gap-6 sm:gap-8 mb-6 sm:mb-8">
                     <div>
-                        <img src="{{ asset('images/profile/Hamdani.png') }}" alt="Hamdani Arif" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 object-cover border-4 border-hydro-green">
                         <h3 class="text-xl sm:text-2xl font-bold text-hydro-green mb-4">HydroGami Team</h3>
+                        <img src="{{ asset('images/profile/Hamdani.png') }}" alt="Hamdani Arif" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 object-cover border-4 border-hydro-green">
                         <div class="space-y-2 text-sm sm:text-base text-gray-700">
                             <p><strong>Manajer Proyek:</strong> Hamdani Arif, S.Pd., M.Sc.</p>
                             <p><strong>Institusi:</strong> Politeknik Negeri Batam</p>
                             <p><strong>Program Studi:</strong> D3 Teknik Informatika</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="text-5xl sm:text-6xl mb-4">🎓</div>
-                            <p class="text-hydro-green font-bold text-lg sm:text-xl">Semester Genap 2024-2025</p>
                         </div>
                     </div>
                 </div>
@@ -538,12 +538,8 @@
             
             <h3 class="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-6 sm:mb-8">Tim Pengembang (HydroGami Team)</h3>
             
-            <!-- Team Section with Horizontal Scrolling -->
-            <div class="relative team-container">
-                <!-- Scroll Indicators Removed -->
-                
-                <!-- Team Cards Container -->
-                <div class="team-scroll-container" id="team-scroll">
+            <div class="scroller">
+                <div class="scroller__inner">
                     <!-- Team Member 1 -->
                     <div class="team-member-card bg-gradient-to-br from-hydro-green to-hydro-light text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
                         <img src="{{ asset('images/profile/Clinton.jpg') }}" alt="Clinton Alfaro" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
@@ -558,7 +554,7 @@
                         <img src="{{ asset('images/profile/Nania.jpg') }}" alt="Nania Prima Citra Aulia" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
                         <h4 class="font-bold text-base sm:text-lg mb-2">Nania Prima Citra Aulia</h4>
                         <p class="text-xs sm:text-sm opacity-90 mb-2">3312301056</p>
-                        <p class="text-xs sm:text-sm font-semibold">Mobile Developer</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
                         <p class="text-xs opacity-75">App Development</p>
                     </div>
                     
@@ -567,8 +563,8 @@
                         <img src="{{ asset('images/profile/Citra.jpg') }}" alt="Citra Miranda Purnama Sari" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
                         <h4 class="font-bold text-base sm:text-lg mb-2">Citra Miranda Purnama Sari</h4>
                         <p class="text-xs sm:text-sm opacity-90 mb-2">3312301070</p>
-                        <p class="text-xs sm:text-sm font-semibold">Documentation</p>
-                        <p class="text-xs opacity-75">Web Developer</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">Web Developer, Hardware & Integration</p>
                     </div>
                     
                     <!-- Team Member 4 -->
@@ -576,7 +572,8 @@
                         <img src="{{ asset('images/profile/Jihan.jpg') }}" alt="Jihan Safinatunnaja" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
                         <h4 class="font-bold text-base sm:text-lg mb-2">Jihan Safinatunnaja</h4>
                         <p class="text-xs sm:text-sm opacity-90 mb-2">3312301065</p>
-                        <p class="text-xs sm:text-sm font-semibold">App Development</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">App Development</p>
                     </div>
                     
                     <!-- Team Member 5 -->
@@ -584,7 +581,8 @@
                             <img src="{{ asset('images/profile/Juan.jpg') }}" alt="Juan Jonathan Nainggolan" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
                         <h4 class="font-bold text-base sm:text-lg mb-2">Juan Jonathan Nainggolan</h4>
                         <p class="text-xs sm:text-sm opacity-90 mb-2">3312301009</p>
-                        <p class="text-xs sm:text-sm font-semibold">App Development</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">App Development</p>
                     </div>
                     
                     <!-- Team Member 6 -->
@@ -592,7 +590,57 @@
                         <img src="{{ asset('images/profile/Yoel.jpg') }}" alt="Yoel Feliks Hutabarat" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
                         <h4 class="font-bold text-base sm:text-lg mb-2">Yoel Feliks Hutabarat</h4>
                         <p class="text-xs sm:text-sm opacity-90 mb-2">3312301083</p>
-                        <p class="text-xs sm:text-sm font-semibold">Web Developer</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">Web Developer</p>
+                    </div>
+
+                    <!-- Duplicated Team Members -->
+                    <div class="team-member-card bg-gradient-to-br from-hydro-green to-hydro-light text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Clinton.jpg') }}" alt="Clinton Alfaro" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Clinton Alfaro</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301080</p>
+                        <p class="text-xs sm:text-sm font-semibold">Ketua Tim</p>
+                        <p class="text-xs opacity-75">Hardware & Integration</p>
+                    </div>
+                    
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Nania.jpg') }}" alt="Nania Prima Citra Aulia" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Nania Prima Citra Aulia</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301056</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">App Development</p>
+                    </div>
+                    
+                    <div class="team-member-card bg-gradient-to-br from-pink-500 to-pink-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Citra.jpg') }}" alt="Citra Miranda Purnama Sari" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Citra Miranda Purnama Sari</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301070</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">Web Developer, Hardware & Integration</p>
+                    </div>
+                    
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Jihan.jpg') }}" alt="Jihan Safinatunnaja" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Jihan Safinatunnaja</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301065</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">App Development</p>
+                    </div>
+                    
+                    <div class="team-member-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                            <img src="{{ asset('images/profile/Juan.jpg') }}" alt="Juan Jonathan Nainggolan" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Juan Jonathan Nainggolan</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301009</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">App Development</p>
+                    </div>
+                    
+                    <div class="team-member-card bg-gradient-to-br from-pink-500 to-pink-600 text-white p-5 sm:p-6 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-2 transition">
+                        <img src="{{ asset('images/profile/Yoel.jpg') }}" alt="Yoel Feliks Hutabarat" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-white border-opacity-30">
+                        <h4 class="font-bold text-base sm:text-lg mb-2">Yoel Feliks Hutabarat</h4>
+                        <p class="text-xs sm:text-sm opacity-90 mb-2">3312301083</p>
+                        <p class="text-xs sm:text-sm font-semibold">Anggota</p>
+                        <p class="text-xs opacity-75">Web Developer</p>
                     </div>
                 </div>
             </div>
@@ -693,7 +741,7 @@
             </div>
             
             <div class="border-t border-gray-800 pt-6 sm:pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024-2025 HYDROGAMI Team - Politeknik Negeri Batam. All rights reserved.</p>
+                <p>&copy; HYDROGAMI Team - Politeknik Negeri Batam. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -802,24 +850,51 @@
                     weeklyPlayerChart.update();
                 });
 
+            const scroller = document.querySelector('.scroller');
+            const scrollerInner = document.querySelector('.scroller__inner');
 
-            const scrollContainer = document.getElementById('team-scroll');
-            
-            // --- Content Duplication for seamless loop ---
-            const originalContent = scrollContainer.innerHTML;
-            scrollContainer.innerHTML += originalContent;
-            // -----------------------------------------
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
             function animateScroll() {
-                scrollContainer.scrollLeft += 0.5;
-                if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 2)) {
-                    scrollContainer.scrollLeft = 0;
+                if (!isDown) {
+                    scroller.scrollLeft += 0.5;
+                    if (scroller.scrollLeft >= scrollerInner.scrollWidth / 2) {
+                        scroller.scrollLeft = 0;
+                    }
                 }
                 requestAnimationFrame(animateScroll);
             }
 
+            scroller.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - scroller.offsetLeft;
+                scrollLeft = scroller.scrollLeft;
+                scroller.style.cursor = 'grabbing';
+            });
+
+            scroller.addEventListener('mouseleave', () => {
+                isDown = false;
+                scroller.style.cursor = 'grab';
+            });
+
+            scroller.addEventListener('mouseup', () => {
+                isDown = false;
+                scroller.style.cursor = 'grab';
+            });
+
+            scroller.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - scroller.offsetLeft;
+                const walk = (x - startX) * 2;
+                scroller.scrollLeft = scrollLeft - walk;
+            });
+
+            // Start the animation
             animateScroll();
-            
+
             // Mobile menu functionality
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
