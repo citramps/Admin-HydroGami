@@ -10,8 +10,33 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\LogPompaController;
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', function () {
-    return view('landing');
+    $leaderboard = User::orderBy('coin', 'desc')->take(5)->get();
+    
+    $weeklyPlayerData = User::select(
+        DB::raw('YEAR(created_at) as year'),
+        DB::raw('WEEK(created_at) as week'),
+        DB::raw('COUNT(*) as player_count')
+    )
+    ->groupBy('year', 'week')
+    ->orderBy('year', 'desc')
+    ->orderBy('week', 'desc')
+    ->take(7)
+    ->get()
+    ->reverse();
+
+    $formattedWeeklyData = [
+        'weeks' => $weeklyPlayerData->pluck('week')->map(function($week) { return 'Minggu ' . $week; })->toArray(),
+        'player_counts' => $weeklyPlayerData->pluck('player_count')->toArray(),
+    ];
+
+    return view('landing', [
+        'leaderboard' => $leaderboard,
+        'weeklyPlayerData' => $formattedWeeklyData
+    ]);
 });
 
 Route::get('/register-admin', [AuthController::class, 'showRegisterAdminForm'])->name('register-admin');

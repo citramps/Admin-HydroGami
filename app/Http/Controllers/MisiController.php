@@ -62,13 +62,25 @@ class MisiController extends Controller
         $validated = $request->validate([
             'nama_misi'      => 'required|string|max:255',
             'deskripsi_misi' => 'required|string',
-            'status_misi'    => 'required|in:aktif,tidak aktif',
+            'status_misi'    => 'required|in:aktif,tidak aktif,selesai',
             'tipe_misi'      => 'required|in:harian,mingguan',
             'poin'           => 'required|integer|min:0',
         ]);
 
         $mission = Misi::findOrFail($id_misi);
         $validated['expiry_type'] = $validated['tipe_misi'] === 'mingguan' ? 'weekly' : 'daily';
+
+        // ✅ Jika status misi diset "selesai", isi expired_at secara otomatis
+        if ($validated['status_misi'] === 'selesai') {
+            $now = Carbon::now();
+            $expiresAt = $validated['tipe_misi'] === 'mingguan'
+                ? $now->copy()->addWeek()->startOfDay()
+                : $now->copy()->addDay()->startOfDay();
+
+            $validated['completed_at'] = $now;
+            $validated['expires_at'] = $expiresAt;
+        }
+
         $mission->update($validated);
 
         return redirect()
